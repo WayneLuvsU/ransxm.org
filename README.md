@@ -1,0 +1,2 @@
+# ransxm.org
+anti jai
