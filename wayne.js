@@ -90,47 +90,12 @@ function pause(){ audio.pause(); playBtn.textContent='▶'; }
   
 const playlist = [
   {
-    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/soulja444-gusto-official-music-video-128-ytshorts.savetube.me.mp3',
-    title: 'Gusto',
-    artist: 'Soulja444',
-    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/julia'
-  },
-  {
-    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/m-blocc-soulja444-cosii-janny-saint-omv-128-ytshorts.savetube.me.mp3',
-    title: 'M BLOCC',
-    artist: 'Cosii, Soulja444, Janny Saint',
-    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/MBLOCC.png'
-  },
-  {
-    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/Gangsta%20Baby.mp3',
-    title: 'Gangsta Baby',
-    artist: 'Hellmerry',
-    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/From%20KlickPin%20CF%20%D0%9F%D0%B8%D0%BD%20%D0%BE%D1%82%20%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F%20suzy%20%D0%BD%D0%B0%20%D0%B4%D0%BE%D1%81%D0%BA%D0%B5%20%E2%99%A1%E2%B8%9D%E2%B8%9D%2016%20%D0%B2%202025%20%D0%B3%20_%20%D0%9F%D0%B8%D1%80%D0%B0%D1%82%D1%8B%20%C2%AB%D1%87%D1%91%D1%80%D0%BD%D0%BE%D0%B9%20%D0%BB%D0%B0%D0%B3%D1%83%D0%BD%D1%8B%C2%BB%20%D0%A4%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D0%B8%20%D0%BE%D1%82%D0%BD%D0%BE%D1%88%D0%B5%D0%BD%D0%B8%D0%B9%20%D0%98%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5.gif'
-  },
-  {
-    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/DEMONS%20FAIRY%20-%20(OFFICIAL%20MUSIC%20VIDEO).mp3',
-    title: 'Demons Fairy',
-    artist: 'TSG',
-    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/fe5c0a3629d12f0acf4f62f402d81224.gif'
-  },
-  {
-    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/YOUNG%20MOOLAH%20FREESTYLE%20%5BOFFICIAL%20LYRIC%20VIDEO%5D.mp3',
-    title: 'YMF',
-    artist: 'Nio',
-    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/From%20KlickPin%20CF%20Pin%20on%20carti.gif'
-  },
-  {
-    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/sin%20pablo%20jersey%20(intro).mp3',
-    title: 'Sin Pablo Jersey',
-    artist: 'Cosii',
-    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/From%20KlickPin%20CF%20%5B%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%5D%20%C2%AB3eeFee%C2%BB.gif'
-  },
-  {
-    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/Realest%20Cram%20-%20Need%20Ya%20feat.%20YB%20Neet%20(Official%20Lyric%20Video).mp3',
-    title: 'Need Ya',
-    artist: 'Realest Cram',
-    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/From%20KlickPin%20CF%20Pin%20em%20AMoments.gif'
+    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/my-bad-bro-128-ytshorts.savetube.me.mp3',
+    title: 'My Bad Bro',
+    artist: '4/u',
+    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/07508a7960089f6b827212d7008ad1c0.jpg'
   }
+
 ];
 
 let trackIndex = 0; 
@@ -781,4 +746,4 @@ function setBackgroundVideo(url){
   v.play().catch(()=>{});
 }
 
-setBackgroundVideo('https://file.garden/aN0Uo2YmaWI-OmAY/SnapTik.Cx_1763791230.mp4');
+setBackgroundVideo('https://file.garden/aN0Uo2YmaWI-OmAY/From%20KlickPin%20CF%20Pin%20by%20%D8%A5%D8%B3%20on%20Pines%20creados%20por%20ti%20in%202025%20_%20Girly%20things%20Pink%20girly%20things%20Cute%20couples%20goals%20(1).mp4');
