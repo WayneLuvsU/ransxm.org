@@ -1,1 +1,121 @@
-ransxm is back, di na tamad web dev mwa
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sosa</title>
+  <link rel="icon" type="image/png" href="https://file.garden/aL0tuKtqfwJhLj0Y/d7707d6e53ba002e407694618e103331.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Poppins:wght@300;400;600;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+<div id="cursor" class="cursor"></div>
+
+  <div id="gif-bg">
+    <video id="bgVideo" autoplay muted loop playsinline></video>
+  </div>
+  <div id="static-bg" style="position:fixed;inset:0;z-index:-4;background-image:url('https://file.garden/aL0tuKtqfwJhLj0Y/6d94016629d4552cc1789309c7b8ffcf.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;opacity:0;transition:opacity 1s ease;"></div>
+  <canvas id="bgCanvas"></canvas>
+  <canvas id="vizCanvas"></canvas>
+
+    <div id="snowLayer" style="position:fixed;inset:0;pointer-events:none;z-index:0;"></div>
+    
+    <div id="bgToggle" class="bg-toggle">
+      <span class="toggle-label">Background:</span>
+      <div class="toggle-switch">
+        <input type="checkbox" id="bgSwitch" checked>
+        <label for="bgSwitch"></label>
+      </div>
+    </div>
+
+
+<div id="intro">
+  <div class="intro-content">
+    <img src="https://file.garden/aN0Uo2YmaWI-OmAY/a068e8552ede3d26075c571eec4ae028-1.png" alt="Intro Logo" class="intro-logo">
+    <div class="press-enter">Press to enter</div>
+  </div>
+</div>
+
+  <main id="main">
+  <div class="profile-wrap">
+  <span class="ring" aria-hidden="true"></span>
+  <img src="https://file.garden/aL0tuKtqfwJhLj0Y/d7707d6e53ba002e407694618e103331.jpg" alt="Profile" class="pfp"/>
+  <span id="presenceBadge" class="presence-badge offline" title="Offline" aria-hidden="true"></span>
+  <div id="avatarFrame" class="avatar-frame" aria-hidden="true"></div>
+  <img id="avatarDeco" class="avatar-deco" aria-hidden="true" alt=""/>
+  <div id="hoverText">B O DOUBLE S </div>
+  </div>
+  <div class="username" id="usernameContainer">
+    <span class="gradient" data-text="Sosa" id="usernameText">Sosa</span>
+    <div class="status-panel" id="statusPanel">
+      <div class="status-content" id="discordStatus">Loading Discord status...</div>
+    </div>
+    <div class="activity-status" id="SosaActivity" style="margin-top:6px;font-size:14px;color:var(--fg);"></div>
+  </div>
+  
+  
+  <div class="alt-container">
+    <span class="alt"><span class="word w1"></span> <span class="word w2"></span> <span class="word w3"><span class="rev-red">ransom</span></span></span>
+  </div>
+  <div class="status" id="status"></div>
+    
+
+    <div class="socials">
+      <a href="https://discord.gg/souths" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+      <a href="https://www.instagram.com/sosaa.xyz/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://ransxm.org/" target="_blank" rel="noopener noreferrer" title="Website"><i class="fa-solid fa-globe"></i></a>
+      <a href="https://www.youtube.com/@Sosa1nonly" target="_blank" title="Youtube">
+      <img src="https://file.garden/aL0tuKtqfwJhLj0Y/YouTube-Icon-Almost-Black-Logo.wine-removebg-preview.png" alt="Youtube" style="width: 20px;height: 20px;filter:invert(1);">
+  </a>
+      <a href="https://www.tiktok.com/@1nonly.sosa213" target="_blank" title="Tiktok"><i class="fa-brands fa-tiktok"></i></a>
+
+    </div>
+
+<div class="music">
+<div class="music-top">
+  <img src="#" class="cover" alt="Cover">
+  <div class="music-info">
+    <div class="title" id="songTitle"></div>
+    <div class="artist" id="songArtist"></div>
+  </div>
+  <div class="music-controls">
+    <div class="btn" id="prevBtn" title="Previous">⏮</div>
+    <div class="btn" id="playBtn" title="Play/Pause">▶</div>
+    <div class="btn" id="nextBtn" title="Next">⏭</div>
+  </div>
+</div>
+
+      <div class="bar" id="bar"><div class="fill" id="fill"></div></div>
+      <div class="ctrls">
+        <div class="group">
+          <span class="time" id="cur">0:00</span>
+          <span>/</span>
+          <span class="time" id="dur">0:00</span>
+        </div>
+        <div class="group">
+          <input type="range" min="0" max="1" step="0.01" value="1" class="vol" id="vol">
+        </div>
+      </div>
+      
+      <div class="laser-visualizer" id="laserVisualizer">
+        <canvas class="laser-canvas" id="laserCanvas" width="280" height="40"></canvas>
+      </div>
+      
+      <audio id="audio" preload="metadata" ></audio>
+    </div>
+  </main>
+
+  <div id="avatarPanel">
+  <span class="close">&times;</span>
+  <img src="https://file.garden/aL0tuKtqfwJhLj0Y/d7707d6e53ba002e407694618e103331.jpg" alt="Big Avatar">
+</div>
+
+  <div id="view-counter"><i class="fa-solid fa-eye" aria-hidden="true" style="margin-right:8px;"></i>0</div>
+  <script src="script.js"></script>
+
+  </body>
+  </html>
