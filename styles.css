@@ -355,10 +355,10 @@ body::before {
 }
 
 .partners {
-      text-align: center;
+    text-align: center;
     font-size: 30px;
     color: #ffffff;
-    margin: 150px 0 20px;
+    margin: 100px 0 20px;
     font-family: 'Orbitron', sans-serif;
     background: linear-gradient(to right, #fff, #000, #fff);
     background-size: 400% 100%;
