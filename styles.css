@@ -303,33 +303,40 @@ body::before {
     width: 100%;
     overflow: hidden;
     padding: 20px 0;
+    position: relative;
 }
 
 .member-list {
     display: flex;
     gap: 25px;
-    animation: slideMembers 20s linear infinite;
-    will-change: transform;
+    width: max-content;             
+    animation: scrollLoop 25s linear infinite;
 }
 
-@keyframes slideMembers {
-    0% {
+.member-list::after {
+    content: "";
+    display: flex;
+    gap: 25px;
+    width: 100%;
+}
+
+@keyframes scrollLoop {
+    from {
         transform: translateX(0);
     }
-    100% {
-        transform: translateX(-100%);
+    to {
+        transform: translateX(-50%); /
     }
 }
 
-.member-list:hover {
+.member-slider:hover .member-list {
     animation-play-state: paused;
 }
-
 .member {
     display: flex;
     align-items: center;
     gap: 12px;
-    background: #ffffff00;
+    background: rgba(255, 255, 255, 0.05);
     padding: 10px 18px;
     border-radius: 50px;
     transition: transform 0.2s ease;
@@ -353,6 +360,7 @@ body::before {
     color: white;
     font-weight: 600;
 }
+
 
 .partners {
     text-align: center;
