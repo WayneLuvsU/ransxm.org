@@ -298,7 +298,6 @@ body::before {
     justify-content: center; 
     gap: 50px;               
 }
-
 .member-slider {
     width: 100%;
     overflow: hidden;
@@ -309,8 +308,8 @@ body::before {
 .member-list {
     display: flex;
     gap: 25px;
-    width: max-content;             
-    animation: scrollLoop 2000s linear infinite;
+    width: max-content;              
+    animation: scrollLoop 800s linear infinite;
 }
 
 .member-list::after {
@@ -325,13 +324,14 @@ body::before {
         transform: translateX(0);
     }
     to {
-        transform: translateX(-50%); /
+        transform: translateX(-50%); 
     }
 }
 
 .member-slider:hover .member-list {
     animation-play-state: paused;
 }
+
 .member {
     display: flex;
     align-items: center;
