@@ -52,7 +52,7 @@ html, body {
     background: rgb(55, 255, 0);
 }
 body {
-    background: url('https://file.garden/aN0Uo2YmaWI-OmAY/Untitled48_20251027163909.png') no-repeat center center / cover;
+    background: url('https://file.garden/aN0Uo2YmaWI-OmAY/nukebyransxm.png') no-repeat center center / cover;
     background-size: cover;     
     background-attachment: fixed; 
     color: #fff;
@@ -65,8 +65,8 @@ body::before {
     position: fixed;
     display: flex;
     inset: 0;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
     z-index: -1;
 }
 
@@ -361,12 +361,11 @@ body::before {
     font-weight: 600;
 }
 
-
 .partners {
-    text-align: center;
+      text-align: center;
     font-size: 30px;
     color: #ffffff;
-    margin: 100px 0 20px;
+    margin: 150px 0 20px;
     font-family: 'Orbitron', sans-serif;
     background: linear-gradient(to right, #fff, #000, #fff);
     background-size: 400% 100%;
@@ -381,26 +380,6 @@ body::before {
     100% { background-position: 100% 0%; }
 }
     
-.affiliations-icons {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;   
-    justify-content: center;
-    align-items: center;
-}
-
-.affiliations-icons img {
-    height: 650px;
-    width: auto;
-    border-radius: 12px;
-    object-fit: contain;
-    transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
-}
-
-.affiliations-icons a img:hover {
-    transform: scale(1.08);
-}
-
 .affiliation-caption {
     margin-top: 12px;
     margin-bottom: 40px; 
@@ -410,4 +389,59 @@ body::before {
     opacity: 0.8;
     text-align: center;
     font-family: 'Poppins', sans-serif;
+}
+
+.member-slider {
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.member-list {
+    display: flex;
+    gap: 25px;
+    animation: slideMembers 20s linear infinite;
+}
+
+@keyframes slideMembers {
+    0% {
+        transform: translateX(0);
+    }
+    95% {
+        transform: translateX(calc(-100% + 100vw)); 
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.affiliations-icons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.affiliations-icons img:not(.revshit-logo) {
+    height: 650px;
+    width: auto;
+    border-radius: 12px;
+    object-fit: contain;
+    transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+}
+
+.revshit-logo {
+    width: 1200px !important;     
+    height: auto !important;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    transition: transform 0.25s ease !important;
+}
+
+
+.affiliations-icons a img:hover {
+    transform: scale(1.08);
 }
