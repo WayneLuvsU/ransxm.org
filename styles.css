@@ -308,8 +308,8 @@ body::before {
 .member-list {
     display: flex;
     gap: 25px;
-    width: max-content;              
-    animation: scrollLoop 800s linear infinite;
+    width: max-content;
+    animation: scrollLoop 1200s linear infinite;
 }
 
 .member-list::after {
