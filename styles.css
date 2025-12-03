@@ -310,7 +310,7 @@ body::before {
     display: flex;
     gap: 25px;
     width: max-content;             
-    animation: scrollLoop 800s linear infinite;
+    animation: scrollLoop 2000s linear infinite;
 }
 
 .member-list::after {
