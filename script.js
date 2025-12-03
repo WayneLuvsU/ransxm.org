@@ -338,3 +338,25 @@ async function loadMembers() {
 }
 
 loadMembers();
+
+document.addEventListener("contextmenu", (e) => e.preventDefault());
+document.addEventListener("keydown", (e) => {
+    if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && e.key === "I") ||
+        (e.ctrlKey && e.shiftKey && e.key === "J") ||
+        (e.ctrlKey && e.key === "U")
+    ) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+});
+
+setInterval(() => {
+    const before = new Date().getTime();
+    debugger;
+    const after = new Date().getTime();
+    if (after - before > 200) {
+        window.location.reload();
+    }
+}, 500);
