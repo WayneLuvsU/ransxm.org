@@ -62,7 +62,7 @@ body {
 
 body::before {
     content: "";
-    position: fixed;
+    width: 500%;
     display: flex;
     inset: 0;
     backdrop-filter: blur(12px);
