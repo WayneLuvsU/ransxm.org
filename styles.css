@@ -62,6 +62,7 @@ body {
 
 body::before {
     content: "";
+    position: fixed;
     width: 500%;
     display: flex;
     inset: 0;
