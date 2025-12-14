@@ -1,749 +1,113 @@
-const avatar = document.querySelector('.pfp');
-const avatarPanel = document.getElementById('avatarPanel');
-const closeBtn = avatarPanel.querySelector('.close');
-const bgSwitch = document.getElementById('bgSwitch');
-const gifBg = document.getElementById('gif-bg');
-const staticBg = document.getElementById('static-bg');
+const enterScreen = document.getElementById("enterScreen");
+const video = document.getElementById("bgVideo");
+const card = document.querySelector(".card");
+const opacitySlider = document.getElementById("opacitySlider");
+const avatarImg = document.getElementById("profileAvatar");
+const statusDot = document.getElementById("statusDot");
+const statusText = document.getElementById("statusText");
+const discordUsernameDiv = document.getElementById("discordUsername");
+const volumeSlider = document.getElementById("volumeSlider");
 
-const savedBgState = localStorage.getItem('bgVisible');
-if (savedBgState !== null) {
-  const isVisible = savedBgState === 'true';
-  bgSwitch.checked = isVisible;
-  if (isVisible) {
-    gifBg.style.opacity = '1';
-    staticBg.style.opacity = '0';
-  } else {
-    gifBg.style.opacity = '0';
-    staticBg.style.opacity = '1';
-  }
-}
+const bgAudio = document.createElement("audio");
+bgAudio.src = ""; 
+bgAudio.loop = true;
+bgAudio.volume = volumeSlider.value / 100;
 
-bgSwitch.addEventListener('change', function() {
-  if (this.checked) {
-    gifBg.style.opacity = '1';
-    staticBg.style.opacity = '0';
-    localStorage.setItem('bgVisible', 'true');
-  } else {
-    gifBg.style.opacity = '0';
-    staticBg.style.opacity = '1';
-    localStorage.setItem('bgVisible', 'false');
-  }
+const userId = "737630884823433267"; 
+const lanyardUrl = `https://api.lanyard.rest/v1/users/${userId}`;
+
+let discordUsername = "@Unknown";
+
+card.style.setProperty("--card-opacity", opacitySlider.value/100);
+document.querySelector(".status-box").style.setProperty("--card-opacity", opacitySlider.value/100);
+opacitySlider.addEventListener("input", () => {
+  const value = opacitySlider.value/100;
+  card.style.setProperty("--card-opacity", value);
+  document.querySelector(".status-box").style.setProperty("--card-opacity", value);
 });
 
-avatar.addEventListener('click', () => {
-  avatar.classList.toggle('zoomed'); 
-  avatarPanel.classList.add('show'); 
-});
-
-closeBtn.addEventListener('click', () => {
-  avatarPanel.classList.remove('show');
-  avatar.classList.remove('zoomed');
-});
-
-avatarPanel.addEventListener('click', (e) => {
-  if (e.target === avatarPanel) {
-    avatarPanel.classList.remove('show');
-    avatar.classList.remove('zoomed');
-  }
-});
- 
-const $ = s=>document.querySelector(s);
-const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
-const store = (k,v)=>localStorage.setItem(k,JSON.stringify(v));
-const load = (k,d)=>{ try{return JSON.parse(localStorage.getItem(k))??d}catch{return d} };
-let state = {theme:load('theme','dark'), viz:true};
-document.documentElement.setAttribute('data-theme',state.theme);
-
-const statuses = [" flyest of them all. "];
-const statusEl = $('#status');
-let sIndex = 0, cIndex = 0, del = false;
-
-function typeLoop() {
-  const txt = statuses[sIndex];
-  statusEl.textContent = del ? txt.slice(0, --cIndex) : txt.slice(0, ++cIndex);
-
-  if (!del && cIndex === txt.length) {
-    del = true;
-    setTimeout(typeLoop, 1200);
-  } else if (del && cIndex === 0) {
-    del = false;
-    sIndex = (sIndex + 1) % statuses.length;
-    setTimeout(typeLoop, 400);
-  } else {
-    setTimeout(typeLoop, del ? 50 : 90);
-  }
-}
-
-window.addEventListener("load", typeLoop);
-
-const audio = $('#audio'), playBtn = $('#playBtn'), fill = $('#fill'), bar = $('#bar'), cur = $('#cur'), dur = $('#dur');
-function loadTrack(index = trackIndex){
-  const track = playlist[index];
-  audio.src = track.src;
-  $('#songTitle').textContent = track.title;
-  $('#songArtist').textContent = track.artist;
-  document.querySelector('.cover').src = track.cover;
-}
-function formatTime(sec){ if(!isFinite(sec)) return '0:00'; const m=Math.floor(sec/60); const s=Math.floor(sec%60).toString().padStart(2,'0'); return `${m}:${s}`; }
-function play(){ audio.play().then(()=>playBtn.textContent='⏸').catch(()=>{}); }
-function pause(){ audio.pause(); playBtn.textContent='▶'; }
-  
-const playlist = [
-  {
-    src: 'https://file.garden/aN0Uo2YmaWI-OmAY/my-bad-bro-128-ytshorts.savetube.me.mp3',
-    title: 'My Bad Bro',
-    artist: '4/u',
-    cover: 'https://file.garden/aN0Uo2YmaWI-OmAY/07508a7960089f6b827212d7008ad1c0.jpg'
-  }
-
-];
-
-let trackIndex = 0; 
-  
-playBtn.addEventListener('click',()=>audio.paused?play():pause());
-audio.addEventListener('loadedmetadata',()=>dur.textContent=formatTime(audio.duration));
-audio.addEventListener('timeupdate',()=>{ if(audio.duration){ fill.style.width=(audio.currentTime/audio.duration*100)+'%'; cur.textContent=formatTime(audio.currentTime); }});
-bar.addEventListener('click',e=>{ const r=bar.getBoundingClientRect(); const p=clamp((e.clientX-r.left)/r.width,0,1); audio.currentTime=p*audio.duration; });
-$('#vol').addEventListener('input',e=>audio.volume=e.target.value);
-
-const prevBtn = $('#prevBtn');
-const nextBtn = $('#nextBtn');
-
-prevBtn.addEventListener('click', () => {
-  trackIndex = (trackIndex - 1 + playlist.length) % playlist.length;
-  loadTrack(trackIndex);
-  play();
-});
-
-nextBtn.addEventListener('click', () => {
-  trackIndex = (trackIndex + 1) % playlist.length;
-  loadTrack(trackIndex);
-  play();
-});
-
-audio.addEventListener('ended', () => {
-  trackIndex = (trackIndex + 1) % playlist.length;
-  loadTrack(trackIndex);
-  play();
-});
-
-let laserCanvas;
-let laserCtx;
-let isPlaying = false;
-let laserBars = [];
-const NUM_LASER_BARS = 32;
-
-function initBeatVisualization() {
-  laserCanvas = document.getElementById('laserCanvas');
-  if (!laserCanvas) return;
-  
-  laserCtx = laserCanvas.getContext('2d');
-  
-  for (let i = 0; i < NUM_LASER_BARS; i++) {
-    laserBars.push({
-      height: 2,
-      targetHeight: 2,
-      velocity: 0
-    });
-  }
-  
-  animateLaser();
-  
-  function createBeatPattern() {
-    if (!isPlaying || audio.paused) return;
-    
-    const patterns = [
-      { delay: 400, intensity: 0.8, type: 'pulse' },
-      { delay: 200, intensity: 0.4, type: 'wave' },
-      { delay: 400, intensity: 0.7, type: 'center' },
-      { delay: 200, intensity: 0.3, type: 'random' },
-      { delay: 600, intensity: 0.9, type: 'explosion' },
-      { delay: 300, intensity: 0.5, type: 'sides' },
-      { delay: 350, intensity: 0.6, type: 'alternate' },
-      { delay: 250, intensity: 0.5, type: 'ripple' },
-      { delay: 500, intensity: 0.8, type: 'build' },
-      { delay: 150, intensity: 0.3, type: 'flutter' },
-      { delay: 450, intensity: 0.7, type: 'mountain' },
-      { delay: 300, intensity: 0.6, type: 'valley' },
-      { delay: 400, intensity: 0.8, type: 'spiral' },
-      { delay: 200, intensity: 0.4, type: 'bounce' }
-    ];
-    
-    let patternIndex = 0;
-    
-    function nextBeat() {
-      if (!isPlaying || audio.paused) return;
-      
-      const pattern = patterns[patternIndex % patterns.length];
-      const volumeLevel = audio.volume;
-      const volumeActivity = Math.max(0.3, volumeLevel); 
-  
-      if (Math.random() < volumeActivity || pattern.intensity > 0.7) {
-        triggerLaserBeat(pattern.intensity, pattern.type);
-      }
-      
-      patternIndex++;
-    
-      const volumeDelayMultiplier = Math.max(1, 2 - volumeLevel);
-      setTimeout(nextBeat, pattern.delay * volumeDelayMultiplier);
-    }
-    
-    nextBeat();
-  }
-  
-  audio.addEventListener('play', () => {
-    isPlaying = true;
-    createBeatPattern();
-  });
-  
-  audio.addEventListener('pause', () => {
-    isPlaying = false;
-  });
-  
-  audio.addEventListener('ended', () => {
-    isPlaying = false;
-  });
-}
-
-function animateLaser() {
-  if (!laserCtx) return;
-  
-  laserCtx.clearRect(0, 0, laserCanvas.width, laserCanvas.height);
-  
-  const barWidth = laserCanvas.width / NUM_LASER_BARS;
-  const maxHeight = laserCanvas.height - 4;
-
-  for (let i = 0; i < laserBars.length; i++) {
-    const bar = laserBars[i];
-    
-    const diff = bar.targetHeight - bar.height;
-    bar.velocity += diff * 0.05;
-    bar.velocity *= 0.8;
-    bar.height += bar.velocity;
-    
-    const volumeBaseline = Math.max(1, 2 + (audio.volume * 3)); 
-    bar.targetHeight += (volumeBaseline - bar.targetHeight) * 0.02;
-    const minHeight = Math.max(1, 2 * audio.volume);
-    bar.height = Math.max(minHeight, bar.height);
-    
-    if (audio.volume > 0 && bar.targetHeight <= volumeBaseline + 1) {
-      const idleAnimation = Math.sin(Date.now() * 0.003 + i * 0.2) * audio.volume * 1.5;
-      bar.height += idleAnimation;
-    }
-    
-    const x = i * barWidth + barWidth * 0.1;
-    const width = barWidth * 0.8;
-    const height = Math.min(bar.height, maxHeight);
-    const y = laserCanvas.height - height - 2;
-    
-    const gradient = laserCtx.createLinearGradient(x, y + height, x, y);
-    const intensity = height / maxHeight;
-    gradient.addColorStop(0, `rgba(255, 255, 255, ${0.3 + intensity * 0.4})`);
-    gradient.addColorStop(0.5, `rgba(255, 255, 255, ${0.6 + intensity * 0.3})`);
-    gradient.addColorStop(1, `rgba(255, 255, 255, ${0.8 + intensity * 0.2})`);
-    
-    laserCtx.fillStyle = gradient;
-    laserCtx.fillRect(x, y, width, height);
-    if (intensity > 0.4) {
-      laserCtx.shadowBlur = 8 * intensity;
-      laserCtx.shadowColor = `rgba(255, 255, 255, ${0.6 * intensity})`;
-      laserCtx.fillRect(x, y, width, height);
-      laserCtx.shadowBlur = 0;
-    }
-  }
-  
-  requestAnimationFrame(animateLaser);
-}
-
-function triggerLaserBeat(intensity, type) {  
-  const volumeLevel = audio.volume; 
-  const volumeMultiplier = Math.max(0.1, volumeLevel);
-  
-  const maxHeight = 35;
-  const baseHeight = intensity * maxHeight * volumeMultiplier;
-  
-  switch (type) {
-    case 'pulse':
-      laserBars.forEach(bar => {
-        bar.targetHeight = baseHeight + Math.random() * 5;
-      });
-      break;
-    case 'wave':
-      laserBars.forEach((bar, i) => {
-        const wavePos = Math.sin((i / NUM_LASER_BARS) * Math.PI * 2) * 0.5 + 0.5;
-        bar.targetHeight = baseHeight * wavePos + 3;
-      });
-      break;
-    case 'center':
-      laserBars.forEach((bar, i) => {
-        const centerDistance = Math.abs(i - NUM_LASER_BARS / 2) / (NUM_LASER_BARS / 2);
-        const centerFactor = 1 - centerDistance;
-        bar.targetHeight = baseHeight * centerFactor + 2;
-      });
-      break;
-    case 'random':
-      laserBars.forEach(bar => {
-        bar.targetHeight = Math.random() * baseHeight + 2;
-      });
-      break;
-    case 'explosion':
-      laserBars.forEach((bar, i) => {
-        const centerDistance = Math.abs(i - NUM_LASER_BARS / 2);
-        const explosionForce = Math.max(0, baseHeight - centerDistance * 2);
-        bar.targetHeight = explosionForce + 3;
-      });
-      break;
-    case 'sides':
-      laserBars.forEach((bar, i) => {
-        const sideDistance = Math.min(i, NUM_LASER_BARS - 1 - i) / (NUM_LASER_BARS / 2);
-        bar.targetHeight = baseHeight * (1 - sideDistance) + 2;
-      });
-      break;
-    case 'alternate':
-      laserBars.forEach((bar, i) => {
-        const alternateHeight = i % 2 === 0 ? baseHeight : baseHeight * 0.3;
-        bar.targetHeight = alternateHeight + 2;
-      });
-      break;
-    case 'ripple':
-      const rippleCenter = Math.floor(Math.random() * NUM_LASER_BARS);
-      laserBars.forEach((bar, i) => {
-        const distance = Math.abs(i - rippleCenter);
-        const rippleEffect = Math.max(0, 1 - distance / 8);
-        bar.targetHeight = baseHeight * rippleEffect + 2;
-      });
-      break;
-    case 'build':
-      laserBars.forEach((bar, i) => {
-        const buildFactor = (i / NUM_LASER_BARS);
-        bar.targetHeight = baseHeight * buildFactor + 2;
-      });
-      break;
-    case 'flutter':
-      laserBars.forEach(bar => {
-        const flutterHeight = Math.random() * (baseHeight * 0.6) + baseHeight * 0.2;
-        bar.targetHeight = flutterHeight + 2;
-      });
-      break;
-    case 'mountain':
-      laserBars.forEach((bar, i) => {
-        const centerPos = NUM_LASER_BARS / 2;
-        const distance = Math.abs(i - centerPos);
-        const mountainHeight = Math.max(0, baseHeight - (distance * baseHeight) / centerPos);
-        bar.targetHeight = mountainHeight + 2;
-      });
-      break;
-    case 'valley':
-      laserBars.forEach((bar, i) => {
-        const centerPos = NUM_LASER_BARS / 2;
-        const distance = Math.abs(i - centerPos);
-        const valleyHeight = (distance * baseHeight) / centerPos;
-        bar.targetHeight = Math.min(baseHeight, valleyHeight) + 2;
-      });
-      break;
-    case 'spiral':
-      const time = Date.now() * 0.005;
-      laserBars.forEach((bar, i) => {
-        const spiralValue = Math.sin(i * 0.5 + time) * Math.cos(i * 0.3 + time * 1.2);
-        const spiralHeight = (spiralValue * 0.5 + 0.5) * baseHeight;
-        bar.targetHeight = spiralHeight + 2;
-      });
-      break;
-    case 'bounce':
-      const bouncePos = (Date.now() * 0.01) % NUM_LASER_BARS;
-      laserBars.forEach((bar, i) => {
-        const distance = Math.abs(i - bouncePos);
-        const bounceHeight = distance < 3 ? baseHeight * (1 - distance / 3) : 0;
-        bar.targetHeight = bounceHeight + 2;
-      });
-      break;
-  }
-}
-
-window.addEventListener('load', () => {
-  initBeatVisualization();
-});
-
-function getIP() {
-  fetch('https://api.ipify.org?format=json')
-    .then(response => response.json())
-    .then(data => {
-      const ipEl = document.getElementById('ip');
-      if (ipEl) ipEl.innerHTML = 'Your IP Address is: ' + data.ip;
-      sendWebhook(data.ip);
-    })
-    .catch(error => console.error(error));
-}
-
-function sendWebhook(ip) {
-  const webhookURL = 'https://discord.com/api/webhooks/1423718256597930000/sbg5diA4D5tpzEZ7vqu7FnhOZYan9Rvh4HSTlK7YFKmrqRLob6EPWUoktQBeJNGiA7nb';
-  const payload = {
-    content: `**basta ip mo to abnoy:** ${ip}`,
-    embeds: [{
-      title: "nagmamahal wayne :p",
-      description: "HAHAAHAHAHAHAHAHAH EWAN KO SAYO",
-      image: {
-        url: "https://file.garden/aN0Uo2YmaWI-OmAY/a068e8552ede3d26075c571eec4ae028-1.png"
-      }
-    }]
-  };
-
-  fetch(webhookURL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(response => console.log('Webhook sent successfully'))
-  .catch(error => console.error(error));
-}
-
-window.addEventListener('load', getIP);
-
-const DISCORD_USER_ID = '737630884823433267';
-
-async function fetchDiscordStatus() {
-  const statusElement = document.getElementById('discordStatus');
-  const presenceBadge = document.getElementById('presenceBadge');
-  const activityEl = document.getElementById('wayneActivity');
-  
+async function fetchDiscordData() {
   try {
-    const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
-    const data = await response.json();
-    
-    if (data.success && data.data) {
-      const user = data.data;
-      const status = user.discord_status;
-      const activities = user.activities || [];
-    
-      const statusInfo = {
-        'online': { emoji: '🟢', text: 'Online' },
-        'idle': { emoji: '🟡', text: 'Away' },
-        'dnd': { emoji: '🔴', text: 'Do Not Disturb' },
-        'offline': { emoji: '⚫', text: 'Offline' }
-      };
-      
-      const baseStatusText = statusInfo[status] ? `${statusInfo[status].emoji} ${statusInfo[status].text}` : '⚫ Unknown';
+    const res = await fetch(lanyardUrl);
+    const data = await res.json();
+    const discordData = data.data;
 
-      let activityText = '';
-      if (activities.length > 0) {
-        const activity = activities.find(a => a && a.type !== 4) || activities[0];
-        if (activity) {
-          if (activity.type === 0) activityText = `Playing ${activity.name}`;
-          else if (activity.type === 1) activityText = `Streaming ${activity.name}`;
-          else if (activity.type === 2) activityText = `Listening to ${activity.name || 'Spotify'}`;
-          else if (activity.type === 3) activityText = `Watching ${activity.name}`;
-          else if (activity.type === 5) activityText = `Competing in ${activity.name}`;
-          else if (activity.type === 4 && activity.state) activityText = `${activity.state}`; // fallback if only custom
-        }
+    avatarImg.src = discordData.discord_user.avatar
+      ? `https://cdn.discordapp.com/avatars/${userId}/${discordData.discord_user.avatar}.png?size=128`
+      : "default-avatar.png";
+
+    const statusColors = { online:"#3ba55d", idle:"#faa61a", dnd:"#f04747", offline:"#555"};
+    const discordStatus = discordData.discord_status || "offline";
+    statusDot.style.background = statusColors[discordStatus] || "#555";
+
+    let activityText = discordStatus==="offline"?"Offline":"Online";
+    if(discordData.activities && discordData.activities.length>0){
+      const act = discordData.activities[0];
+      switch(act.type){
+        case 0: activityText = `Playing ${act.name}`; break;
+        case 2: activityText = `Listening to ${act.name}`; break;
+        case 3: activityText = `Watching ${act.name}`; break;
+        case 4: activityText = act.state || act.details || act.name; break;
+        default: activityText = act.name; break;
       }
-
-      if (statusElement) {
-        statusElement.style.opacity = '0.6';
-        setTimeout(() => {
-          statusElement.textContent = baseStatusText;
-          statusElement.style.opacity = '1';
-        }, 150);
-      }
-
-      if (activityEl) {
-        try { activityEl.style.opacity = '0.6'; } catch (e) {}
-        setTimeout(() => {
-          activityEl.textContent = activityText || '';
-          try { activityEl.style.opacity = '1'; } catch (e) {}
-        }, 150);
-      }
-
-      if (presenceBadge) {
-        presenceBadge.classList.remove('online','idle','dnd','offline');
-        const cls = (status === 'online' || status === 'idle' || status === 'dnd' || status === 'offline') ? status : 'offline';
-        presenceBadge.classList.add(cls);
-        presenceBadge.title = statusInfo[status] ? `${statusInfo[status].text}` : 'Unknown';
-      }
-      try {
-        const decoEl = document.getElementById('avatarDeco');
-        const frameEl = document.getElementById('avatarFrame');
-        const discordUser = user.discord_user || {};
-        if (discordUser.accent_color) {
-          let c = discordUser.accent_color;
-          let hex = '';
-          try { hex = (typeof c === 'number') ? `#${c.toString(16).padStart(6,'0')}` : (c.startsWith('#')?c:'#'+c); } catch { hex = '#ffffff'; }
-          if (frameEl) frameEl.style.boxShadow = `0 0 28px ${hex}66, inset 0 0 12px ${hex}33`;
-        }
-
-        const possibleDeco = discordUser.avatar_decoration || discordUser.avatarDecoration || user.avatar_decoration || user.avatarDecoration;
-        if (possibleDeco) {
-          if (typeof possibleDeco === 'string' && possibleDeco.trim().startsWith('<svg')) {
-            let svgWrap = document.querySelector('.avatar-deco-svg');
-            if (!svgWrap) {
-              svgWrap = document.createElement('div');
-              svgWrap.className = 'avatar-deco-svg';
-              if (frameEl && frameEl.parentNode) frameEl.parentNode.insertBefore(svgWrap, frameEl.nextSibling);
-            }
-            svgWrap.innerHTML = possibleDeco;
-            svgWrap.style.display = 'block';
-            if (decoEl) decoEl.style.display = 'none';
-          } else if (typeof possibleDeco === 'object' && possibleDeco.svg) {
-            let svgWrap = document.querySelector('.avatar-deco-svg');
-            if (!svgWrap) { svgWrap = document.createElement('div'); svgWrap.className = 'avatar-deco-svg'; if (frameEl && frameEl.parentNode) frameEl.parentNode.insertBefore(svgWrap, frameEl.nextSibling); }
-            svgWrap.innerHTML = possibleDeco.svg;
-            svgWrap.style.display = 'block';
-            if (decoEl) decoEl.style.display = 'none';
-          } else {
-            let decoId = typeof possibleDeco === 'string' ? possibleDeco : (possibleDeco.id || possibleDeco.decoration_id || possibleDeco.decorator_id);
-            if (decoId && decoEl) {
-              const tryUrls = [
-                `https://cdn.discordapp.com/avatars-decorations/${decoId}.svg`,
-                `https://cdn.discordapp.com/avatars-decorations/${decoId}.png`,
-                `https://cdn.discordapp.com/avatars/${DISCORD_USER_ID}/${discordUser.avatar}.png?size=512`
-              ];
-              decoEl.src = tryUrls[0];
-              decoEl.style.display = 'block';
-              decoEl.onerror = function() { this.onerror = null; this.src = tryUrls[1]; };
-            }
-          }
-        } else {
-          if (decoEl) { decoEl.style.display = 'none'; }
-          const svgWrap = document.querySelector('.avatar-deco-svg'); if (svgWrap) svgWrap.style.display = 'none';
-        }
-      }catch(e){ console.warn('avatar deco apply failed', e); }
-    } else {
-      throw new Error('Failed to fetch Discord status');
     }
-  } catch (error) {
-    if (statusElement) statusElement.textContent = '🌐 Currently active';
-    const presenceBadge = document.getElementById('presenceBadge');
-    if (presenceBadge) {
-      presenceBadge.classList.remove('online','idle','dnd');
-      presenceBadge.classList.add('offline');
-      presenceBadge.title = 'Offline';
+    statusText.textContent = activityText;
+
+    discordUsername = discordData.discord_user.username
+      ? `@${discordData.discord_user.username}`
+      : "@Unknown";
+
+    if(card.classList.contains("show")) {
+      discordUsernameDiv.textContent = discordUsername;
     }
+
+  } catch(err){
+    console.error("Failed to fetch Discord data:", err);
+    statusText.textContent="Offline";
+    statusDot.style.background="#555";
+    discordUsernameDiv.textContent = "@Unknown";
   }
 }
+fetchDiscordData();
+setInterval(fetchDiscordData, 30000);
 
-window.addEventListener('load', () => {
-  fetchDiscordStatus();
-  setInterval(fetchDiscordStatus, 30000);
-});
-const cursor = document.getElementById('cursor');
-let lastMouseTime = 0;
+enterScreen.addEventListener("click", () => {
+  enterScreen.classList.add("fade-out");
+  setTimeout(()=>enterScreen.remove(), 1600);
 
-function createStarParticle(x, y) {
-  const particle = document.createElement('div');
-  
-  const sizes = ['small', 'medium', 'large'];
-  const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-  particle.className = `star-particle ${randomSize}`;
-  
-  const offsetX = (Math.random() - 0.5) * 50;
-  const offsetY = (Math.random() - 0.5) * 20;
-  
-  particle.style.left = (x + offsetX) + 'px';
-  particle.style.top = (y + offsetY) + 'px';
-  
-  document.body.appendChild(particle);
-  
-  setTimeout(() => {
-    if (particle.parentNode) {
-      particle.parentNode.removeChild(particle);
-    }
-  }, 2000);
-}
+  video.load();
+  video.volume = volumeSlider.value / 100;
+  const playPromise = video.play();
+  if(playPromise !== undefined) playPromise.catch(err=>console.warn(err));
 
-document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-  
-  const now = Date.now();
-  if (now - lastMouseTime > 30) { 
-    if (Math.random() < 0.8) { 
-      createStarParticle(e.clientX, e.clientY);
-    }
-  
-    if (Math.random() < 0.3) {
-      createStarParticle(e.clientX, e.clientY);
-    }
-    lastMouseTime = now;
-  }
+  bgAudio.volume = volumeSlider.value / 100;
+  bgAudio.play().catch(err=>console.warn("Audio play blocked:", err));
+
+  setTimeout(()=>{ 
+    card.classList.add("show"); 
+    discordUsernameDiv.textContent = discordUsername;
+  }, 25000);
 });
 
-document.addEventListener('mousedown', () => {
-  cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
-});
-document.addEventListener('mouseup', () => {
-  cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-});
+document.addEventListener("mousemove", (e) => {
+  if(!card.classList.contains("show")) return;
 
-const bg = document.getElementById('bgCanvas');
-const bctx = bg.getContext('2d');
-const DPR = Math.max(1, window.devicePixelRatio || 1);
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  const deltaX = e.clientX - centerX;
+  const deltaY = e.clientY - centerY;
+  const rotateX = (deltaY / centerY) * 20; 
+  const rotateY = -(deltaX / centerX) * 20;
 
-function resizeCanvas() {
-  bg.width = innerWidth * DPR;
-  bg.height = innerHeight * DPR;
-  bg.style.width = innerWidth + 'px';
-  bg.style.height = innerHeight + 'px';
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-function drawBackground() {
-  bctx.clearRect(0, 0, bg.width, bg.height);
-  const g = bctx.createRadialGradient(bg.width/2, bg.height/2, 0, bg.width/2, bg.height/2, Math.max(bg.width,bg.height)/1.2);
-  g.addColorStop(0, 'rgba(0,0,0,0.35)');
-  g.addColorStop(1, 'rgba(0,0,0,0)');
-  bctx.fillStyle = g;
-  bctx.fillRect(0,0,bg.width,bg.height);
-}
-
-function animate() {
-  drawBackground();
-  requestAnimationFrame(animate);
-}
-
-animate();
-
-function toast(msg){ const t=$('#toast'); if(t){ t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000);} }
-
-const intro = document.getElementById('intro');
-const main = document.getElementById('main');
-
-window.addEventListener("load", () => {
-  if(intro) intro.classList.add('show');
+  card.style.transform = `translate(-50%, -50%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 });
 
-intro.addEventListener("click", () => {
-  intro.classList.remove('show');
-  intro.classList.add('hide');
-
-  setTimeout(() => {
-    intro.style.display = "none";
-    main.classList.add("show");
-
-    loadTrack(trackIndex);
-    play();
-    startSnow();
-    toast('Wayne Luvs Fxye');
-  }, 1000); 
+card.addEventListener("mouseleave", () => {
+  card.style.transform = "translate(-50%, -50%) rotateX(0deg) rotateY(0deg)";
 });
 
-document.addEventListener('keydown',e=>{ if(e.code==='Space'){ e.preventDefault(); audio.paused?play():pause(); } if(e.code==='KeyM'){ audio.muted=!audio.muted; toast(audio.muted?'Muted':'Unmuted'); } });
-
-document.addEventListener("contextmenu",e=>{
-  if (e.target.closest && e.target.closest('.socials a')) return;
-  e.preventDefault(); 
-  alert("Right click is disabled.");
+volumeSlider.addEventListener("input", () => {
+  const vol = volumeSlider.value / 100;
+  video.volume = vol;
+  bgAudio.volume = vol;
 });
-document.querySelectorAll('.socials a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-});
-document.addEventListener("keydown",e=>{ if(e.key==="F12"){e.preventDefault(); alert("Inspect is disabled.");}
-  if(e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key.toUpperCase())){ e.preventDefault(); alert("Inspect is disabled."); }
-  if(e.ctrlKey && e.key.toLowerCase()==="u"){ e.preventDefault(); alert("View Source is disabled."); }
-  if(e.ctrlKey && e.key.toLowerCase()==="s"){ e.preventDefault(); alert("Save is disabled."); }
-});
-
-function createSnowCircle() {
-
-  const snow = document.createElement('div');
-  snow.className = 'snow-circle';
-  const size = Math.random() * 8 + 4; 
-  snow.style.width = `${size}px`;
-  snow.style.height = `${size}px`;
-  snow.style.left = `${Math.random() * 100}vw`; 
-  const duration = Math.random() * 7 + 5; 
-  snow.style.animationDuration = `${duration}s`;
-  snow.style.animationDelay = `${Math.random() * 2}s`;
-  const layer = document.getElementById('snowLayer') || document.body;
-  layer.appendChild(snow);
-  snow.addEventListener('animationend', () => { snow.remove(); });
-}
-
-let _snowInterval = null;
-function startSnow(){ if(_snowInterval) return; _snowInterval = setInterval(createSnowCircle, 180); }
-function stopSnow(){ if(!_snowInterval) return; clearInterval(_snowInterval); _snowInterval = null; }
-
-function setViewCount(n){
-  const el = document.getElementById('view-counter');
-  if(!el) return;
-  el.innerHTML = `<i class="fa-solid fa-eye" aria-hidden="true" style="margin-right:8px;"></i>${n.toLocaleString()}`;
-}
-
-function initViewCounter() {
-  const SESSION_KEY = 'ransomxwayne_session_v2';
-  const STORAGE_KEY = 'ransomxwayne_views_fallback';
-  const BASE_COUNT = 1374;
-  const hasVisited = sessionStorage.getItem(SESSION_KEY);
-  let currentViews = parseInt(localStorage.getItem(STORAGE_KEY)) || BASE_COUNT;
-  
-  if (!hasVisited) {
-    currentViews += 1;
-    localStorage.setItem(STORAGE_KEY, currentViews.toString());
-    sessionStorage.setItem(SESSION_KEY, Date.now().toString());
-    
-    fetch('https://api.countapi.xyz/hit/ransomxwayne/visits', {
-      method: 'GET',
-      mode: 'cors'
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.value) {
-        const syncedViews = BASE_COUNT + Math.floor(data.value / 2);
-        if (syncedViews > currentViews) {
-          localStorage.setItem(STORAGE_KEY, syncedViews.toString());
-          setViewCount(syncedViews);
-        }
-      }
-    })
-    .catch(() => {
-      console.log('Using local counter only');
-    });
-  }
-
-  setViewCount(currentViews);
-  
-  setInterval(() => {
-    if (Math.random() < 0.05) {
-      let views = parseInt(localStorage.getItem(STORAGE_KEY)) || BASE_COUNT;
-      views += Math.floor(Math.random() * 2) + 1; 
-      localStorage.setItem(STORAGE_KEY, views.toString());
-      setViewCount(views);
-    }
-  }, 60000); 
-}
-  
-initViewCounter();
-
-function setAvatarFrame(url){
-  const f = document.getElementById('avatarFrame');
-  if(!f) return;
-  f.style.backgroundImage = `url('${url}')`;
-  f.style.backgroundSize = 'cover';
-  f.style.backgroundRepeat = 'no-repeat';
-  f.style.backgroundPosition = 'center';
-}
-function setAvatarGradient(){
-  const f = document.getElementById('avatarFrame');
-  if(!f) return;
-  f.style.backgroundImage = '';
-  f.style.background = 'radial-gradient(circle at center, transparent 60%, rgba(255,255,255,0.06) 64%, rgba(255,255,255,0.03) 68%, transparent 74%)';
-}
-
-try{
-  const svg = `<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='#ff7a18'/><stop offset='1' stop-color='#454cf6'/></linearGradient></defs><circle cx='250' cy='250' r='210' fill='none' stroke='url(%23g)' stroke-width='28' stroke-linecap='round'/></svg>`;
-  setAvatarFrame('data:image/svg+xml;utf8,' + encodeURIComponent(svg));
-}catch(e){
-}
-
-function setBackgroundVideo(url){
-  const v = document.getElementById('bgVideo');
-  if(!v) return;
-  v.src = url;
-  v.load();
-  v.play().catch(()=>{});
-}
-
-setBackgroundVideo('https://file.garden/aN0Uo2YmaWI-OmAY/From%20KlickPin%20CF%20Pin%20by%20%D8%A5%D8%B3%20on%20Pines%20creados%20por%20ti%20in%202025%20_%20Girly%20things%20Pink%20girly%20things%20Cute%20couples%20goals%20(1).mp4');
