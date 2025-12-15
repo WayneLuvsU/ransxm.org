@@ -9,7 +9,7 @@ const discordUsernameDiv = document.getElementById("discordUsername");
 const volumeSlider = document.getElementById("volumeSlider");
 
 const bgAudio = document.createElement("audio");
-bgAudio.src = ""; 
+bgAudio.src = "https://file.garden/aN0Uo2YmaWI-OmAY/Metro%20Boomin%2C%20Don%20Toliver%2C%20Future%20-%20Too%20Many%20Nights%20(Official%20Video).mp3"; 
 bgAudio.loop = true;
 bgAudio.volume = volumeSlider.value / 100;
 
@@ -86,7 +86,7 @@ enterScreen.addEventListener("click", () => {
   setTimeout(()=>{ 
     card.classList.add("show"); 
     discordUsernameDiv.textContent = discordUsername;
-  }, 25000);
+  }, 11000 );
 });
 
 document.addEventListener("mousemove", (e) => {
