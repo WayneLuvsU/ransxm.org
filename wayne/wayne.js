@@ -124,17 +124,6 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-setInterval(() => {
-  const threshold = 160;
-  if (
-    window.outerWidth - window.innerWidth > threshold ||
-    window.outerHeight - window.innerHeight > threshold
-  ) {
-    document.body.innerHTML = '';
-    alert('HAHAHAHAHHA TANGINAMO SSKID KA PA');
-  }
-}, 1000);
-
 (function () {
   const devtools = /./;
   devtools.toString = function () {
