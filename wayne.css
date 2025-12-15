@@ -1,11 +1,11 @@
 :root {
   --bg: #000000;
   --panel: rgba(10, 10, 15, 0.95);
-  --border: rgba(0, 200, 255, 0.35);
-  --glow: 0 0 25px rgba(0, 200, 255, 0.25);
+  --border: rgb(145, 145, 145);
+  --glow: 0 0 25px rgb(175, 173, 173);
   --text: #eaeaea;
   --muted: #9aa0a6;
-  --accent: #3bc9ff;
+  --accent: #a2a2a2;
 }
 
 * {
@@ -23,6 +23,20 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(0,0,0,0) 55%,
+    rgba(0,0,0,0.45) 100%
+  );
+  z-index: -1;
+}
+
 
 #enterScreen {
   position: fixed;
@@ -260,15 +274,15 @@ input[type=range]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   background: #000;
-  border: 2px solid #3bc9ff; 
+  border: 2px solid #ffffff; 
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 10px #3bc9ff, 0 0 20px #3bc9ff;
+  box-shadow: 0 0 10px #a2a2a2, 0 0 20px #a2a2a2;
   transition: box-shadow 0.2s ease;
 }
 
 input[type=range]:hover::-webkit-slider-thumb {
-  box-shadow: 0 0 15px #3bc9ff, 0 0 25px #3bc9ff;
+  box-shadow: 0 0 15px #a2a2a2, 0 0 25px #a2a2a2;
 }
 
 input[type=range]::-moz-range-thumb {
@@ -276,9 +290,9 @@ input[type=range]::-moz-range-thumb {
   height: 20px;
   background: #000;
   border-radius: 50%;
-  border: 2px solid #3bc9ff;
+  border: 2px solid #a2a2a2;
   cursor: pointer;
-  box-shadow: 0 0 10px #3bc9ff, 0 0 20px #3bc9ff;
+  box-shadow: 0 0 10px #a2a2a2, 0 0 20px #a2a2a2;
   transition: box-shadow 0.2s ease;
 }
 
@@ -291,7 +305,7 @@ input[type=range]::-moz-range-track {
 
 input[type=range]:active::-webkit-slider-thumb,
 input[type=range]:active::-moz-range-thumb {
-  box-shadow: 0 0 6px #3bc9ff, 0 0 35px #3bc9ff;
+  box-shadow: 0 0 6px #a2a2a2, 0 0 35px #a2a2a2;
 }
 
 .card {
@@ -395,7 +409,7 @@ input[type=range]:active::-moz-range-thumb {
   object-fit: contain;
   transform-style: preserve-3d;
   animation: spinY 6s linear infinite;
-  filter: drop-shadow(0 0 6px rgba(0, 242, 250, 0.6));
+  filter: drop-shadow(0 0 6px rgba(160, 160, 160, 0.6));
 }
 
 .affiliations img:nth-child(2) {
