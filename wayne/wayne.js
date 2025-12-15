@@ -9,7 +9,7 @@ const discordUsernameDiv = document.getElementById("discordUsername");
 const volumeSlider = document.getElementById("volumeSlider");
 
 const bgAudio = document.createElement("audio");
-bgAudio.src = "https://file.garden/aN0Uo2YmaWI-OmAY/Metro%20Boomin%2C%20Don%20Toliver%2C%20Future%20-%20Too%20Many%20Nights%20(Official%20Video).mp3"; 
+bgAudio.src = "https://file.garden/aN0Uo2YmaWI-OmAY/WING%20GOODS%20-%20GG4%20Shiesty%20at%20Gorilla%20ft.%20SICA%20%26%20GASPARI%20(Official%20Music%20Video).mp3"; 
 bgAudio.loop = true;
 bgAudio.volume = volumeSlider.value / 100;
 
@@ -86,7 +86,7 @@ enterScreen.addEventListener("click", () => {
   setTimeout(()=>{ 
     card.classList.add("show"); 
     discordUsernameDiv.textContent = discordUsername;
-  }, 11000 );
+  }, 27000 );
 });
 
 document.addEventListener("mousemove", (e) => {
@@ -111,3 +111,35 @@ volumeSlider.addEventListener("input", () => {
   video.volume = vol;
   bgAudio.volume = vol;
 });
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', function (e) {
+  if (
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key)) ||
+    (e.ctrlKey && ['U', 'S'].includes(e.key))
+  ) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+setInterval(() => {
+  const threshold = 160;
+  if (
+    window.outerWidth - window.innerWidth > threshold ||
+    window.outerHeight - window.innerHeight > threshold
+  ) {
+    document.body.innerHTML = '';
+    alert('HAHAHAHAHHA TANGINAMO SSKID KA PA');
+  }
+}, 1000);
+
+(function () {
+  const devtools = /./;
+  devtools.toString = function () {
+    alert('HAHAHAHAHAAH TANGINAMO SSKID KA PA');
+    document.body.innerHTML = '';
+  };
+  console.log(devtools);
+})();
