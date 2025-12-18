@@ -703,5 +703,5 @@ html, body {
 }
 
 .video-slide:hover::after {
-  color: rgba(0, 255, 255, 1);
+  color: rgb(255, 255, 255);
 }
