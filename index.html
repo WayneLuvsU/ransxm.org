@@ -156,21 +156,26 @@
     <section id="archives" class="section">
       <h2 class="section-title">Archives</h2>
       <div class="section-content">
-        
+        <h3 class="section-title" style="margin-top: 40px;">Featured Videos</h3>
+        <div class="video-slideshow-container">
+          <div class="video-slideshow">
+            <iframe class="video-slide" src="https://www.youtube.com/embed/nijiZsx2w6k" allowfullscreen></iframe>
+            <iframe class="video-slide" src="https://www.youtube.com/embed/RwFne43z5Tc" allowfullscreen></iframe>
+            <iframe class="video-slide" src="https://www.youtube.com/embed/7RuUDjGos48" allowfullscreen></iframe>
+            <iframe class="video-slide" src="https://www.youtube.com/embed/I86PC-VvA70" allowfullscreen></iframe>
+            <iframe class="video-slide" src="https://www.youtube.com/embed/L59S20F7sp0" allowfullscreen></iframe>
+            <!-- Duplicate for seamless loop -->
+            <iframe class="video-slide" src="https://www.youtube.com/embed/nijiZsx2w6k" allowfullscreen></iframe>
+            <iframe class="video-slide" src="https://www.youtube.com/embed/RwFne43z5Tc" allowfullscreen></iframe>
+            <iframe class="video-slide" src="https://www.youtube.com/embed/7RuUDjGos48" allowfullscreen></iframe>
+            <iframe class="video-slide" src="https://www.youtube.com/embed/I86PC-VvA70" allowfullscreen></iframe>
+            <iframe class="video-slide" src="https://www.youtube.com/embed/L59S20F7sp0" allowfullscreen></iframe>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="slideshow" class="section">
-      <h2 class="section-title">Featured Videos</h2>
-      <div class="video-slideshow-container">
-        <div class="video-slideshow">
-          <iframe class="video-slide active" src="https://www.youtube.com/embed/nijiZsx2w6k" allowfullscreen></iframe>
-          <iframe class="video-slide" src="https://www.youtube.com/embed/RwFne43z5Tc" allowfullscreen></iframe>
-          <iframe class="video-slide" src="https://www.youtube.com/embed/7RuUDjGos48" allowfullscreen></iframe>
-          <iframe class="video-slide" src="https://www.youtube.com/embed/I86PC-VvA70" allowfullscreen></iframe>
-          <iframe class="video-slide" src="https://www.youtube.com/embed/L59S20F7sp0" allowfullscreen></iframe>
-        </div>
-      </div>
     </section>
 
     <section id="members" class="section">
@@ -249,44 +254,15 @@ Welcome to RANSXM.ORG.`;
     });
   }
 
-  // YouTube Slideshow
-  const videoSlides = document.querySelectorAll('.video-slide');
+  // YouTube Carousel Scrolling
   const videoSlideshow = document.querySelector('.video-slideshow');
-  let currentSlide = 0;
-  let slideshowInterval;
-  let isHovering = false;
-
-  function showSlide(index) {
-    videoSlides.forEach(slide => slide.classList.remove('active'));
-    videoSlides[index].classList.add('active');
-  }
-
-  function nextSlide() {
-    if (!isHovering) {
-      currentSlide = (currentSlide + 1) % videoSlides.length;
-      showSlide(currentSlide);
-    }
-  }
-
-  function startSlideshow() {
-    slideshowInterval = setInterval(nextSlide, 5000);
-  }
-
-  function stopSlideshow() {
-    clearInterval(slideshowInterval);
-  }
-
-  showSlide(0);
-  startSlideshow();
 
   videoSlideshow.addEventListener('mouseenter', () => {
-    isHovering = true;
-    stopSlideshow();
+    videoSlideshow.style.animationPlayState = 'paused';
   });
 
   videoSlideshow.addEventListener('mouseleave', () => {
-    isHovering = false;
-    startSlideshow();
+    videoSlideshow.style.animationPlayState = 'running';
   });
 
 </script>
