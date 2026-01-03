@@ -3,19 +3,20 @@
   "private": true,
   "version": "1.0.1",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
-    "preview": "vite preview"
-  },
+ "scripts": {
+  "dev": "vite",
+  "build": "tsc -b && vite build",
+  "lint": "eslint .",
+  "lint:fix": "eslint . --fix",
+  "format": "prettier --check .",
+  "format:fix": "prettier --write .",
+  "preview": "vite preview",
+  "deploy": "gh-pages -d dist"
+},
   "author": {
-    "name": "Sanidhya Kumar Verma",
-    "email": "sanidhya.verma12345@gmail.com",
-    "url": "https://github.com/sanidhyy"
+    "name": "WayneLuvsU",
+    "email": "engr.wayne02@gmail.com",
+    "url": "https://github.com/WayneLuvsU"
   },
   "description": "Modern UI/UX 3D Animated Gaming Website using React and GSAP",
   "keywords": [
@@ -83,6 +84,7 @@
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.26",
+    "gh-pages": "^6.3.0",
     "globals": "^16.5.0",
     "postcss": "^8.4.49",
     "prettier": "^3.7.4",
