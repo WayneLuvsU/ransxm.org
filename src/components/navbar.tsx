@@ -25,6 +25,13 @@ export const Navbar = () => {
     setIsIndicatorActive((prevIndicatorActive) => !prevIndicatorActive);
   };
 
+  const handleNavClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const handleProductsClick = () => {
     setShowComingSoon(true);
   };
@@ -66,9 +73,9 @@ export const Navbar = () => {
         <div className="absolute top-1/2 w-full -translate-y-1/2">
           <nav className="flex size-full items-center justify-between p-4">
             <div className="flex items-center gap-7">
-              <a href="#hero" className="transition hover:opacity-75">
+              <button onClick={() => handleNavClick("hero")} className="transition hover:opacity-75">
                 <img src="https://file.garden/aN0Uo2YmaWI-OmAY/Untitled%20design%20(1).png" alt="Logo" className="w-10" />
-              </a>
+              </button>
 
               <Button
                 id="product-button"
@@ -83,9 +90,13 @@ export const Navbar = () => {
             <div className="flex h-full items-center">
               <div className="hidden md:block">
                 {NAV_ITEMS.map(({ label, href }) => (
-                  <a key={href} href={href} className="nav-hover-btn">
+                  <button 
+                    key={href} 
+                    onClick={() => handleNavClick(href.replace("#", ""))}
+                    className="nav-hover-btn"
+                  >
                     {label}
-                  </a>
+                  </button>
                 ))}
               </div>
 
