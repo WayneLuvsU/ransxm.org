@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <a name="readme-top"></a>
 
 # Nova - 3D Animated Gaming Website
@@ -199,3 +200,7 @@ You can also give this repository a star to show more people and they can use th
 
 <br />
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+=======
+# ransxm.org
+anti jai
+>>>>>>> 733ca2a3d58b03fc481fb47e6980570dcc3d645d
