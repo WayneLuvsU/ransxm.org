@@ -30,6 +30,11 @@ export const Story = () => {
             alt="Alliance 3" 
             className="h-80 object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg cursor-pointer"
           />
+          <img 
+            src="https://file.garden/aN0Uo2YmaWI-OmAY/5ffe9bcee94f63a8ed74b19f4ae7b903-1-removebg-preview.png" 
+            alt="Alliance 4" 
+            className="h-80 object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg cursor-pointer"
+          />
         </div>
       </div>
     </section>
