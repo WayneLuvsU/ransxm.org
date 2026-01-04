@@ -232,7 +232,7 @@ export const DiscordCards = () => {
           <div className="media-slot">
             <img
               className="media-img"
-              src="https://file.garden/aN0Uo2YmaWI-OmAY/09ab17d10cb0621984a281d9592131e5.png"
+              src="https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png"
               alt="Profile"
             />
           </div>
