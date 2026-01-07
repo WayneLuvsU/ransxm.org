@@ -59,20 +59,9 @@ export const Navbar = () => {
   }, [isAudioPlaying]);
 
   useEffect(() => {
-    // Listen for card audio events
-    const handleCardAudioPlay = () => {
-      audioElementRef.current?.pause();
-    };
-    const handleCardAudioStop = () => {
-      if (isAudioPlaying) void audioElementRef.current?.play();
-    };
-
-    window.addEventListener('cardAudioPlay', handleCardAudioPlay);
-    window.addEventListener('cardAudioStop', handleCardAudioStop);
-    return () => {
-      window.removeEventListener('cardAudioPlay', handleCardAudioPlay);
-      window.removeEventListener('cardAudioStop', handleCardAudioStop);
-    };
+    // Store reference and state on window for discord-cards to access
+    (window as any).navbarAudioRef = audioElementRef.current;
+    (window as any).isNavbarAudioPlaying = isAudioPlaying;
   }, [isAudioPlaying]);
 
   useEffect(() => {
