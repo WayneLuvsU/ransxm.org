@@ -152,9 +152,14 @@ export const MembersGrid = () => {
             bannerBgRef.current.style.backgroundImage = `url('${user.banner}')`;
             bannerBgRef.current.style.opacity = '1';
           }
+        
+          const discordAudio = document.querySelector('audio[data-type="discord"]') as HTMLAudioElement;
+          if (discordAudio && !discordAudio.paused) {
+            discordAudio.pause();
+          }
           audio.currentTime = 0;
           audio.play().catch(() => {
-            // Autoplay might be blocked
+    
           });
         });
 
@@ -164,6 +169,12 @@ export const MembersGrid = () => {
           }
           audio.pause();
           audio.currentTime = 0;
+          // Restore discord audio if it was playing
+          const discordAudio = document.querySelector('audio[data-type="discord"]') as HTMLAudioElement;
+          const wasDiscordPlaying = (window as any).isDiscordAudioPlaying as boolean;
+          if (discordAudio && wasDiscordPlaying) {
+            discordAudio.play().catch(() => {});
+          }
         });
 
         dracGridRef.current.appendChild(drac);
