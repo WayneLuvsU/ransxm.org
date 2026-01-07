@@ -12,28 +12,20 @@ export const DiscordCards = () => {
       "https://file.garden/aN0Uo2YmaWI-OmAY/NEMZZZ%20-%20COLD%20(OFFICIAL%20VIDEO).mp3",
     ];
 
-    // Autoplay the first song on page load
-    if (audioRef.current) {
-      audioRef.current.src = songs[0];
-      audioRef.current.play().catch(() => {
-        // Autoplay might be blocked by browser
-      });
-    }
-
     const cards = containerRef.current?.querySelectorAll(".card");
     if (!cards || !audioRef.current) return;
 
-    // Audio playback on hover
     cards.forEach((card: Element, index: number) => {
       const cardElement = card as HTMLElement;
       cardElement.dataset.audio = songs[index];
 
       cardElement.addEventListener("mouseenter", () => {
         if (audioRef.current) {
+          const navbarAudio = (window as any).navbarAudioRef as HTMLAudioElement;
+          if (navbarAudio) navbarAudio.pause();
           audioRef.current.src = songs[index];
           audioRef.current.currentTime = 0;
           audioRef.current.play().catch(() => {
-            // Auto-play might be blocked
           });
         }
       });
@@ -41,11 +33,13 @@ export const DiscordCards = () => {
       cardElement.addEventListener("mouseleave", () => {
         if (audioRef.current) {
           audioRef.current.pause();
+          const navbarAudio = (window as any).navbarAudioRef as HTMLAudioElement;
+          const wasPlaying = (window as any).isNavbarAudioPlaying as boolean;
+          if (navbarAudio && wasPlaying) void navbarAudio.play();
         }
       });
     });
 
-    // Lanyard API WebSocket connection for each card
     cards.forEach((card: Element) => {
       const userId = card.getAttribute("data-user-id");
       if (!userId) return;
@@ -233,7 +227,7 @@ export const DiscordCards = () => {
 
   return (
     <div ref={containerRef} className="container-wrapper">
-      <audio ref={audioRef}  />
+      <audio ref={audioRef} />
 
       <div className="card side" data-user-id="1413874403837476956">
         <div className="profile-ui">
