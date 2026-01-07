@@ -35,6 +35,17 @@ export const Features = () => {
           <p className="mt-24 max-w-4xl mx-auto font-circular-web text-lg text-blue-50 opacity-50 text-center">
             <TypewriterText text={descriptionText} speed={20} />
           </p>
+
+          <div className="mt-12 flex justify-center">
+            <a 
+              href="https://discord.gg/N8ngBwFK" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-8 py-3 border-2 border-white text-white font-circular-web text-lg hover:bg-white hover:text-black transition-colors duration-300"
+            >
+              JOIN US!
+            </a>
+          </div>
         </div>
 
         <div className="py-20">
