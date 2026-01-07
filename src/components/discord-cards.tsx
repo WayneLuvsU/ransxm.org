@@ -6,11 +6,19 @@ export const DiscordCards = () => {
 
   useEffect(() => {
     const songs = [
-      "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20molly%20to%20the%20head%20freestyle.mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/Future%20-%20WAIT%20FOR%20U%20(Official%20Audio)%20ft%20(mp3cut.net).mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/NEMZZZ%20-%20COLD%20(OFFICIAL%20VIDEO).mp3",
     ];
+
+    // Autoplay the first song on page load
+    if (audioRef.current) {
+      audioRef.current.src = songs[0];
+      audioRef.current.play().catch(() => {
+        // Autoplay might be blocked by browser
+      });
+    }
 
     const cards = containerRef.current?.querySelectorAll(".card");
     if (!cards || !audioRef.current) return;
@@ -225,7 +233,7 @@ export const DiscordCards = () => {
 
   return (
     <div ref={containerRef} className="container-wrapper">
-      <audio ref={audioRef} />
+      <audio ref={audioRef} autoplay muted />
 
       <div className="card side" data-user-id="1413874403837476956">
         <div className="profile-ui">

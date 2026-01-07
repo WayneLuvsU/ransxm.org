@@ -37,6 +37,23 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
+    // Autoplay on page fully load
+    const handlePageLoad = () => {
+      setIsAudioPlaying(true);
+      void audioElementRef.current?.play().catch(() => {
+        // Autoplay might be blocked by browser
+      });
+    };
+
+    if (document.readyState === 'complete') {
+      handlePageLoad();
+    } else {
+      window.addEventListener('load', handlePageLoad);
+      return () => window.removeEventListener('load', handlePageLoad);
+    }
+  }, []);
+
+  useEffect(() => {
     if (isAudioPlaying) void audioElementRef.current?.play();
     else audioElementRef.current?.pause();
   }, [isAudioPlaying]);
@@ -108,7 +125,7 @@ export const Navbar = () => {
                 >
                   <audio
                     ref={audioElementRef}
-                    src="https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3"
+                    src="https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20molly%20to%20the%20head%20freestyle.mp3"
                     className="hidden"
                     loop
                   />
