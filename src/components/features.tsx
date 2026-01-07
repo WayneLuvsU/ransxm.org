@@ -43,7 +43,7 @@ export const Features = () => {
               href="https://discord.gg/N8ngBwFK" 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`px-8 py-3 border-2 border-white text-white font-circular-web text-lg hover:bg-white hover:text-black transition-colors duration-300 ${
+              className={`px-8 py-3 border-2 border-white text-white font-circular-web text-lg hover:bg-white hover:text-black transition-colors duration-300 rounded-full ${
                 typewriterComplete 
                   ? 'animate-in fade-in zoom-in duration-500' 
                   : 'opacity-0 scale-75'
