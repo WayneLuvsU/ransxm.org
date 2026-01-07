@@ -59,6 +59,23 @@ export const Navbar = () => {
   }, [isAudioPlaying]);
 
   useEffect(() => {
+    // Listen for card audio events
+    const handleCardAudioPlay = () => {
+      audioElementRef.current?.pause();
+    };
+    const handleCardAudioStop = () => {
+      if (isAudioPlaying) void audioElementRef.current?.play();
+    };
+
+    window.addEventListener('cardAudioPlay', handleCardAudioPlay);
+    window.addEventListener('cardAudioStop', handleCardAudioStop);
+    return () => {
+      window.removeEventListener('cardAudioPlay', handleCardAudioPlay);
+      window.removeEventListener('cardAudioStop', handleCardAudioStop);
+    };
+  }, [isAudioPlaying]);
+
+  useEffect(() => {
     if (currentScrollY === 0) {
       setIsNavVisible(true);
       navContainerRef.current?.classList.remove("floating-nav");
