@@ -30,11 +30,6 @@ export const MembersGrid = () => {
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3"
       },
       {
-        id: "1335221585652613130",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/amiri.png",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/NEMZZZ%20-%20COLD%20(OFFICIAL%20VIDEO).mp3"
-      },
-      {
         id: "453061371513536523",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/8d8c95e3de8ed723cfb50c3ea4a6407d.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/DaBaby%20Ft%20(mp3cut.net).mp3"
@@ -88,11 +83,6 @@ export const MembersGrid = () => {
         id: "1385658740447121423",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/328826fa582ff4e248949e467cd59710.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/hev-abi-ya-dig-freestyle-feat-gins-melodies-128-ytshorts.savetube.me.mp3"
-      },
-      {
-        id: "1427338982865240147",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/9d132b707038602f4671ef32d167cdd3.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/uicideboy-and-to-those-i-love-thanks-for-sticking-around-lyric-video-128-ytshorts.savetube.me.mp3"
       },
       {
         id: "1309674736887791698",
@@ -173,6 +163,7 @@ export const MembersGrid = () => {
         dracGridRef.current.appendChild(drac);
       }
 
+      // Add scroll animation to all drac cards
       if (dracGridRef.current) {
         const dracCards = dracGridRef.current.querySelectorAll('.drac');
         
