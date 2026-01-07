@@ -9,7 +9,7 @@ export const DiscordCards = () => {
       "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/Future%20-%20WAIT%20FOR%20U%20(Official%20Audio)%20ft%20(mp3cut.net).mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
-      "https://file.garden/aN0Uo2YmaWI-OmAY/NEMZZZ%20-%20COLD%20(OFFICIAL%20VIDEO).mp3",
+      "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3",
     ];
 
     const cards = containerRef.current?.querySelectorAll(".card");
@@ -201,7 +201,6 @@ export const DiscordCards = () => {
         ws.close();
       };
 
-      // Update Spotify progress
       const spotifyInterval = setInterval(() => {
         if (spotifyData && spotifyProgressFill) {
           const duration = spotifyData.timestamps.end - spotifyData.timestamps.start;
@@ -349,12 +348,12 @@ export const DiscordCards = () => {
         </div>
       </div>
 
-      <div className="card main" data-user-id="1335221585652613130">
+      <div className="card main" data-user-id="1015473740391399474">
         <div className="profile-ui">
           <div className="media-slot">
             <img
               className="media-img"
-              src="https://file.garden/aN0Uo2YmaWI-OmAY/amiri.png"
+              src="https://file.garden/aN0Uo2YmaWI-OmAY/0ad735f722522d9a424b2a018ff63319.gif"
               alt="Profile"
             />
           </div>
