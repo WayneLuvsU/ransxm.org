@@ -23,7 +23,7 @@ export const MembersGrid = () => {
       {
         id: "737630884823433267",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/nazty-kidd-those-eyez-ft-hev-abi-official-lyric-video-128-ytshorts%20(mp3cut.net).mp3"
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Future%20-%20WAIT%20FOR%20U%20(Official%20Audio)%20ft%20(mp3cut.net).mp3"
       },
       {
         id: "1283033719371993111",
