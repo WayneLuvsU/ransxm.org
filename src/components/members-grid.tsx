@@ -30,6 +30,11 @@ export const MembersGrid = () => {
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3"
       },
       {
+        id: "1015473740391399474",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/0ad735f722522d9a424b2a018ff63319.gif",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3"
+      },
+      {
         id: "453061371513536523",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/8d8c95e3de8ed723cfb50c3ea4a6407d.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/DaBaby%20Ft%20(mp3cut.net).mp3"
@@ -43,11 +48,6 @@ export const MembersGrid = () => {
         id: "1350849152136773717",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/06d85dfe641057ec9462c0bc6b092aa6.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/Jhen%C3%A9%20Aiko%20-%20Sativa%20ft%20(mp3cut.net).mp3"
-      },
-      {
-        id: "1015473740391399474",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/0ad735f722522d9a424b2a018ff63319.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3"
       },
       {
         id: "1451159758953250953",
