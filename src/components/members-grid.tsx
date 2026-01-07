@@ -10,7 +10,6 @@ export const MembersGrid = () => {
   const initializedRef = useRef(false);
 
   useEffect(() => {
-    // Prevent running twice in StrictMode
     if (initializedRef.current) return;
     initializedRef.current = true;
 
@@ -152,14 +151,11 @@ export const MembersGrid = () => {
             bannerBgRef.current.style.backgroundImage = `url('${user.banner}')`;
             bannerBgRef.current.style.opacity = '1';
           }
-        
-          const discordAudio = document.querySelector('audio[data-type="discord"]') as HTMLAudioElement;
-          if (discordAudio && !discordAudio.paused) {
-            discordAudio.pause();
-          }
+          const navbarAudio = (window as any).navbarAudioRef as HTMLAudioElement;
+          if (navbarAudio) navbarAudio.pause();
           audio.currentTime = 0;
           audio.play().catch(() => {
-    
+            
           });
         });
 
@@ -169,18 +165,14 @@ export const MembersGrid = () => {
           }
           audio.pause();
           audio.currentTime = 0;
-          // Restore discord audio if it was playing
-          const discordAudio = document.querySelector('audio[data-type="discord"]') as HTMLAudioElement;
-          const wasDiscordPlaying = (window as any).isDiscordAudioPlaying as boolean;
-          if (discordAudio && wasDiscordPlaying) {
-            discordAudio.play().catch(() => {});
-          }
+          const navbarAudio = (window as any).navbarAudioRef as HTMLAudioElement;
+          const wasPlaying = (window as any).isNavbarAudioPlaying as boolean;
+          if (navbarAudio && wasPlaying) navbarAudio.play().catch(() => {});
         });
 
         dracGridRef.current.appendChild(drac);
       }
 
-      // Add scroll animation to all drac cards
       if (dracGridRef.current) {
         const dracCards = dracGridRef.current.querySelectorAll('.drac');
         
