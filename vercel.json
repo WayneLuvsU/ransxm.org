@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/wayne",
+      "destination": "https://ransxm-wayne.vercel.app"
+    },
+    {
+      "source": "/wayne/(.*)",
+      "destination": "https://ransxm-wayne.vercel.app/$1"
+    }
+  ]
+}
