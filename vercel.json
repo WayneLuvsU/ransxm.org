@@ -13,7 +13,7 @@
     "destination": "https://ransxm-sosa-zpc4.vercel.app/"
     },
     {
-    "source": "/sosa",
+    "source": "/sosa/(.*)",
     "destination": "https://ransxm-sosa-zpc4.vercel.app/$1"
     }
   ]
