@@ -26,11 +26,11 @@
     },
      {
        "source": "/rei",
-    "destination": "https://ransxm-rei.vercel.app//"
+    "destination": "https://ransxm-rei.vercel.app/"
     },
     {
     "source": "/rei/(.*)",
-    "destination": "https://ransxm-rei.vercel.app//$1"
+    "destination": "https://ransxm-rei.vercel.app/$1"
     }
   ]
 }
