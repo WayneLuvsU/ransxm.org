@@ -15,6 +15,14 @@
     {
     "source": "/sosa/(.*)",
     "destination": "https://ransxm-sosa-zpc4.vercel.app/$1"
+    },
+     {
+       "source": "/ransxmware",
+    "destination": "https://ransxm-ransxmware.vercel.app/"
+    },
+    {
+    "source": "/ransxmware/(.*)",
+    "destination": "https://ransxm-ransxmware.vercel.app/$1"
     }
   ]
 }
