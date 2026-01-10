@@ -39,6 +39,14 @@
     {
     "source": "/lia/(.*)",
     "destination": "https://ransxm-lei.vercel.app/$1"
+    },
+     {
+       "source": "/chlo",
+    "destination": "https://ransxm-chlo.vercel.app/"
+    },
+    {
+    "source": "/chlo/(.*)",
+    "destination": "https://ransxm-chlo.vercel.app/$1"
     }
   ]
 }
