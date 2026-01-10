@@ -31,6 +31,14 @@
     {
     "source": "/rei/(.*)",
     "destination": "https://ransxm-rei.vercel.app/$1"
+    },
+     {
+       "source": "/lei",
+    "destination": "https://ransxm-lei.vercel.app/"
+    },
+    {
+    "source": "/lei/(.*)",
+    "destination": "https://ransxm-lei.vercel.app/$1"
     }
   ]
 }
