@@ -21,7 +21,7 @@ export const MembersGrid = () => {
       },
       {
         id: "737630884823433267",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/d4c201bf5468b4c81388ffd16a70d725.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/Future%20-%20WAIT%20FOR%20U%20(Official%20Audio)%20ft%20(mp3cut.net).mp3"
       },
       {
