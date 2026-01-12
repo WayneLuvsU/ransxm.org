@@ -7,7 +7,7 @@ export const DiscordCards = () => {
   useEffect(() => {
     const songs = [
       "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
-      "https://file.garden/aN0Uo2YmaWI-OmAY/Future%20-%20WAIT%20FOR%20U%20(Official%20Audio)%20ft%20(mp3cut.net).mp3",
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3",
     ];
