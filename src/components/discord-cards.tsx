@@ -117,23 +117,19 @@ export const DiscordCards = () => {
         if (!payload.d) return;
         const user = payload.d;
 
-        // Update avatar
         if (user.discord_user?.avatar && avatar) {
           avatar.src = `https://cdn.discordapp.com/avatars/${userId}/${user.discord_user.avatar}.png?size=256`;
         }
 
-        // Update display name and username
         const globalName = user.discord_user?.global_name || user.discord_user?.username || "Unknown";
         const discordUsername = user.discord_user?.username || "Unknown";
         if (displayName) displayName.textContent = globalName;
         if (username) username.textContent = "@" + discordUsername;
 
-        // Update status dot
         if (statusDot) {
           statusDot.className = `status-dot status-${user.discord_status}`;
         }
 
-        // Update custom status with emoji
         const customStatus = user.activities?.find((a: any) => a.type === 4);
         if (customStatus && statusBox) {
           const emoji = renderDiscordEmoji(customStatus.emoji) || "";
@@ -141,7 +137,6 @@ export const DiscordCards = () => {
           statusBox.innerHTML = emoji + state;
         }
 
-        // Update activities with icons
         const activities = user.activities?.filter((a: any) => a.type !== 4 && a.name !== "Spotify") || [];
         
         if (activities && activities.length > 0) {
@@ -184,7 +179,6 @@ export const DiscordCards = () => {
           if (activityIconsContainer) activityIconsContainer.innerHTML = "";
         }
 
-        // Update Spotify
         if (user.spotify && spotifyContainer) {
           spotifyContainer.style.display = "block";
           if (spotifyAlbum) spotifyAlbum.src = user.spotify.album_art_url || "";
@@ -273,7 +267,7 @@ export const DiscordCards = () => {
           <div className="media-slot">
             <img
               className="media-img"
-              src="https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif"
+              src="https://file.garden/aN0Uo2YmaWI-OmAY/d4c201bf5468b4c81388ffd16a70d725.gif"
               alt="Profile"
             />
           </div>
