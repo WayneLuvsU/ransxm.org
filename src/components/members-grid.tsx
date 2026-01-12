@@ -75,6 +75,16 @@ export const MembersGrid = () => {
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/xxxtentacion-rip-roach-audio-feat-ki-mask-the-slump-god-128-ytshorts%20(mp3cut.net).mp3"
       },
       {
+        id: "1309674736887791698",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/Untitled_design.gif",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/frank-ocean-ivy-128-ytshorts.savetube.me.mp3"
+      },
+      {
+        id: "1361012595561205951",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/d310d314fc99e1aedd20294e5cc6c5b1.gif",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/I%20BE%20LIKE%20(DIFG)%20-%20gaspari%20x%20costa%20cashman%20(OLV).mp3"
+      },
+      {
         id: "1447286267900330184",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/2498b7aeb833d49748f0af151cf199a5.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/jazz-binalagbag-cuervo-messiah-128-ytshorts.savetube.me.mp3"
@@ -83,11 +93,6 @@ export const MembersGrid = () => {
         id: "1385658740447121423",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/328826fa582ff4e248949e467cd59710.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/hev-abi-ya-dig-freestyle-feat-gins-melodies-128-ytshorts.savetube.me.mp3"
-      },
-      {
-        id: "1309674736887791698",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/Untitled_design.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/frank-ocean-ivy-128-ytshorts.savetube.me.mp3"
       }
     ];
 
