@@ -55,9 +55,9 @@ export const MembersGrid = () => {
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/side-p-feat-d0m-128-ytshorts.savetube.me.mp3"
       },
       {
-        id: "1427591256552247347",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/1c8b8c326b8356c732ba949aece5a516.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Tj%20-%20Stay%20Happy%20%5BMusic%20Video%5D%20%20GRM%20Daily.mp3"
+        id: "1461550030950240277",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/kaie%20background",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/The%20Weeknd%20-%20Starboy%20(Audio)%20ft.%20Daft%20Punk.mp3"
       },
       {
         id: "1322249368719593582",
