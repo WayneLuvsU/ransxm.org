@@ -47,6 +47,14 @@
     {
     "source": "/chlo/(.*)",
     "destination": "https://ransxm-chlo.vercel.app/$1"
+    },
+     {
+       "source": "/kaie",
+    "destination": "https://ransxm-kaie.vercel.app/"
+    },
+    {
+    "source": "/kaie/(.*)",
+    "destination": "https://ransxm-kaie.vercel.app/$1"
     }
   ]
 }
