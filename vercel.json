@@ -58,11 +58,11 @@
     },
     {
        "source": "/uzi",
-    "destination": "https://ransxm-kaie.vercel.app/"
+    "destination": "https://ransxm-uzi.vercel.app/"
     },
     {
     "source": "/uzi/(.*)",
-    "destination": "https://ransxm-kaie.vercel.app/$1"
+    "destination": "https://ransxm-uzi.vercel.app/$1"
     }
   ]
 }
