@@ -63,6 +63,14 @@
     {
     "source": "/uzi/(.*)",
     "destination": "https://ransxm-uzi.vercel.app/$1"
+    },
+        {
+       "source": "/fei",
+    "destination": "https://ransxm-fei.vercel.app/"
+    },
+    {
+    "source": "/fei/(.*)",
+    "destination": "https://ransxm-fei.vercel.app/$1"
     }
   ]
 }
