@@ -55,6 +55,14 @@
     {
     "source": "/kaie/(.*)",
     "destination": "https://ransxm-kaie.vercel.app/$1"
+    },
+    {
+       "source": "/uzi",
+    "destination": "https://ransxm-kaie.vercel.app/"
+    },
+    {
+    "source": "/uzi/(.*)",
+    "destination": "https://ransxm-kaie.vercel.app/$1"
     }
   ]
 }
