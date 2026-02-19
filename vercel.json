@@ -71,6 +71,14 @@
     {
     "source": "/fei/(.*)",
     "destination": "https://ransxm-fei.vercel.app/$1"
+    },
+        {
+       "source": "/crypto",
+    "destination": "https://ransxm-crypto.vercel.app/"
+    },
+    {
+    "source": "/crypto/(.*)",
+    "destination": "https://ransxm-crypto.vercel.app/$1"
     }
   ]
 }
