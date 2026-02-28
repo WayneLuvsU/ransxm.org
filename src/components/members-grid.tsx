@@ -45,9 +45,9 @@ export const MembersGrid = () => {
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/guatno-filipino-ot-remix-official-music-video-128-ytshorts.savetube.me.mp3"
       },
       {
-        id: "1350849152136773717",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/06d85dfe641057ec9462c0bc6b092aa6.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Jhen%C3%A9%20Aiko%20-%20Sativa%20ft%20(mp3cut.net).mp3"
+        id: "1321554150747668522",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/qweasdasdaewq.png",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Future%20-%20LIL%20DEMON%20Official%20Audio.mp3"
       },
       {
         id: "1451159758953250953",
