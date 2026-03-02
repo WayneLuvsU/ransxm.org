@@ -79,6 +79,14 @@
     {
     "source": "/crypto/(.*)",
     "destination": "https://ransxm-crypto.vercel.app/$1"
+    },
+        {
+       "source": "/kurt",
+    "destination": "https://ransxm-kurt.vercel.app/"
+    },
+    {
+    "source": "/kurt/(.*)",
+    "destination": "https://ransxm-kurt.vercel.app/$1"
     }
   ]
 }
