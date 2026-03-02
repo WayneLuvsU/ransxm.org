@@ -85,9 +85,9 @@ export const MembersGrid = () => {
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/I%20BE%20LIKE%20(DIFG)%20-%20gaspari%20x%20costa%20cashman%20(OLV).mp3"
       },
       {
-        id: "1447286267900330184",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/2498b7aeb833d49748f0af151cf199a5.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/jazz-binalagbag-cuervo-messiah-128-ytshorts.savetube.me.mp3"
+        id: "1286586160361246789",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_0111.jpg",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/offtide!%20-%20by%20a%20thread%20(Official%20Video)%20(1).mp3"
       },
       {
         id: "1380573575282692166",
