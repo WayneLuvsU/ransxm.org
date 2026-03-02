@@ -87,7 +87,7 @@ export const MembersGrid = () => {
       {
         id: "1286586160361246789",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_0111.jpg",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/offtide!%20-%20by%20a%20thread%20(Official%20Video)%20(1).mp3"
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/offtide!%20-%20by%20a%20thread%20(Official%20Video)%20(1)%20(mp3cut.net).mp3"
       },
       {
         id: "1380573575282692166",
