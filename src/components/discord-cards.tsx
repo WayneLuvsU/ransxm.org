@@ -266,7 +266,7 @@ export const DiscordCards = () => {
           <div className="media-slot">
             <img
               className="media-img"
-              src="https://file.garden/aN0Uo2YmaWI-OmAY/2c1Ht6TLmpMc3xhN5euPZo5ecC4RJtfJrJu8.gif"
+              src="https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif"
               alt="Profile"
             />
           </div>
