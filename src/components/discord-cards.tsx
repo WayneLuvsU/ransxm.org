@@ -8,7 +8,6 @@ export const DiscordCards = () => {
     const songs = [
       "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3",
-      "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3",
     ];
 
@@ -268,46 +267,6 @@ export const DiscordCards = () => {
             <img
               className="media-img"
               src="https://file.garden/aN0Uo2YmaWI-OmAY/d4c201bf5468b4c81388ffd16a70d725.gif"
-              alt="Profile"
-            />
-          </div>
-          <div className="avatar">
-            <img src="" alt="Avatar" />
-            <span className="status-dot"></span>
-          </div>
-          <div className="user-info">
-            <div className="display-name"></div>
-            <div className="username"></div>
-          </div>
-          <div className="status-box"></div>
-          <div className="activity-box">
-            <div className="activity-content">
-              <span className="activity-name"></span>
-              <span className="activity-details"></span>
-            </div>
-            <div className="activity-icons-container"></div>
-          </div>
-          <div className="spotify-container">
-            <div className="spotify-box">
-              <img className="spotify-album" src="" alt="Album" />
-              <div className="spotify-info">
-                <div className="spotify-song"></div>
-                <div className="spotify-artist"></div>
-                <div className="spotify-progress-bar">
-                  <div className="spotify-progress-fill"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="card main" data-user-id="1283033719371993111">
-        <div className="profile-ui">
-          <div className="media-slot">
-            <img
-              className="media-img"
-              src="https://file.garden/aN0Uo2YmaWI-OmAY/a387c19a64644060f368931d481b712a.png"
               alt="Profile"
             />
           </div>
