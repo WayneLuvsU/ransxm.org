@@ -60,7 +60,7 @@ export const Hero = () => {
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
         <img
-          src="https://file.garden/aN0Uo2YmaWI-OmAY/Untitled62_20251227223904.png"
+          src="https://file.garden/aN0Uo2YmaWI-OmAY/2498b7aeb833d49748f0af151cf199a5.gif"
           alt="background"
           className="absolute left-0 top-0 size-full object-cover object-center"
         />
