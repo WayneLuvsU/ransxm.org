@@ -16,11 +16,6 @@ export const Story = () => {
 
         <div className="mt-16 flex justify-center gap-8 flex-wrap md:flex-nowrap">
           <img 
-            src="https://file.garden/aN0Uo2YmaWI-OmAY/13.png" 
-            alt="Alliance 1" 
-            className="h-80 object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg cursor-pointer"
-          />
-          <img 
             src="https://file.garden/aN0Uo2YmaWI-OmAY/purpp.png" 
             alt="Alliance 2" 
             className="h-80 object-contain transition-all duration-300 hover:scale-110 hover:drop-shadow-lg cursor-pointer"
