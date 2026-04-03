@@ -8,15 +8,7 @@
       "source": "/wayne/(.*)",
       "destination": "https://ransxm-wayne.vercel.app/$1"
     },
-     {
-       "source": "/sosa",
-    "destination": "https://ransxm-sosa-zpc4.vercel.app/"
-    },
     {
-    "source": "/sosa/(.*)",
-    "destination": "https://ransxm-sosa-zpc4.vercel.app/$1"
-    },
-     {
        "source": "/ransxmware",
     "destination": "https://ransxm-ransxmware.vercel.app/"
     },
