@@ -35,7 +35,7 @@ export const About = () => {
 
         <AnimatedTitle containerClass="mt-5 !text-black text-center">
           {
-            "REVSHIT<b>'</b>S FIN<b>E</b>ST"
+            "KAHIT LOLA MO ALAM YAN "
           }
         </AnimatedTitle>
 
