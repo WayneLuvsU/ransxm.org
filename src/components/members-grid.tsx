@@ -21,8 +21,8 @@ export const MembersGrid = () => {
       },
       {
         id: "737630884823433267",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/d4c201bf5468b4c81388ffd16a70d725.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3"
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/LOBAT%20-%20COSTA%20CASHMAN%20(OFFICIAL%20MUSIC%20VIDEO)%20(mp3cut.net).mp3"
       },
       {
         id: "1283033719371993111",
