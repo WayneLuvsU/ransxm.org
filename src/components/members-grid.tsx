@@ -75,7 +75,7 @@ export const MembersGrid = () => {
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/xxxtentacion-rip-roach-audio-feat-ki-mask-the-slump-god-128-ytshorts%20(mp3cut.net).mp3"
       },
       {
-        id: "1309674736887791698",
+        id: "1477383583386828850",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/Untitled_design.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/frank-ocean-ivy-128-ytshorts.savetube.me.mp3"
       },
