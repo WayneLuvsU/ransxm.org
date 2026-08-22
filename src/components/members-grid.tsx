@@ -15,7 +15,7 @@ export const MembersGrid = () => {
 
     const discordUsers = [
       {
-        id: "1413874403837476956",
+        id: "1498182038342336542",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3"
       },
