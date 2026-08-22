@@ -21,7 +21,7 @@ export const Archives = () => {
           scrub: 1.5,
           onUpdate: (self) => {
             const progress = self.progress;
-            // Blend from black to white
+
             const r = Math.round(0 + (255 - 0) * progress);
             const g = Math.round(0 + (255 - 0) * progress);
             const b = Math.round(0 + (255 - 0) * progress);
@@ -30,7 +30,6 @@ export const Archives = () => {
         },
       });
 
-      // Pop-out animation for video cards
       const videoCards = gridRef.current?.querySelectorAll("[data-video-card]");
       if (videoCards) {
         gsap.fromTo(
