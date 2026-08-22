@@ -25,7 +25,7 @@ export const MembersGrid = () => {
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/LOBAT%20-%20COSTA%20CASHMAN%20(OFFICIAL%20MUSIC%20VIDEO)%20(mp3cut.net).mp3"
       },
       {
-        id: "1283033719371993111",
+        id: "1411934822544314381",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/a387c19a64644060f368931d481b712a.png",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3"
       },
@@ -48,26 +48,6 @@ export const MembersGrid = () => {
         id: "1321554150747668522",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/qweasdasdaewq.png",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/Future%20-%20LIL%20DEMON%20Official%20Audio.mp3"
-      },
-      {
-        id: "1451159758953250953",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/b2182d59db19a0910fbf7146d1232edb.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/side-p-feat-d0m-128-ytshorts.savetube.me.mp3"
-      },
-      {
-        id: "1466518244335550586",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/kaie%20background",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/The%20Weeknd%20-%20Starboy%20(Audio)%20ft%20(mp3cut.net).mp3"
-      },
-      {
-        id: "1322249368719593582",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/92c0fdcda32637768839dc73b38a4595.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/M%20Let's%20Do%20It%20(feat.%20Janny%20Saint%2C%20Ddot%20Skinny%20%26%20Rico%20Laced).mp3"
-      },
-      {
-        id: "1380656322046857286",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/From%20KlickPin%20CF%20Pin%20em%20AMoments.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/partynextdoor-drake-nokia-128-ytshorts.savetube.me.mp3"
       },
       {
         id: "1171474815874506864",
@@ -98,7 +78,14 @@ export const MembersGrid = () => {
         id: "984436577612759111",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/09fae4879b5c83ac5620f3e0b75156fb.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3"
+      },
+      {
+        id: "1252278719184113724",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/8a266a935a82db27b3c75a8d6dab9b1a.gif",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3"
       }
+
+      
     ];
 
     async function fetchDiscordInfoMembers(discordId: string) {
