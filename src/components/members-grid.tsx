@@ -21,8 +21,8 @@ export const MembersGrid = () => {
       },
       {
         id: "737630884823433267",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/LOBAT%20-%20COSTA%20CASHMAN%20(OFFICIAL%20MUSIC%20VIDEO)%20(mp3cut.net).mp3"
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3"
       },
       {
         id: "1411934822544314381",
@@ -78,6 +78,11 @@ export const MembersGrid = () => {
         id: "1252278719184113724",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/8a266a935a82db27b3c75a8d6dab9b1a.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3"
+      },
+      {
+        id: "1501588984810176792",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/nazty-kidd-those-eyez-ft-hev-abi-official-lyric-video-128-ytshorts%20(mp3cut.net).mp3"
       }
 
       
