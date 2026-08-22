@@ -37,11 +37,11 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    // Autoplay on page fully load
+    
     const handlePageLoad = () => {
       setIsAudioPlaying(true);
       void audioElementRef.current?.play().catch(() => {
-        // Autoplay might be blocked by browser
+
       });
     };
 
@@ -59,7 +59,6 @@ export const Navbar = () => {
   }, [isAudioPlaying]);
 
   useEffect(() => {
-    // Store reference and state on window for discord-cards to access
     (window as any).navbarAudioRef = audioElementRef.current;
     (window as any).isNavbarAudioPlaying = isAudioPlaying;
   }, [isAudioPlaying]);
