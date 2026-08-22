@@ -221,7 +221,7 @@ export const DiscordCards = () => {
     <div ref={containerRef} className="container-wrapper">
       <audio ref={audioRef} />
 
-      <div className="card side" data-user-id="1413874403837476956">
+      <div className="card side" data-user-id="1498182038342336542">
         <div className="profile-ui">
           <div className="media-slot">
             <img
