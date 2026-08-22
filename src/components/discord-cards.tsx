@@ -7,7 +7,7 @@ export const DiscordCards = () => {
   useEffect(() => {
     const songs = [
       "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
-      "https://file.garden/aN0Uo2YmaWI-OmAY/LOBAT%20-%20COSTA%20CASHMAN%20(OFFICIAL%20MUSIC%20VIDEO)%20(mp3cut.net).mp3",
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
       "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3",
     ];
 
@@ -266,7 +266,7 @@ export const DiscordCards = () => {
           <div className="media-slot">
             <img
               className="media-img"
-              src="https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif"
+              src="https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif"
               alt="Profile"
             />
           </div>
