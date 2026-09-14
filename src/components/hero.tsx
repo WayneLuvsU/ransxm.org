@@ -28,7 +28,7 @@ export const Hero = () => {
 
   useGSAP(() => {
     // ==========================================
-    // VIDEO FRAME SCROLL ANIMATION
+    // VIDEO FRAME ANIMATION
     // ==========================================
 
     gsap.set("#video-frame", {
@@ -49,7 +49,7 @@ export const Hero = () => {
     });
 
     // ==========================================
-    // RANSXM TITLE
+    // RANSXM TITLE ANIMATION
     // ==========================================
 
     const title = heroTitleRef.current;
@@ -58,306 +58,151 @@ export const Hero = () => {
 
     const letters = title.querySelectorAll(".ransxm-letter");
 
-    const outlineTop = title.querySelector(
-      ".ransxm-glitch-top"
-    ) as HTMLElement | null;
+    const glitchLayers = title.querySelectorAll(
+      ".ransxm-glitch-layer"
+    );
 
-    const outlineBottom = title.querySelector(
-      ".ransxm-glitch-bottom"
-    ) as HTMLElement | null;
-
-    const outlineLeft = title.querySelector(
-      ".ransxm-glitch-left"
-    ) as HTMLElement | null;
-
-    const outlineRight = title.querySelector(
-      ".ransxm-glitch-right"
-    ) as HTMLElement | null;
-
-    // ==========================================
-    // INITIAL LETTER STATE
-    // R → A → N → S → X → M
-    // ==========================================
+    // ------------------------------------------
+    // INITIAL STATE
+    // ------------------------------------------
 
     gsap.set(letters, {
       opacity: 0,
-      y: -180,
-      scale: 0.75,
-      rotationX: -90,
-      filter: "blur(12px)",
+      y: -150,
+      scale: 0.8,
+      rotationX: -80,
+      filter: "blur(10px)",
       transformOrigin: "50% 100%",
     });
 
-    // Keep glitch borders hidden initially
-    gsap.set(
-      [
-        outlineTop,
-        outlineBottom,
-        outlineLeft,
-        outlineRight,
-      ],
-      {
-        opacity: 0,
-      }
-    );
+    gsap.set(glitchLayers, {
+      opacity: 0,
+      x: 0,
+      y: 0,
+      skewX: 0,
+    });
 
-    // ==========================================
-    // LETTER-BY-LETTER REVEAL
-    // ==========================================
+    // ------------------------------------------
+    // LETTER REVEAL
+    // R → A → N → S → X → M
+    // ------------------------------------------
 
-    const introTimeline = gsap.timeline({
+    const intro = gsap.timeline({
       delay: 0.35,
     });
 
-    introTimeline.to(letters, {
+    intro.to(letters, {
       opacity: 1,
       y: 0,
       scale: 1,
       rotationX: 0,
       filter: "blur(0px)",
       duration: 0.7,
-      stagger: 0.14,
+      stagger: 0.13,
       ease: "back.out(1.7)",
     });
 
-    // Small final settle
-    introTimeline.to(
-      letters,
-      {
-        y: 0,
-        scale: 1,
-        rotationX: 0,
-        duration: 0.3,
-        ease: "power2.out",
-      },
-      "+=0.05"
-    );
+    // ------------------------------------------
+    // BORDER GLITCH
+    // ------------------------------------------
 
-    // ==========================================
-    // BORDER GLITCH SYSTEM
-    //
-    // CLEAN
-    // CLEAN
-    // GLITCH
-    // CLEAN
-    // CLEAN
-    // GLITCH
-    // ==========================================
-
-    const glitchTimeline = gsap.timeline({
+    const glitch = gsap.timeline({
       repeat: -1,
-      repeatDelay: 3.4,
-      delay: 2.6,
+      repeatDelay: 3,
+      delay: 2.8,
     });
 
-    // ------------------------------------------
-    // FIRST BORDER TEAR
-    // ------------------------------------------
+    // Start hidden
+    glitch.set(glitchLayers, {
+      opacity: 0,
+      x: 0,
+      y: 0,
+      skewX: 0,
+    });
 
-    glitchTimeline
-      .set(outlineTop, {
-        opacity: 0,
-        clipPath: "inset(0 0 85% 0)",
-        x: 0,
-        y: 0,
-      })
-      .set(outlineBottom, {
-        opacity: 0,
-        clipPath: "inset(85% 0 0 0)",
-        x: 0,
-        y: 0,
-      })
-      .set(outlineLeft, {
-        opacity: 0,
-        clipPath: "inset(20% 85% 20% 0)",
-        x: 0,
-        y: 0,
-      })
-      .set(outlineRight, {
-        opacity: 0,
-        clipPath: "inset(20% 0 20% 85%)",
-        x: 0,
-        y: 0,
-      })
-
-      // TOP BORDER FLASH
-      .to(outlineTop, {
+    // FIRST FLASH
+    glitch
+      .to(".ransxm-glitch-top", {
         opacity: 0.9,
-        x: -8,
+        x: -7,
         y: -2,
+        skewX: -6,
+        duration: 0.04,
+        ease: "none",
+      })
+
+      .to(
+        ".ransxm-glitch-bottom",
+        {
+          opacity: 0.75,
+          x: 8,
+          y: 2,
+          skewX: 6,
+          duration: 0.04,
+          ease: "none",
+        },
+        "<"
+      )
+
+      // QUICK SHIFT
+      .to(".ransxm-glitch-top", {
+        x: 10,
+        y: 1,
+        skewX: 9,
+        opacity: 0.55,
         duration: 0.045,
         ease: "none",
       })
 
-      // BOTTOM BORDER FLASH
       .to(
-        outlineBottom,
+        ".ransxm-glitch-bottom",
         {
-          opacity: 0.75,
-          x: 9,
-          y: 2,
+          x: -10,
+          y: -1,
+          skewX: -9,
+          opacity: 0.55,
           duration: 0.045,
           ease: "none",
         },
         "<"
       )
 
-      // LEFT BORDER
-      .to(
-        outlineLeft,
-        {
-          opacity: 0.8,
-          x: -5,
-          duration: 0.04,
-          ease: "none",
-        },
-        "<"
-      )
-
-      // RIGHT BORDER
-      .to(
-        outlineRight,
-        {
-          opacity: 0.7,
-          x: 6,
-          duration: 0.04,
-          ease: "none",
-        },
-        "<"
-      )
-
-      // ------------------------------------------
-      // QUICK BORDER DISPLACEMENT
-      // ------------------------------------------
-
-      .to(outlineTop, {
-        x: 13,
-        y: 3,
-        opacity: 0.55,
-        duration: 0.04,
-        ease: "none",
-      })
-
-      .to(
-        outlineBottom,
-        {
-          x: -12,
-          y: -3,
-          opacity: 0.5,
-          duration: 0.04,
-          ease: "none",
-        },
-        "<"
-      )
-
-      .to(
-        outlineLeft,
-        {
-          x: 8,
-          opacity: 0.45,
-          duration: 0.04,
-          ease: "none",
-        },
-        "<"
-      )
-
-      .to(
-        outlineRight,
-        {
-          x: -9,
-          opacity: 0.45,
-          duration: 0.04,
-          ease: "none",
-        },
-        "<"
-      )
-
-      // ------------------------------------------
-      // HARD BORDER SNAP
-      // ------------------------------------------
-
-      .to(outlineTop, {
-        x: -4,
-        y: 0,
-        opacity: 0.85,
+      // SECOND BORDER FLASH
+      .to(".ransxm-glitch-left", {
+        opacity: 0.8,
+        x: -8,
         duration: 0.035,
         ease: "none",
       })
 
       .to(
-        outlineBottom,
+        ".ransxm-glitch-right",
         {
-          x: 4,
-          y: 0,
-          opacity: 0.8,
+          opacity: 0.7,
+          x: 8,
           duration: 0.035,
           ease: "none",
         },
         "<"
       )
 
-      // ------------------------------------------
-      // FINAL FLICKER
-      // ------------------------------------------
-
-      .to(
-        [
-          outlineTop,
-          outlineBottom,
-          outlineLeft,
-          outlineRight,
-        ],
-        {
-          opacity: 0,
-          duration: 0.08,
-          ease: "none",
-        }
-      );
-
-    // ==========================================
-    // RANDOM MICRO BORDER FLASHES
-    // ==========================================
-
-    const microGlitch = gsap.timeline({
-      repeat: -1,
-      repeatDelay: 3.4,
-      delay: 2.6,
-    });
-
-    microGlitch
-      .to(outlineTop, {
-        opacity: 0.45,
-        x: -15,
-        duration: 0.025,
-        ease: "none",
-      })
-      .to(outlineTop, {
-        opacity: 0,
+      // SNAP BACK
+      .to(glitchLayers, {
         x: 0,
-        duration: 0.025,
-        ease: "none",
-      })
-      .to(outlineBottom, {
-        opacity: 0.4,
-        x: 12,
-        duration: 0.025,
-        ease: "none",
-      })
-      .to(outlineBottom, {
+        y: 0,
+        skewX: 0,
         opacity: 0,
-        x: 0,
-        duration: 0.025,
+        duration: 0.07,
         ease: "none",
       });
 
-    // ==========================================
+    // ------------------------------------------
     // CLEANUP
-    // ==========================================
+    // ------------------------------------------
 
     return () => {
-      introTimeline.kill();
-      glitchTimeline.kill();
-      microGlitch.kill();
+      intro.kill();
+      glitch.kill();
     };
   });
 
@@ -367,7 +212,7 @@ export const Hero = () => {
       className="relative h-dvh w-screen overflow-x-hidden"
     >
       {/* ==========================================
-          LOADING SCREEN
+          LOADING
       ========================================== */}
 
       {isLoading && (
@@ -381,7 +226,7 @@ export const Hero = () => {
       )}
 
       {/* ==========================================
-          VIDEO FRAME
+          VIDEO
       ========================================== */}
 
       <div
@@ -422,15 +267,15 @@ export const Hero = () => {
         <div className="pointer-events-none absolute inset-0 z-30 bg-black/10" />
 
         {/* ==========================================
-            HERO CONTENT
+            CONTENT
         ========================================== */}
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
 
-            {/* ==========================================
-                RANSXM CINEMATIC TITLE
-            ========================================== */}
+            {/* ========================================
+                RANSXM TITLE
+            ======================================== */}
 
             <div
               ref={heroTitleRef}
@@ -439,89 +284,77 @@ export const Hero = () => {
                 perspective: "1000px",
               }}
             >
-              {/* ========================================
-                  TOP GLITCH BORDER
-              ======================================== */}
+              {/* ----------------------------------------
+                  TOP BORDER GLITCH
+              ---------------------------------------- */}
 
               <h1
                 aria-hidden="true"
-                className="hero-heading special-font pointer-events-none absolute left-0 top-0 text-blue-100"
+                className="ransxm-glitch-layer ransxm-glitch-top hero-heading special-font pointer-events-none absolute left-0 top-0"
                 style={{
                   color: "transparent",
                   WebkitTextStroke:
-                    "2px rgba(255,255,255,0.95)",
-                  opacity: 0,
-                  clipPath: "inset(0 0 85% 0)",
-                  willChange:
-                    "transform, opacity, clip-path",
+                    "2px rgba(255,255,255,0.9)",
                 }}
               >
                 RANSXM
               </h1>
 
-              {/* ========================================
-                  BOTTOM GLITCH BORDER
-              ======================================== */}
+              {/* ----------------------------------------
+                  BOTTOM BORDER GLITCH
+              ---------------------------------------- */}
 
               <h1
                 aria-hidden="true"
-                className="hero-heading special-font pointer-events-none absolute left-0 top-0 text-blue-100"
+                className="ransxm-glitch-layer ransxm-glitch-bottom hero-heading special-font pointer-events-none absolute left-0 top-0"
                 style={{
                   color: "transparent",
                   WebkitTextStroke:
-                    "2px rgba(255,255,255,0.95)",
-                  opacity: 0,
-                  clipPath: "inset(85% 0 0 0)",
-                  willChange:
-                    "transform, opacity, clip-path",
+                    "2px rgba(255,255,255,0.8)",
                 }}
               >
                 RANSXM
               </h1>
 
-              {/* ========================================
-                  LEFT GLITCH BORDER
-              ======================================== */}
+              {/* ----------------------------------------
+                  LEFT BORDER GLITCH
+              ---------------------------------------- */}
 
               <h1
                 aria-hidden="true"
-                className="ransxm-glitch-left hero-heading special-font pointer-events-none absolute left-0 top-0 text-blue-100"
+                className="ransxm-glitch-layer ransxm-glitch-left hero-heading special-font pointer-events-none absolute left-0 top-0"
                 style={{
                   color: "transparent",
                   WebkitTextStroke:
-                    "1px rgba(255,255,255,0.8)",
-                  opacity: 0,
-                  clipPath: "inset(20% 85% 20% 0)",
-                  willChange:
-                    "transform, opacity, clip-path",
+                    "1px rgba(255,255,255,0.7)",
+                  clipPath:
+                    "inset(15% 85% 15% 0)",
                 }}
               >
                 RANSXM
               </h1>
 
-              {/* ========================================
-                  RIGHT GLITCH BORDER
-              ======================================== */}
+              {/* ----------------------------------------
+                  RIGHT BORDER GLITCH
+              ---------------------------------------- */}
 
               <h1
                 aria-hidden="true"
-                className="ransxm-glitch-right hero-heading special-font pointer-events-none absolute left-0 top-0 text-blue-100"
+                className="ransxm-glitch-layer ransxm-glitch-right hero-heading special-font pointer-events-none absolute left-0 top-0"
                 style={{
                   color: "transparent",
                   WebkitTextStroke:
-                    "1px rgba(255,255,255,0.8)",
-                  opacity: 0,
-                  clipPath: "inset(20% 0 20% 85%)",
-                  willChange:
-                    "transform, opacity, clip-path",
+                    "1px rgba(255,255,255,0.7)",
+                  clipPath:
+                    "inset(15% 0 15% 85%)",
                 }}
               >
                 RANSXM
               </h1>
 
-              {/* ========================================
-                  MAIN CLEAN RANSXM
-              ======================================== */}
+              {/* ----------------------------------------
+                  MAIN CLEAN TEXT
+              ---------------------------------------- */}
 
               <h1
                 className="hero-heading special-font relative text-blue-100"
