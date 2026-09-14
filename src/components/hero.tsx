@@ -314,16 +314,15 @@ export const Hero = () => {
             </div>
 
             <button
-              id="watch-trailer"
-              onClick={handleWatchTrailer}
-              className="group relative z-10 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
-            >
-              <TiLocationArrow />
-
-              <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
-                Watch Trailer
-              </p>
-            </button>
+  id="watch-trailer"
+  onClick={handleWatchTrailer}
+  className="group relative z-10 mt-1 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
+>
+  <TiLocationArrow />
+  <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
+    Watch Trailer
+  </p>
+</button>
           </div>
 
           <div className="absolute right-10 top-32 scale-50 sm:scale-75 md:scale-100">
