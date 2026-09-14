@@ -1,12 +1,13 @@
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
-
 import { useWindowScroll } from "react-use";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
 import { NAV_ITEMS } from "@/constants";
 import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollToPlugin);
+
 export const Navbar = () => {
   const navContainerRef = useRef<HTMLDivElement>(null);
   const audioElementRef = useRef<HTMLAudioElement>(null);
@@ -15,7 +16,6 @@ export const Navbar = () => {
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(false);
- 
 
   const { y: currentScrollY } = useWindowScroll();
 
@@ -25,47 +25,51 @@ export const Navbar = () => {
   };
 
   const handleNavClick = (id: string) => {
-  const element = document.getElementById(id);
+    const element = document.getElementById(id);
 
-  if (!element) return;
+    if (!element) return;
 
-  const targetY =
-    element.getBoundingClientRect().top +
-    window.scrollY -
-    80;
+    const targetY =
+      element.getBoundingClientRect().top +
+      window.scrollY -
+      80;
 
-  gsap.to(window, {
-    scrollTo: {
-      y: targetY,
-      autoKill: true,
-    },
-    duration: 1.8,
-    ease: "power3.inOut",
-  });
-};
-
-
+    gsap.to(window, {
+      scrollTo: {
+        y: targetY,
+        autoKill: true,
+      },
+      duration: 1.8,
+      ease: "power3.inOut",
+    });
+  };
 
   useEffect(() => {
-    
     const handlePageLoad = () => {
       setIsAudioPlaying(true);
-      void audioElementRef.current?.play().catch(() => {
 
+      void audioElementRef.current?.play().catch(() => {
+        // Browser may block autoplay until user interaction.
       });
     };
 
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       handlePageLoad();
     } else {
-      window.addEventListener('load', handlePageLoad);
-      return () => window.removeEventListener('load', handlePageLoad);
+      window.addEventListener("load", handlePageLoad);
+
+      return () => {
+        window.removeEventListener("load", handlePageLoad);
+      };
     }
   }, []);
 
   useEffect(() => {
-    if (isAudioPlaying) void audioElementRef.current?.play();
-    else audioElementRef.current?.pause();
+    if (isAudioPlaying) {
+      void audioElementRef.current?.play().catch(() => {});
+    } else {
+      audioElementRef.current?.pause();
+    }
   }, [isAudioPlaying]);
 
   useEffect(() => {
@@ -97,72 +101,77 @@ export const Navbar = () => {
   }, [isNavVisible]);
 
   return (
-    <>
-      <header
-        ref={navContainerRef}
-        className="fixed inset-x-0 top-4 z-50 h-16 border-none transition-all duration-700 sm:inset-x-6"
-      >
-        <div className="absolute top-1/2 w-full -translate-y-1/2">
-          <nav className="flex size-full items-center justify-between p-4">
-            <div className="flex items-center gap-7">
-              <button onClick={() => handleNavClick("hero")} className="transition hover:opacity-75">
-                <img src="https://file.garden/aN0Uo2YmaWI-OmAY/Untitled%20design%20(1).png" alt="Logo" className="w-10" />
-              </button>
+    <header
+      ref={navContainerRef}
+      className="fixed inset-x-0 top-4 z-50 h-16 border-none transition-all duration-700 sm:inset-x-6"
+    >
+      <div className="absolute top-1/2 w-full -translate-y-1/2">
+        <nav className="flex size-full items-center justify-between p-4">
 
-          
-            </div>
-
-            <div className="flex h-full items-center">
-              <div className="hidden md:block">
-                {NAV_ITEMS.map(({ label, href }) => (
-                  <button 
-                    key={href} 
-                    onClick={() => handleNavClick(href.replace("#", ""))}
-                    className="nav-hover-btn"
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-4">
-                <button
-                  onClick={toggleAudioIndicator}
-                  className="ml-10 flex items-center space-x-1 p-2 transition hover:opacity-75"
-                  title="Play Audio"
-                >
-                  <audio
-                    ref={audioElementRef}
-                    src="https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20WALANG%20HIYA%20(Audio)%20%5BfSZyd_2LIPg%5D%20(1).mp3"
-                    className="hidden"
-                    loop
-                  />
-
-                  {Array(4)
-                    .fill("")
-                    .map((_, i) => {
-                      return (
-                        <div
-                          key={i + 1}
-                          className={cn(
-                            "indicator-line",
-                            isIndicatorActive && "active"
-                          )}
-                          style={{ animationDelay: `${(i + 1) * 0.1}s` }}
-                        />
-                      );
-                    })}
-                </button>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </header>
-
-            </h1>
+          {/* Logo */}
+          <div className="flex items-center gap-7">
+            <button
+              onClick={() => handleNavClick("hero")}
+              className="transition hover:opacity-75"
+            >
+              <img
+                src="https://file.garden/aN0Uo2YmaWI-OmAY/Untitled%20design%20(1).png"
+                alt="Logo"
+                className="w-10"
+              />
+            </button>
           </div>
-        </div>
-      )}
-    </>
+
+          {/* Navigation + Audio */}
+          <div className="flex h-full items-center">
+
+            {/* Navigation Links */}
+            <div className="hidden md:block">
+              {NAV_ITEMS.map(({ label, href }) => (
+                <button
+                  key={href}
+                  onClick={() => handleNavClick(href.replace("#", ""))}
+                  className="nav-hover-btn"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            {/* Audio */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={toggleAudioIndicator}
+                className="ml-10 flex items-center space-x-1 p-2 transition hover:opacity-75"
+                title="Play Audio"
+              >
+                <audio
+                  ref={audioElementRef}
+                  src="https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20WALANG%20HIYA%20(Audio)%20%5BfSZyd_2LIPg%5D%20(1).mp3"
+                  className="hidden"
+                  loop
+                />
+
+                {Array(4)
+                  .fill("")
+                  .map((_, i) => (
+                    <div
+                      key={i + 1}
+                      className={cn(
+                        "indicator-line",
+                        isIndicatorActive && "active"
+                      )}
+                      style={{
+                        animationDelay: `${(i + 1) * 0.1}s`,
+                      }}
+                    />
+                  ))}
+              </button>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+    </header>
   );
 };
