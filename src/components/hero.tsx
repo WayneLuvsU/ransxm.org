@@ -369,7 +369,7 @@ export const Hero = () => {
                     &gt;&gt;
                   </span>
 
-                  <p className="font-general text-[15px] font-bold tracking-[0.08em] text-white sm:text-[17px]">
+                  <p className="font-general text-[15px] font-bold tracking-[0.08em] text-white sm:text-[19px]">
                     {tagline}
                   </p>
                 </div>
