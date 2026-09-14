@@ -9,11 +9,62 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const Hero = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [tagline, setTagline] = useState("");
+  const [tagArrowVisible, setTagArrowVisible] = useState(true);
   const heroTitleRef = useRef<HTMLDivElement>(null);
-
 
   useEffect(() => {
     setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    const phrases = ["flyest of 'em all", "pinakamainit sa scene"];
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const type = () => {
+      const currentPhrase = phrases[phraseIndex];
+
+      if (!deleting) {
+        charIndex++;
+        setTagline(currentPhrase.slice(0, charIndex));
+
+        if (charIndex >= currentPhrase.length) {
+          deleting = true;
+          timeout = setTimeout(type, 1800);
+          return;
+        }
+
+        timeout = setTimeout(type, 75);
+      } else {
+        charIndex--;
+        setTagline(currentPhrase.slice(0, charIndex));
+
+        if (charIndex <= 0) {
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          timeout = setTimeout(type, 500);
+          return;
+        }
+
+        timeout = setTimeout(type, 55);
+      }
+    };
+
+    type();
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTagArrowVisible((visible) => !visible);
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   useGSAP(() => {
@@ -213,105 +264,117 @@ export const Hero = () => {
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <div
-              ref={heroTitleRef}
-              className="relative ml-6 sm:ml-12 md:ml-20 lg:ml-24"
-              style={{ perspective: "1000px" }}
-            >
-              <h1
-                aria-hidden="true"
-                className="ransxm-glitch-layer ransxm-glitch-top hero-heading special-font pointer-events-none absolute left-0 top-0"
-                style={{
-                  color: "transparent",
-                  WebkitTextStroke: "2px rgba(255,255,255,0.9)",
-                }}
+            <div className="ml-6 sm:ml-12 md:ml-20 lg:ml-24">
+              <div
+                ref={heroTitleRef}
+                className="relative"
+                style={{ perspective: "1000px" }}
               >
-                RANSXM
-              </h1>
+                <h1
+                  aria-hidden="true"
+                  className="ransxm-glitch-layer ransxm-glitch-top hero-heading special-font pointer-events-none absolute left-0 top-0"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "2px rgba(255,255,255,0.9)",
+                  }}
+                >
+                  RANSXM
+                </h1>
 
-              <h1
-                aria-hidden="true"
-                className="ransxm-glitch-layer ransxm-glitch-bottom hero-heading special-font pointer-events-none absolute left-0 top-0"
-                style={{
-                  color: "transparent",
-                  WebkitTextStroke: "2px rgba(255,255,255,0.8)",
-                }}
-              >
-                RANSXM
-              </h1>
+                <h1
+                  aria-hidden="true"
+                  className="ransxm-glitch-layer ransxm-glitch-bottom hero-heading special-font pointer-events-none absolute left-0 top-0"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "2px rgba(255,255,255,0.8)",
+                  }}
+                >
+                  RANSXM
+                </h1>
 
-              <h1
-                aria-hidden="true"
-                className="ransxm-glitch-layer ransxm-glitch-left hero-heading special-font pointer-events-none absolute left-0 top-0"
-                style={{
-                  color: "transparent",
-                  WebkitTextStroke: "1px rgba(255,255,255,0.7)",
-                  clipPath: "inset(15% 85% 15% 0)",
-                }}
-              >
-                RANSXM
-              </h1>
+                <h1
+                  aria-hidden="true"
+                  className="ransxm-glitch-layer ransxm-glitch-left hero-heading special-font pointer-events-none absolute left-0 top-0"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "1px rgba(255,255,255,0.7)",
+                    clipPath: "inset(15% 85% 15% 0)",
+                  }}
+                >
+                  RANSXM
+                </h1>
 
-              <h1
-                aria-hidden="true"
-                className="ransxm-glitch-layer ransxm-glitch-right hero-heading special-font pointer-events-none absolute left-0 top-0"
-                style={{
-                  color: "transparent",
-                  WebkitTextStroke: "1px rgba(255,255,255,0.7)",
-                  clipPath: "inset(15% 0 15% 85%)",
-                }}
-              >
-                RANSXM
-              </h1>
+                <h1
+                  aria-hidden="true"
+                  className="ransxm-glitch-layer ransxm-glitch-right hero-heading special-font pointer-events-none absolute left-0 top-0"
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "1px rgba(255,255,255,0.7)",
+                    clipPath: "inset(15% 0 15% 85%)",
+                  }}
+                >
+                  RANSXM
+                </h1>
 
-              <h1
-                className="hero-heading special-font relative"
-                style={{
-                  willChange: "transform, opacity, filter",
-                }}
-              >
-                <span
-                  className="ransxm-letter inline-block"
-                  style={{ color: "#ff003c" }}
+                <h1
+                  className="hero-heading special-font relative"
+                  style={{
+                    willChange: "transform, opacity, filter",
+                  }}
                 >
-                  R
-                </span>
-                <span
-                  className="ransxm-letter inline-block"
-                  style={{ color: "#ff003c" }}
-                >
-                  A
-                </span>
-                <span
-                  className="ransxm-letter inline-block"
-                  style={{ color: "#ff003c" }}
-                >
-                  N
-                </span>
-                <span
-                  className="ransxm-letter inline-block"
-                  style={{ color: "#a855f7" }}
-                >
-                  S
-                </span>
-                <span
-                  className="ransxm-letter inline-block"
-                  style={{ color: "#a855f7" }}
-                >
-                  X
-                </span>
-                <span
-                  className="ransxm-letter inline-block"
-                  style={{ color: "#a855f7" }}
-                >
-                  M
-                </span>
-              </h1>
-              <p className="mt-2 font-general text-sm font-bold uppercase tracking-[0.35em] text-white sm:text-base">
-            flyest of 'em all
-</p>
+                  <span
+                    className="ransxm-letter inline-block"
+                    style={{ color: "#ff003c" }}
+                  >
+                    R
+                  </span>
+                  <span
+                    className="ransxm-letter inline-block"
+                    style={{ color: "#ff003c" }}
+                  >
+                    A
+                  </span>
+                  <span
+                    className="ransxm-letter inline-block"
+                    style={{ color: "#ff003c" }}
+                  >
+                    N
+                  </span>
+                  <span
+                    className="ransxm-letter inline-block"
+                    style={{ color: "#a855f7" }}
+                  >
+                    S
+                  </span>
+                  <span
+                    className="ransxm-letter inline-block"
+                    style={{ color: "#a855f7" }}
+                  >
+                    X
+                  </span>
+                  <span
+                    className="ransxm-letter inline-block"
+                    style={{ color: "#a855f7" }}
+                  >
+                    M
+                  </span>
+                </h1>
+
+                <div className="mt-2 flex items-center gap-2">
+                  <span
+                    className={`font-general text-sm font-bold tracking-[0.12em] text-white transition-opacity duration-1000 sm:text-base ${
+                      tagArrowVisible ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    &gt;&gt;
+                  </span>
+
+                  <p className="font-general text-sm font-bold tracking-[0.08em] text-white sm:text-base">
+                    {tagline}
+                  </p>
+                </div>
+              </div>
             </div>
-
           </div>
 
           <div className="absolute right-10 top-32 scale-50 sm:scale-75 md:scale-100">
@@ -319,8 +382,6 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-
-     
     </section>
   );
 };
