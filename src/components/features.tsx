@@ -29,7 +29,7 @@ export const Features = () => {
   return (
     <section id="nexus" className="bg-black pb-52">
       <div className="container mx-auto px-3 md:px-10">
-        <div className="px-5 py-32">
+        <div id="introducing-ransxm" className="px-5 py-32 scroll-mt-24">
           <p className="mx-auto font-circular-web text-lg text-blue-50 text-center">
            Introducing Ransxm 
           </p>
@@ -54,7 +54,7 @@ export const Features = () => {
           </div>
         </div>
 
-        <div className="py-20">
+        <div id="members" className="py-20 scroll-mt-24">
           <p className="font-general text-sm uppercase md:text-[10px] text-center mb-16 text-blue-50">
             MEMBERS
           </p>
