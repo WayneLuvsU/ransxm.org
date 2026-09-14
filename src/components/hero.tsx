@@ -216,13 +216,13 @@ export const Hero = () => {
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <div
-              ref={heroTitleRef}
-              className="relative"
-              style={{
-                perspective: "1000px",
-              }}
-            >
+  <div
+    ref={heroTitleRef}
+    className="relative ml-4 sm:ml-8 md:ml-12 lg:ml-16"
+    style={{
+      perspective: "1000px",
+    }}
+  >
               <h1
                 aria-hidden="true"
                 className="ransxm-glitch-layer ransxm-glitch-top hero-heading special-font pointer-events-none absolute left-0 top-0"
