@@ -159,17 +159,6 @@ export const Navbar = () => {
         </div>
       </header>
 
-      {showComingSoon && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm"
-          onClick={() => setShowComingSoon(false)}
-        >
-          <div
-            className="text-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h1 className="font-circular-web text-6xl font-bold text-blue-50">
-              Coming Soon!
             </h1>
           </div>
         </div>
