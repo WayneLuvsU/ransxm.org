@@ -1,18 +1,18 @@
 export const NAV_ITEMS = [
   {
     label: "About",
-    href: "#about",
+    href: "#introducing-ransxm",
   },
   {
-    label: "Story",
-    href: "#story",
+    label: "Members",
+    href: "#members",
+  },
+  {
+    label: "Affiliations",
+    href: "#affiliations",
   },
   {
     label: "Archives",
     href: "#archives",
-  },
-  {
-    label: "Contact",
-    href: "#contact",
   },
 ];
