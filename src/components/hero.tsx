@@ -59,11 +59,14 @@ export const Hero = () => {
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
-        <img
-          src="https://file.garden/aN0Uo2YmaWI-OmAY/ezgif-686e4691d20e3345.mp4"
-          alt="background"
-          className="absolute left-0 top-0 size-full object-cover object-center"
-        />
+        <video
+  src="https://file.garden/aN0Uo2YmaWI-OmAY/ezgif-686e4691d20e3345.mp4"
+  autoPlay
+  loop
+  muted
+  playsInline
+  className="absolute left-0 top-0 size-full object-cover object-center"
+/>
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
