@@ -352,29 +352,40 @@ export const Hero = () => {
                 RANSXM
               </h1>
 
-              {/* ----------------------------------------
-                  MAIN CLEAN TEXT
-              ---------------------------------------- */}
+             {/* ----------------------------------------
+    MAIN CLEAN TEXT
+---------------------------------------- */}
 
-              <h1
-                className="hero-heading special-font relative text-blue-100"
-                style={{
-                  willChange:
-                    "transform, opacity, filter",
-                }}
-              >
-                {"RANSXM".split("").map(
-                  (letter, index) => (
-                    <span
-                      key={`${letter}-${index}`}
-                      className="ransxm-letter inline-block"
-                    >
-                      {letter}
-                    </span>
-                  )
-                )}
-              </h1>
-            </div>
+<h1
+  className="hero-heading special-font relative"
+  style={{
+    willChange: "transform, opacity, filter",
+  }}
+>
+  <span className="ransxm-letter inline-block text-red-500">
+    R
+  </span>
+
+  <span className="ransxm-letter inline-block text-red-500">
+    A
+  </span>
+
+  <span className="ransxm-letter inline-block text-red-500">
+    N
+  </span>
+
+  <span className="ransxm-letter inline-block text-purple-500">
+    S
+  </span>
+
+  <span className="ransxm-letter inline-block text-purple-500">
+    X
+  </span>
+
+  <span className="ransxm-letter inline-block text-purple-500">
+    M
+  </span>
+</h1>
 
             {/* ==========================================
                 WATCH TRAILER
