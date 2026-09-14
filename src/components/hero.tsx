@@ -22,18 +22,16 @@ export const Hero = () => {
 
   useGSAP(() => {
     gsap.set("#video-frame", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      borderRadius: "0",
-      transformPerspective: 1800,
+      transformPerspective: 1600,
       transformOrigin: "50% 50%",
       transformStyle: "preserve-3d",
     });
 
     gsap.to("#video-frame", {
-      rotateX: -10,
-      rotateY: -7,
-      y: 35,
-      scale: 0.96,
+      rotateX: -18,
+      rotateY: -28,
+      scale: 0.94,
+      y: 25,
       ease: "none",
       scrollTrigger: {
         trigger: "#video-frame",
@@ -65,7 +63,9 @@ export const Hero = () => {
       skewX: 0,
     });
 
-    const intro = gsap.timeline({ delay: 0.35 });
+    const intro = gsap.timeline({
+      delay: 0.35,
+    });
 
     intro.to(letters, {
       opacity: 1,
@@ -166,7 +166,7 @@ export const Hero = () => {
     <section
       id="hero"
       className="relative h-dvh w-screen overflow-hidden"
-      style={{ perspective: "1800px" }}
+      style={{ perspective: "1600px" }}
     >
       {isLoading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
@@ -270,7 +270,9 @@ export const Hero = () => {
 
               <h1
                 className="hero-heading special-font relative"
-                style={{ willChange: "transform, opacity, filter" }}
+                style={{
+                  willChange: "transform, opacity, filter",
+                }}
               >
                 <span
                   className="ransxm-letter inline-block"
@@ -317,6 +319,7 @@ export const Hero = () => {
               className="group relative z-10 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
             >
               <TiLocationArrow />
+
               <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
                 Watch Trailer
               </p>
