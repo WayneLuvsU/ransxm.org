@@ -27,10 +27,6 @@ export const Hero = () => {
   }, []);
 
   useGSAP(() => {
-    // ==========================================
-    // VIDEO FRAME ANIMATION
-    // ==========================================
-
     gsap.set("#video-frame", {
       clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
       borderRadius: "0 0 40% 10%",
@@ -48,23 +44,12 @@ export const Hero = () => {
       },
     });
 
-    // ==========================================
-    // RANSXM TITLE ANIMATION
-    // ==========================================
-
     const title = heroTitleRef.current;
 
     if (!title) return;
 
     const letters = title.querySelectorAll(".ransxm-letter");
-
-    const glitchLayers = title.querySelectorAll(
-      ".ransxm-glitch-layer"
-    );
-
-    // ------------------------------------------
-    // INITIAL STATE
-    // ------------------------------------------
+    const glitchLayers = title.querySelectorAll(".ransxm-glitch-layer");
 
     gsap.set(letters, {
       opacity: 0,
@@ -82,11 +67,6 @@ export const Hero = () => {
       skewX: 0,
     });
 
-    // ------------------------------------------
-    // LETTER REVEAL
-    // R → A → N → S → X → M
-    // ------------------------------------------
-
     const intro = gsap.timeline({
       delay: 0.35,
     });
@@ -102,26 +82,19 @@ export const Hero = () => {
       ease: "back.out(1.7)",
     });
 
-    // ------------------------------------------
-    // BORDER GLITCH
-    // ------------------------------------------
-
     const glitch = gsap.timeline({
       repeat: -1,
       repeatDelay: 3,
       delay: 2.8,
     });
 
-    // Start hidden
-    glitch.set(glitchLayers, {
-      opacity: 0,
-      x: 0,
-      y: 0,
-      skewX: 0,
-    });
-
-    // FIRST FLASH
     glitch
+      .set(glitchLayers, {
+        opacity: 0,
+        x: 0,
+        y: 0,
+        skewX: 0,
+      })
       .to(".ransxm-glitch-top", {
         opacity: 0.9,
         x: -7,
@@ -130,7 +103,6 @@ export const Hero = () => {
         duration: 0.04,
         ease: "none",
       })
-
       .to(
         ".ransxm-glitch-bottom",
         {
@@ -141,10 +113,8 @@ export const Hero = () => {
           duration: 0.04,
           ease: "none",
         },
-        "<"
+        "<",
       )
-
-      // QUICK SHIFT
       .to(".ransxm-glitch-top", {
         x: 10,
         y: 1,
@@ -153,7 +123,6 @@ export const Hero = () => {
         duration: 0.045,
         ease: "none",
       })
-
       .to(
         ".ransxm-glitch-bottom",
         {
@@ -164,17 +133,14 @@ export const Hero = () => {
           duration: 0.045,
           ease: "none",
         },
-        "<"
+        "<",
       )
-
-      // SECOND BORDER FLASH
       .to(".ransxm-glitch-left", {
         opacity: 0.8,
         x: -8,
         duration: 0.035,
         ease: "none",
       })
-
       .to(
         ".ransxm-glitch-right",
         {
@@ -183,10 +149,8 @@ export const Hero = () => {
           duration: 0.035,
           ease: "none",
         },
-        "<"
+        "<",
       )
-
-      // SNAP BACK
       .to(glitchLayers, {
         x: 0,
         y: 0,
@@ -195,10 +159,6 @@ export const Hero = () => {
         duration: 0.07,
         ease: "none",
       });
-
-    // ------------------------------------------
-    // CLEANUP
-    // ------------------------------------------
 
     return () => {
       intro.kill();
@@ -211,10 +171,6 @@ export const Hero = () => {
       id="hero"
       className="relative h-dvh w-screen overflow-x-hidden"
     >
-      {/* ==========================================
-          LOADING
-      ========================================== */}
-
       {isLoading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
@@ -224,10 +180,6 @@ export const Hero = () => {
           </div>
         </div>
       )}
-
-      {/* ==========================================
-          VIDEO
-      ========================================== */}
 
       <div
         id="video-frame"
@@ -242,10 +194,6 @@ export const Hero = () => {
           preload="auto"
           className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
         />
-
-        {/* ==========================================
-            GRAIN + SCANLINES
-        ========================================== */}
 
         <div
           className="pointer-events-none absolute inset-0 z-20 opacity-[0.18]"
@@ -266,17 +214,8 @@ export const Hero = () => {
 
         <div className="pointer-events-none absolute inset-0 z-30 bg-black/10" />
 
-        {/* ==========================================
-            CONTENT
-        ========================================== */}
-
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-
-            {/* ========================================
-                RANSXM TITLE
-            ======================================== */}
-
             <div
               ref={heroTitleRef}
               className="relative"
@@ -284,112 +223,96 @@ export const Hero = () => {
                 perspective: "1000px",
               }}
             >
-              {/* ----------------------------------------
-                  TOP BORDER GLITCH
-              ---------------------------------------- */}
-
               <h1
                 aria-hidden="true"
                 className="ransxm-glitch-layer ransxm-glitch-top hero-heading special-font pointer-events-none absolute left-0 top-0"
                 style={{
                   color: "transparent",
-                  WebkitTextStroke:
-                    "2px rgba(255,255,255,0.9)",
+                  WebkitTextStroke: "2px rgba(255,255,255,0.9)",
                 }}
               >
                 RANSXM
               </h1>
-
-              {/* ----------------------------------------
-                  BOTTOM BORDER GLITCH
-              ---------------------------------------- */}
 
               <h1
                 aria-hidden="true"
                 className="ransxm-glitch-layer ransxm-glitch-bottom hero-heading special-font pointer-events-none absolute left-0 top-0"
                 style={{
                   color: "transparent",
-                  WebkitTextStroke:
-                    "2px rgba(255,255,255,0.8)",
+                  WebkitTextStroke: "2px rgba(255,255,255,0.8)",
                 }}
               >
                 RANSXM
               </h1>
-
-              {/* ----------------------------------------
-                  LEFT BORDER GLITCH
-              ---------------------------------------- */}
 
               <h1
                 aria-hidden="true"
                 className="ransxm-glitch-layer ransxm-glitch-left hero-heading special-font pointer-events-none absolute left-0 top-0"
                 style={{
                   color: "transparent",
-                  WebkitTextStroke:
-                    "1px rgba(255,255,255,0.7)",
-                  clipPath:
-                    "inset(15% 85% 15% 0)",
+                  WebkitTextStroke: "1px rgba(255,255,255,0.7)",
+                  clipPath: "inset(15% 85% 15% 0)",
                 }}
               >
                 RANSXM
               </h1>
-
-              {/* ----------------------------------------
-                  RIGHT BORDER GLITCH
-              ---------------------------------------- */}
 
               <h1
                 aria-hidden="true"
                 className="ransxm-glitch-layer ransxm-glitch-right hero-heading special-font pointer-events-none absolute left-0 top-0"
                 style={{
                   color: "transparent",
-                  WebkitTextStroke:
-                    "1px rgba(255,255,255,0.7)",
-                  clipPath:
-                    "inset(15% 0 15% 85%)",
+                  WebkitTextStroke: "1px rgba(255,255,255,0.7)",
+                  clipPath: "inset(15% 0 15% 85%)",
                 }}
               >
                 RANSXM
               </h1>
 
-             {/* ----------------------------------------
-    MAIN CLEAN TEXT
----------------------------------------- */}
-
-<h1
-  className="hero-heading special-font relative"
-  style={{
-    willChange: "transform, opacity, filter",
-  }}
->
-  <span className="ransxm-letter inline-block text-red-500">
-    R
-  </span>
-
-  <span className="ransxm-letter inline-block text-red-500">
-    A
-  </span>
-
-  <span className="ransxm-letter inline-block text-red-500">
-    N
-  </span>
-
-  <span className="ransxm-letter inline-block text-purple-500">
-    S
-  </span>
-
-  <span className="ransxm-letter inline-block text-purple-500">
-    X
-  </span>
-
-  <span className="ransxm-letter inline-block text-purple-500">
-    M
-  </span>
-</h1>
-
-            {/* ==========================================
-                WATCH TRAILER
-            ========================================== */}
+              <h1
+                className="hero-heading special-font relative"
+                style={{
+                  willChange: "transform, opacity, filter",
+                }}
+              >
+                <span
+                  className="ransxm-letter inline-block"
+                  style={{ color: "#ff003c" }}
+                >
+                  R
+                </span>
+                <span
+                  className="ransxm-letter inline-block"
+                  style={{ color: "#ff003c" }}
+                >
+                  A
+                </span>
+                <span
+                  className="ransxm-letter inline-block"
+                  style={{ color: "#ff003c" }}
+                >
+                  N
+                </span>
+                <span
+                  className="ransxm-letter inline-block"
+                  style={{ color: "#a855f7" }}
+                >
+                  S
+                </span>
+                <span
+                  className="ransxm-letter inline-block"
+                  style={{ color: "#a855f7" }}
+                >
+                  X
+                </span>
+                <span
+                  className="ransxm-letter inline-block"
+                  style={{ color: "#a855f7" }}
+                >
+                  M
+                </span>
+              </h1>
+            </div>
 
             <button
               id="watch-trailer"
@@ -397,26 +320,17 @@ export const Hero = () => {
               className="group relative z-10 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
             >
               <TiLocationArrow />
-
               <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
                 Watch Trailer
               </p>
             </button>
           </div>
 
-          {/* ==========================================
-              DISCORD CARDS
-          ========================================== */}
-
           <div className="absolute right-10 top-32 scale-50 sm:scale-75 md:scale-100">
             <DiscordCards />
           </div>
         </div>
       </div>
-
-      {/* ==========================================
-          TRAILER MODAL
-      ========================================== */}
 
       {showTrailer && (
         <div
