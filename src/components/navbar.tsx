@@ -1,12 +1,11 @@
 import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
-import { TiLocationArrow } from "react-icons/ti";
+
 import { useWindowScroll } from "react-use";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { NAV_ITEMS } from "@/constants";
 import { cn } from "@/lib/utils";
 
-import { Button } from "./button";
 gsap.registerPlugin(ScrollToPlugin);
 export const Navbar = () => {
   const navContainerRef = useRef<HTMLDivElement>(null);
@@ -16,7 +15,7 @@ export const Navbar = () => {
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(false);
-  const [showComingSoon, setShowComingSoon] = useState(false);
+ 
 
   const { y: currentScrollY } = useWindowScroll();
 
@@ -45,9 +44,7 @@ export const Navbar = () => {
   });
 };
 
-  const handleProductsClick = () => {
-    setShowComingSoon(true);
-  };
+
 
   useEffect(() => {
     
@@ -112,14 +109,7 @@ export const Navbar = () => {
                 <img src="https://file.garden/aN0Uo2YmaWI-OmAY/Untitled%20design%20(1).png" alt="Logo" className="w-10" />
               </button>
 
-              <Button
-                id="product-button"
-                rightIcon={TiLocationArrow}
-                containerClass="bg-blue-50 md:flex hidden items-center justify-center gap-1"
-                onClick={handleProductsClick}
-              >
-                Products
-              </Button>
+          
             </div>
 
             <div className="flex h-full items-center">
