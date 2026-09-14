@@ -9,14 +9,19 @@ import { DiscordCards } from "./discord-cards";
 gsap.registerPlugin(ScrollTrigger);
 
 export const Hero = () => {
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showTrailer, setShowTrailer] = useState(false);
+
+  const handleWatchTrailer = () => {
+    setShowTrailer(true);
+  };
+
+  const handleCloseTrailer = () => {
+    setShowTrailer(false);
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev === 3 ? 1 : prev + 1));
-    }, 5000);
-
-    return () => clearInterval(interval);
+    setIsLoading(false);
   }, []);
 
   useGSAP(() => {
@@ -39,12 +44,27 @@ export const Hero = () => {
   });
 
   return (
-    <div id="hero" className="relative h-dvh w-screen overflow-x-hidden">
+    <section
+      id="hero"
+      className="relative h-dvh w-screen overflow-x-hidden"
+    >
+      {/* LOADING SCREEN */}
+      {isLoading && (
+        <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
+          <div className="three-body">
+            <div className="three-body__dot" />
+            <div className="three-body__dot" />
+            <div className="three-body__dot" />
+          </div>
+        </div>
+      )}
+
+      {/* VIDEO FRAME */}
       <div
         id="video-frame"
-        className="relative z-10 h-dvh w-screen overflow-hidden"
+        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
- 
+        {/* BACKGROUND VIDEO */}
         <video
           src="https://file.garden/aN0Uo2YmaWI-OmAY/ezgif-686e4691d20e3345.mp4"
           autoPlay
@@ -56,12 +76,12 @@ export const Hero = () => {
           disablePictureInPicture
           className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
           style={{
-            transform: "translateZ(0)",
+            transform: "translate3d(0, 0, 0)",
             backfaceVisibility: "hidden",
           }}
         />
 
-
+        {/* FILM GRAIN */}
         <div
           className="pointer-events-none absolute inset-0 z-20"
           style={{
@@ -74,7 +94,7 @@ export const Hero = () => {
           }}
         />
 
-     
+        {/* SUBTLE FILM SCANLINES */}
         <div
           className="pointer-events-none absolute inset-0 z-20"
           style={{
@@ -92,7 +112,7 @@ export const Hero = () => {
           }}
         />
 
-     
+        {/* SECONDARY GRAIN */}
         <div
           className="pointer-events-none absolute inset-0 z-20"
           style={{
@@ -105,37 +125,70 @@ export const Hero = () => {
           }}
         />
 
-       
+        {/* VERY LIGHT DARKENING */}
         <div className="pointer-events-none absolute inset-0 z-30 bg-black/[0.04]" />
 
+        {/* HERO CONTENT */}
+        <div className="absolute left-0 top-0 z-40 size-full">
+          <div className="mt-24 px-5 sm:px-10">
+            <h1 className="special-font hero-heading text-blue-100">
+              Ra<b>n</b>sxm
+            </h1>
 
-        <div className="absolute inset-0 z-40">
-          <div className="absolute left-0 top-0 size-full">
-            <div className="mt-24 px-5 sm:px-10">
-              <h1 className="special-font hero-heading text-white">
-                RANSXM
-              </h1>
+            <button
+              id="watch-trailer"
+              onClick={handleWatchTrailer}
+              className="group relative z-10 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
+            >
+              <TiLocationArrow />
 
-              <p className="mb-5 max-w-64 font-robert-regular text-white/80">
-                Welcome to the RANSXM community.
+              <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
+                Watch Trailer
               </p>
-
-              <button className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-white px-5 py-3 font-general text-xs uppercase">
-                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
-                  Enter RANSXM
-                </span>
-
-                <TiLocationArrow className="relative z-10 transition-colors duration-300 group-hover:text-white" />
-
-                <span className="absolute inset-0 z-0 translate-y-full bg-black transition-transform duration-300 group-hover:translate-y-0" />
-              </button>
-            </div>
+            </button>
           </div>
 
-  
-          <DiscordCards />
+          {/* DISCORD CARDS */}
+          <div className="absolute right-10 top-32 scale-50 sm:scale-75 md:scale-100">
+            <DiscordCards />
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* TRAILER MODAL */}
+      {showTrailer && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80"
+          onClick={handleCloseTrailer}
+        >
+          <div
+            className="relative w-11/12 max-w-4xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* CLOSE BUTTON */}
+            <button
+              onClick={handleCloseTrailer}
+              className="absolute -top-10 right-0 text-2xl text-white hover:text-gray-300"
+            >
+              ✕
+            </button>
+
+            {/* YOUTUBE VIDEO */}
+            <div className="aspect-video w-full">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/FT-F5UFwbG8"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
