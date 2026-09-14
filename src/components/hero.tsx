@@ -9,19 +9,14 @@ import { DiscordCards } from "./discord-cards";
 gsap.registerPlugin(ScrollTrigger);
 
 export const Hero = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showTrailer, setShowTrailer] = useState(false);
-
-  const handleWatchTrailer = () => {
-    setShowTrailer(true);
-  };
-
-  const handleCloseTrailer = () => {
-    setShowTrailer(false);
-  };
+  const [currentIndex, setCurrentIndex] = useState(1);
 
   useEffect(() => {
-    setIsLoading(false);
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === 3 ? 1 : prev + 1));
+    }, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   useGSAP(() => {
@@ -44,27 +39,12 @@ export const Hero = () => {
   });
 
   return (
-    <section
-      id="hero"
-      className="relative h-dvh w-screen overflow-x-hidden"
-    >
-     
-      {isLoading && (
-        <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-          <div className="three-body">
-            <div className="three-body__dot" />
-            <div className="three-body__dot" />
-            <div className="three-body__dot" />
-          </div>
-        </div>
-      )}
-
-      
+    <div id="hero" className="relative h-dvh w-screen overflow-x-hidden">
       <div
         id="video-frame"
-        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
+        className="relative z-10 h-dvh w-screen overflow-hidden"
       >
-        
+ 
         <video
           src="https://file.garden/aN0Uo2YmaWI-OmAY/ezgif-686e4691d20e3345.mp4"
           autoPlay
@@ -72,91 +52,90 @@ export const Hero = () => {
           muted
           playsInline
           preload="auto"
+          controls={false}
+          disablePictureInPicture
           className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
+          style={{
+            transform: "translateZ(0)",
+            backfaceVisibility: "hidden",
+          }}
         />
 
-    
+
         <div
-          className="pointer-events-none absolute inset-0 z-20 opacity-[0.18]"
+          className="pointer-events-none absolute inset-0 z-20"
+          style={{
+            backgroundImage: `
+              url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.9'/%3E%3C/svg%3E")
+            `,
+            backgroundSize: "180px 180px",
+            opacity: 0.24,
+            mixBlendMode: "soft-light",
+          }}
+        />
+
+     
+        <div
+          className="pointer-events-none absolute inset-0 z-20"
           style={{
             backgroundImage: `
               repeating-linear-gradient(
                 0deg,
-                rgba(255,255,255,0.025) 0px,
-                rgba(255,255,255,0.025) 1px,
+                rgba(255,255,255,0.035) 0px,
+                rgba(255,255,255,0.035) 1px,
                 transparent 1px,
-                transparent 4px
-              ),
-              url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")
+                transparent 5px
+              )
             `,
+            opacity: 0.32,
             mixBlendMode: "overlay",
           }}
         />
 
      
-        <div className="pointer-events-none absolute inset-0 z-30 bg-black/10" />
+        <div
+          className="pointer-events-none absolute inset-0 z-20"
+          style={{
+            backgroundImage: `
+              url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.45' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise2)' opacity='.65'/%3E%3C/svg%3E")
+            `,
+            backgroundSize: "250px 250px",
+            opacity: 0.12,
+            mixBlendMode: "overlay",
+          }}
+        />
 
        
-        <div className="absolute left-0 top-0 z-40 size-full">
-          <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading text-blue-100">
-              Ra<b>n</b>sxm
-            </h1>
+        <div className="pointer-events-none absolute inset-0 z-30 bg-black/[0.04]" />
 
-            <button
-              id="watch-trailer"
-              onClick={handleWatchTrailer}
-              className="group relative z-10 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
-            >
-              <TiLocationArrow />
 
-              <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
-                Watch Trailer
+        <div className="absolute inset-0 z-40">
+          <div className="absolute left-0 top-0 size-full">
+            <div className="mt-24 px-5 sm:px-10">
+              <h1 className="special-font hero-heading text-white">
+                RANSXM
+              </h1>
+
+              <p className="mb-5 max-w-64 font-robert-regular text-white/80">
+                Welcome to the RANSXM community.
               </p>
-            </button>
-          </div>
 
-         
-          <div className="absolute right-10 top-32 scale-50 sm:scale-75 md:scale-100">
-            <DiscordCards />
-          </div>
-        </div>
-      </div>
+              <button className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-white px-5 py-3 font-general text-xs uppercase">
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                  Enter RANSXM
+                </span>
 
-     
-      {showTrailer && (
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80"
-          onClick={handleCloseTrailer}
-        >
-          <div
-            className="relative w-11/12 max-w-4xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            
-            <button
-              onClick={handleCloseTrailer}
-              className="absolute -top-10 right-0 text-2xl text-white hover:text-gray-300"
-            >
-              ✕
-            </button>
+                <TiLocationArrow className="relative z-10 transition-colors duration-300 group-hover:text-white" />
 
-        
-            <div className="aspect-video w-full">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/FT-F5UFwbG8"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
+                <span className="absolute inset-0 z-0 translate-y-full bg-black transition-transform duration-300 group-hover:translate-y-0" />
+              </button>
             </div>
           </div>
+
+  
+          <DiscordCards />
         </div>
-      )}
-    </section>
+      </div>
+    </div>
   );
 };
