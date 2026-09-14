@@ -22,57 +22,28 @@ export const Hero = () => {
 
   useGSAP(() => {
     gsap.set("#video-frame", {
-      clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
-      borderRadius: "0 0 40% 10%",
-      transformPerspective: 1400,
-      transformOrigin: "50% 100%",
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      borderRadius: "0",
+      transformPerspective: 1800,
+      transformOrigin: "50% 50%",
       transformStyle: "preserve-3d",
-      rotationX: 0,
-      rotationY: 0,
-      rotationZ: 0,
-      skewX: 0,
-      scale: 1,
-      y: 0,
     });
 
-    gsap.fromTo(
-      "#video-frame",
-      {
-        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-        borderRadius: "0 0 0 0",
-        transformPerspective: 1400,
-        transformOrigin: "50% 100%",
-        transformStyle: "preserve-3d",
-        rotationX: 0,
-        rotationY: 0,
-        rotationZ: 0,
-        skewX: 0,
-        scale: 1,
-        y: 0,
+    gsap.to("#video-frame", {
+      rotateX: -10,
+      rotateY: -7,
+      y: 35,
+      scale: 0.96,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#video-frame",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.2,
       },
-      {
-        clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
-        borderRadius: "0 0 40% 10%",
-        transformPerspective: 1400,
-        transformOrigin: "50% 100%",
-        transformStyle: "preserve-3d",
-        rotationX: -8,
-        rotationY: -1.5,
-        skewX: -1.5,
-        scale: 1.015,
-        y: -8,
-        ease: "power1.inOut",
-        scrollTrigger: {
-          trigger: "#video-frame",
-          start: "center center",
-          end: "bottom center",
-          scrub: true,
-        },
-      }
-    );
+    });
 
     const title = heroTitleRef.current;
-
     if (!title) return;
 
     const letters = title.querySelectorAll(".ransxm-letter");
@@ -138,7 +109,7 @@ export const Hero = () => {
           duration: 0.04,
           ease: "none",
         },
-        "<"
+        "<",
       )
       .to(".ransxm-glitch-top", {
         x: 10,
@@ -158,7 +129,7 @@ export const Hero = () => {
           duration: 0.045,
           ease: "none",
         },
-        "<"
+        "<",
       )
       .to(".ransxm-glitch-left", {
         opacity: 0.8,
@@ -174,7 +145,7 @@ export const Hero = () => {
           duration: 0.035,
           ease: "none",
         },
-        "<"
+        "<",
       )
       .to(glitchLayers, {
         x: 0,
@@ -194,7 +165,8 @@ export const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative h-dvh w-screen overflow-x-hidden"
+      className="relative h-dvh w-screen overflow-hidden"
+      style={{ perspective: "1800px" }}
     >
       {isLoading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
@@ -248,10 +220,7 @@ export const Hero = () => {
             <div
               ref={heroTitleRef}
               className="relative ml-6 sm:ml-12 md:ml-20 lg:ml-24"
-              style={{
-                perspective: "1000px",
-                transformStyle: "preserve-3d",
-              }}
+              style={{ perspective: "1000px" }}
             >
               <h1
                 aria-hidden="true"
@@ -301,9 +270,7 @@ export const Hero = () => {
 
               <h1
                 className="hero-heading special-font relative"
-                style={{
-                  willChange: "transform, opacity, filter",
-                }}
+                style={{ willChange: "transform, opacity, filter" }}
               >
                 <span
                   className="ransxm-letter inline-block"
@@ -350,7 +317,6 @@ export const Hero = () => {
               className="group relative z-10 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
             >
               <TiLocationArrow />
-
               <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
                 Watch Trailer
               </p>
