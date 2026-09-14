@@ -308,7 +308,7 @@ export const Hero = () => {
                 </span>
               </h1>
               <p className="mt-2 font-general text-sm font-bold uppercase tracking-[0.35em] text-white sm:text-base">
-  flyest of 'em all
+            flyest of 'em all
 </p>
             </div>
 
