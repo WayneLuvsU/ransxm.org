@@ -44,7 +44,11 @@ export const Hero = () => {
   });
 
   return (
-    <section id="hero" className="relative h-dvh w-screen overflow-x-hidden">
+    <section
+      id="hero"
+      className="relative h-dvh w-screen overflow-x-hidden"
+    >
+     
       {isLoading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
@@ -55,43 +59,71 @@ export const Hero = () => {
         </div>
       )}
 
+      
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
+        
         <video
-  src="https://file.garden/aN0Uo2YmaWI-OmAY/ezgif-686e4691d20e3345.mp4"
-  autoPlay
-  loop
-  muted
-  playsInline
-  className="absolute left-0 top-0 size-full object-cover object-center"
-/>
+          src="https://file.garden/aN0Uo2YmaWI-OmAY/ezgif-686e4691d20e3345.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
+        />
 
+    
+        <div
+          className="pointer-events-none absolute inset-0 z-20 opacity-[0.18]"
+          style={{
+            backgroundImage: `
+              repeating-linear-gradient(
+                0deg,
+                rgba(255,255,255,0.025) 0px,
+                rgba(255,255,255,0.025) 1px,
+                transparent 1px,
+                transparent 4px
+              ),
+              url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")
+            `,
+            mixBlendMode: "overlay",
+          }}
+        />
+
+     
+        <div className="pointer-events-none absolute inset-0 z-30 bg-black/10" />
+
+       
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
             <h1 className="special-font hero-heading text-blue-100">
-              Ra<b>n</b>sxm 
+              Ra<b>n</b>sxm
             </h1>
 
             <button
               id="watch-trailer"
               onClick={handleWatchTrailer}
-              className="group relative z-10 w-fit cursor-pointer overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75 flex-center gap-1"
+              className="group relative z-10 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
             >
               <TiLocationArrow />
+
               <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
                 Watch Trailer
               </p>
             </button>
           </div>
 
+         
           <div className="absolute right-10 top-32 scale-50 sm:scale-75 md:scale-100">
             <DiscordCards />
           </div>
         </div>
       </div>
 
+     
       {showTrailer && (
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80"
@@ -101,12 +133,15 @@ export const Hero = () => {
             className="relative w-11/12 max-w-4xl"
             onClick={(e) => e.stopPropagation()}
           >
+            
             <button
               onClick={handleCloseTrailer}
               className="absolute -top-10 right-0 text-2xl text-white hover:text-gray-300"
             >
               ✕
             </button>
+
+        
             <div className="aspect-video w-full">
               <iframe
                 width="100%"
