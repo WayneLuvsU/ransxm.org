@@ -22,7 +22,7 @@ export const MembersGrid = () => {
       {
         id: "737630884823433267",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3"
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/groundZERO%20-%20TMA%20(Tyler%20x%20ODP%20x%20Primera)%20%5B%20Official%20Music%20Video%20%5D%20%5BOhfOaPdi7yc%5D%20(1)%20(mp3cut.net).mp3"
       },
       {
         id: "1411934822544314381",
@@ -83,6 +83,11 @@ export const MembersGrid = () => {
         id: "1501588984810176792",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif",
         music: "https://file.garden/aN0Uo2YmaWI-OmAY/nazty-kidd-those-eyez-ft-hev-abi-official-lyric-video-128-ytshorts%20(mp3cut.net).mp3"
+      },
+      {
+        id: "1322181942078341174",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/8f4c8e897a81920fbf4e56f0b5da4c1c.gif",
+        music: "https://file.garden/aN0Uo2YmaWI-OmAY/EsDeeKid%20%26%20Rico%20Ace%20-%20Phantom%20(Lyrics)%20%5BGlnYAkcHdGo%5D%20(mp3cut.net).mp3"
       }
 
       
