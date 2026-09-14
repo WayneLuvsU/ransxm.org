@@ -12,7 +12,7 @@ export const Hero = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showTrailer, setShowTrailer] = useState(false);
 
-  const heroTitleRef = useRef<HTMLHeadingElement>(null);
+  const heroTitleRef = useRef<HTMLDivElement>(null);
 
   const handleWatchTrailer = () => {
     setShowTrailer(true);
@@ -27,6 +27,10 @@ export const Hero = () => {
   }, []);
 
   useGSAP(() => {
+    // ==========================================
+    // VIDEO FRAME SCROLL ANIMATION
+    // ==========================================
+
     gsap.set("#video-frame", {
       clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
       borderRadius: "0 0 40% 10%",
@@ -45,16 +49,36 @@ export const Hero = () => {
     });
 
     // ==========================================
-    // RANSXM LETTER-BY-LETTER INTRO
+    // RANSXM TITLE
     // ==========================================
 
-    const letters = heroTitleRef.current?.querySelectorAll(
-      ".ransxm-letter"
-    );
+    const title = heroTitleRef.current;
 
-    if (!letters || letters.length === 0) return;
+    if (!title) return;
 
-    // Initial state
+    const letters = title.querySelectorAll(".ransxm-letter");
+
+    const outlineTop = title.querySelector(
+      ".ransxm-glitch-top"
+    ) as HTMLElement | null;
+
+    const outlineBottom = title.querySelector(
+      ".ransxm-glitch-bottom"
+    ) as HTMLElement | null;
+
+    const outlineLeft = title.querySelector(
+      ".ransxm-glitch-left"
+    ) as HTMLElement | null;
+
+    const outlineRight = title.querySelector(
+      ".ransxm-glitch-right"
+    ) as HTMLElement | null;
+
+    // ==========================================
+    // INITIAL LETTER STATE
+    // R → A → N → S → X → M
+    // ==========================================
+
     gsap.set(letters, {
       opacity: 0,
       y: -180,
@@ -64,7 +88,23 @@ export const Hero = () => {
       transformOrigin: "50% 100%",
     });
 
-    // Letter reveal: R → A → N → S → X → M
+    // Keep glitch borders hidden initially
+    gsap.set(
+      [
+        outlineTop,
+        outlineBottom,
+        outlineLeft,
+        outlineRight,
+      ],
+      {
+        opacity: 0,
+      }
+    );
+
+    // ==========================================
+    // LETTER-BY-LETTER REVEAL
+    // ==========================================
+
     const introTimeline = gsap.timeline({
       delay: 0.35,
     });
@@ -80,132 +120,244 @@ export const Hero = () => {
       ease: "back.out(1.7)",
     });
 
-    // Small settling motion after all letters arrive
+    // Small final settle
     introTimeline.to(
       letters,
       {
         y: 0,
         scale: 1,
-        duration: 0.35,
+        rotationX: 0,
+        duration: 0.3,
         ease: "power2.out",
       },
       "+=0.05"
     );
 
     // ==========================================
-    // GLITCH EFFECT
-    // CLEAN → CLEAN → GLITCH → CLEAN → CLEAN → GLITCH
+    // BORDER GLITCH SYSTEM
+    //
+    // CLEAN
+    // CLEAN
+    // GLITCH
+    // CLEAN
+    // CLEAN
+    // GLITCH
     // ==========================================
 
     const glitchTimeline = gsap.timeline({
       repeat: -1,
-      repeatDelay: 3.2,
-      delay: 1.8,
+      repeatDelay: 3.4,
+      delay: 2.6,
     });
+
+    // ------------------------------------------
+    // FIRST BORDER TEAR
+    // ------------------------------------------
 
     glitchTimeline
-      // Tiny pre-glitch twitch
-      .to(
-        letters,
-        {
-          x: 2,
-          skewX: 3,
-          duration: 0.035,
-          stagger: 0.01,
-          ease: "none",
-        }
-      )
-
-      // Glitch burst
-      .to(
-        letters,
-        {
-          x: -5,
-          skewX: -8,
-          scaleX: 1.04,
-          duration: 0.045,
-          stagger: {
-            each: 0.012,
-            from: "random",
-          },
-          ease: "none",
-        }
-      )
-
-      .to(
-        letters,
-        {
-          x: 7,
-          skewX: 10,
-          scaleX: 0.97,
-          duration: 0.04,
-          stagger: {
-            each: 0.01,
-            from: "random",
-          },
-          ease: "none",
-        }
-      )
-
-      // Hard snap
-      .to(
-        letters,
-        {
-          x: -3,
-          skewX: -4,
-          scaleX: 1.02,
-          duration: 0.035,
-          stagger: 0.008,
-          ease: "none",
-        }
-      )
-
-      // Return perfectly clean
-      .to(letters, {
+      .set(outlineTop, {
+        opacity: 0,
+        clipPath: "inset(0 0 85% 0)",
         x: 0,
-        skewX: 0,
-        scaleX: 1,
-        duration: 0.08,
-        ease: "power2.out",
-      });
+        y: 0,
+      })
+      .set(outlineBottom, {
+        opacity: 0,
+        clipPath: "inset(85% 0 0 0)",
+        x: 0,
+        y: 0,
+      })
+      .set(outlineLeft, {
+        opacity: 0,
+        clipPath: "inset(20% 85% 20% 0)",
+        x: 0,
+        y: 0,
+      })
+      .set(outlineRight, {
+        opacity: 0,
+        clipPath: "inset(20% 0 20% 85%)",
+        x: 0,
+        y: 0,
+      })
+
+      // TOP BORDER FLASH
+      .to(outlineTop, {
+        opacity: 0.9,
+        x: -8,
+        y: -2,
+        duration: 0.045,
+        ease: "none",
+      })
+
+      // BOTTOM BORDER FLASH
+      .to(
+        outlineBottom,
+        {
+          opacity: 0.75,
+          x: 9,
+          y: 2,
+          duration: 0.045,
+          ease: "none",
+        },
+        "<"
+      )
+
+      // LEFT BORDER
+      .to(
+        outlineLeft,
+        {
+          opacity: 0.8,
+          x: -5,
+          duration: 0.04,
+          ease: "none",
+        },
+        "<"
+      )
+
+      // RIGHT BORDER
+      .to(
+        outlineRight,
+        {
+          opacity: 0.7,
+          x: 6,
+          duration: 0.04,
+          ease: "none",
+        },
+        "<"
+      )
+
+      // ------------------------------------------
+      // QUICK BORDER DISPLACEMENT
+      // ------------------------------------------
+
+      .to(outlineTop, {
+        x: 13,
+        y: 3,
+        opacity: 0.55,
+        duration: 0.04,
+        ease: "none",
+      })
+
+      .to(
+        outlineBottom,
+        {
+          x: -12,
+          y: -3,
+          opacity: 0.5,
+          duration: 0.04,
+          ease: "none",
+        },
+        "<"
+      )
+
+      .to(
+        outlineLeft,
+        {
+          x: 8,
+          opacity: 0.45,
+          duration: 0.04,
+          ease: "none",
+        },
+        "<"
+      )
+
+      .to(
+        outlineRight,
+        {
+          x: -9,
+          opacity: 0.45,
+          duration: 0.04,
+          ease: "none",
+        },
+        "<"
+      )
+
+      // ------------------------------------------
+      // HARD BORDER SNAP
+      // ------------------------------------------
+
+      .to(outlineTop, {
+        x: -4,
+        y: 0,
+        opacity: 0.85,
+        duration: 0.035,
+        ease: "none",
+      })
+
+      .to(
+        outlineBottom,
+        {
+          x: 4,
+          y: 0,
+          opacity: 0.8,
+          duration: 0.035,
+          ease: "none",
+        },
+        "<"
+      )
+
+      // ------------------------------------------
+      // FINAL FLICKER
+      // ------------------------------------------
+
+      .to(
+        [
+          outlineTop,
+          outlineBottom,
+          outlineLeft,
+          outlineRight,
+        ],
+        {
+          opacity: 0,
+          duration: 0.08,
+          ease: "none",
+        }
+      );
 
     // ==========================================
-    // GLITCH OPACITY FLASH
+    // RANDOM MICRO BORDER FLASHES
     // ==========================================
 
-    const opacityGlitch = gsap.timeline({
+    const microGlitch = gsap.timeline({
       repeat: -1,
-      repeatDelay: 3.2,
-      delay: 1.8,
+      repeatDelay: 3.4,
+      delay: 2.6,
     });
 
-    opacityGlitch
-      .to(letters, {
-        opacity: 0.65,
-        duration: 0.035,
-        stagger: 0.01,
-        ease: "none",
-      })
-      .to(letters, {
-        opacity: 1,
-        duration: 0.035,
-        ease: "none",
-      })
-      .to(letters, {
-        opacity: 0.8,
+    microGlitch
+      .to(outlineTop, {
+        opacity: 0.45,
+        x: -15,
         duration: 0.025,
         ease: "none",
       })
-      .to(letters, {
-        opacity: 1,
-        duration: 0.05,
-        ease: "power2.out",
+      .to(outlineTop, {
+        opacity: 0,
+        x: 0,
+        duration: 0.025,
+        ease: "none",
+      })
+      .to(outlineBottom, {
+        opacity: 0.4,
+        x: 12,
+        duration: 0.025,
+        ease: "none",
+      })
+      .to(outlineBottom, {
+        opacity: 0,
+        x: 0,
+        duration: 0.025,
+        ease: "none",
       });
+
+    // ==========================================
+    // CLEANUP
+    // ==========================================
 
     return () => {
       introTimeline.kill();
       glitchTimeline.kill();
-      opacityGlitch.kill();
+      microGlitch.kill();
     };
   });
 
@@ -214,6 +366,10 @@ export const Hero = () => {
       id="hero"
       className="relative h-dvh w-screen overflow-x-hidden"
     >
+      {/* ==========================================
+          LOADING SCREEN
+      ========================================== */}
+
       {isLoading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
@@ -223,6 +379,10 @@ export const Hero = () => {
           </div>
         </div>
       )}
+
+      {/* ==========================================
+          VIDEO FRAME
+      ========================================== */}
 
       <div
         id="video-frame"
@@ -238,7 +398,10 @@ export const Hero = () => {
           className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
         />
 
-        {/* GRAIN + SCANLINES */}
+        {/* ==========================================
+            GRAIN + SCANLINES
+        ========================================== */}
+
         <div
           className="pointer-events-none absolute inset-0 z-20 opacity-[0.18]"
           style={{
@@ -258,35 +421,131 @@ export const Hero = () => {
 
         <div className="pointer-events-none absolute inset-0 z-30 bg-black/10" />
 
+        {/* ==========================================
+            HERO CONTENT
+        ========================================== */}
+
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
 
             {/* ==========================================
-                CINEMATIC RANSXM TITLE
+                RANSXM CINEMATIC TITLE
             ========================================== */}
 
-            <h1
+            <div
               ref={heroTitleRef}
-              className="hero-heading special-font text-blue-100"
+              className="relative"
               style={{
                 perspective: "1000px",
               }}
             >
-              {"RANSXM".split("").map((letter, index) => (
-                <span
-                  key={`${letter}-${index}`}
-                  className="ransxm-letter inline-block"
-                  style={{
-                    willChange:
-                      "transform, opacity, filter",
-                  }}
-                >
-                  {letter}
-                </span>
-              ))}
-            </h1>
+              {/* ========================================
+                  TOP GLITCH BORDER
+              ======================================== */}
 
-            {/* WATCH TRAILER */}
+              <h1
+                aria-hidden="true"
+                className="hero-heading special-font pointer-events-none absolute left-0 top-0 text-blue-100"
+                style={{
+                  color: "transparent",
+                  WebkitTextStroke:
+                    "2px rgba(255,255,255,0.95)",
+                  opacity: 0,
+                  clipPath: "inset(0 0 85% 0)",
+                  willChange:
+                    "transform, opacity, clip-path",
+                }}
+              >
+                RANSXM
+              </h1>
+
+              {/* ========================================
+                  BOTTOM GLITCH BORDER
+              ======================================== */}
+
+              <h1
+                aria-hidden="true"
+                className="hero-heading special-font pointer-events-none absolute left-0 top-0 text-blue-100"
+                style={{
+                  color: "transparent",
+                  WebkitTextStroke:
+                    "2px rgba(255,255,255,0.95)",
+                  opacity: 0,
+                  clipPath: "inset(85% 0 0 0)",
+                  willChange:
+                    "transform, opacity, clip-path",
+                }}
+              >
+                RANSXM
+              </h1>
+
+              {/* ========================================
+                  LEFT GLITCH BORDER
+              ======================================== */}
+
+              <h1
+                aria-hidden="true"
+                className="ransxm-glitch-left hero-heading special-font pointer-events-none absolute left-0 top-0 text-blue-100"
+                style={{
+                  color: "transparent",
+                  WebkitTextStroke:
+                    "1px rgba(255,255,255,0.8)",
+                  opacity: 0,
+                  clipPath: "inset(20% 85% 20% 0)",
+                  willChange:
+                    "transform, opacity, clip-path",
+                }}
+              >
+                RANSXM
+              </h1>
+
+              {/* ========================================
+                  RIGHT GLITCH BORDER
+              ======================================== */}
+
+              <h1
+                aria-hidden="true"
+                className="ransxm-glitch-right hero-heading special-font pointer-events-none absolute left-0 top-0 text-blue-100"
+                style={{
+                  color: "transparent",
+                  WebkitTextStroke:
+                    "1px rgba(255,255,255,0.8)",
+                  opacity: 0,
+                  clipPath: "inset(20% 0 20% 85%)",
+                  willChange:
+                    "transform, opacity, clip-path",
+                }}
+              >
+                RANSXM
+              </h1>
+
+              {/* ========================================
+                  MAIN CLEAN RANSXM
+              ======================================== */}
+
+              <h1
+                className="hero-heading special-font relative text-blue-100"
+                style={{
+                  willChange:
+                    "transform, opacity, filter",
+                }}
+              >
+                {"RANSXM".split("").map(
+                  (letter, index) => (
+                    <span
+                      key={`${letter}-${index}`}
+                      className="ransxm-letter inline-block"
+                    >
+                      {letter}
+                    </span>
+                  )
+                )}
+              </h1>
+            </div>
+
+            {/* ==========================================
+                WATCH TRAILER
+            ========================================== */}
 
             <button
               id="watch-trailer"
@@ -301,7 +560,9 @@ export const Hero = () => {
             </button>
           </div>
 
-          {/* DISCORD CARDS */}
+          {/* ==========================================
+              DISCORD CARDS
+          ========================================== */}
 
           <div className="absolute right-10 top-32 scale-50 sm:scale-75 md:scale-100">
             <DiscordCards />
@@ -309,7 +570,9 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* TRAILER MODAL */}
+      {/* ==========================================
+          TRAILER MODAL
+      ========================================== */}
 
       {showTrailer && (
         <div
