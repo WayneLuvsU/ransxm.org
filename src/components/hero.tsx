@@ -2,7 +2,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useEffect, useRef, useState } from "react";
-import { TiLocationArrow } from "react-icons/ti";
 
 import { DiscordCards } from "./discord-cards";
 
@@ -10,11 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const Hero = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [showTrailer, setShowTrailer] = useState(false);
   const heroTitleRef = useRef<HTMLDivElement>(null);
 
-  const handleWatchTrailer = () => setShowTrailer(true);
-  const handleCloseTrailer = () => setShowTrailer(false);
 
   useEffect(() => {
     setIsLoading(false);
@@ -313,16 +309,6 @@ export const Hero = () => {
               </h1>
             </div>
 
-            <button
-  id="watch-trailer"
-  onClick={handleWatchTrailer}
-  className="group relative z-10 mt-1 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
->
-  <TiLocationArrow />
-  <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
-    Watch Trailer
-  </p>
-</button>
           </div>
 
           <div className="absolute right-10 top-32 scale-50 sm:scale-75 md:scale-100">
@@ -331,37 +317,7 @@ export const Hero = () => {
         </div>
       </div>
 
-      {showTrailer && (
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80"
-          onClick={handleCloseTrailer}
-        >
-          <div
-            className="relative w-11/12 max-w-4xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={handleCloseTrailer}
-              className="absolute -top-10 right-0 text-2xl text-white hover:text-gray-300"
-            >
-              ✕
-            </button>
-
-            <div className="aspect-video w-full">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/FT-F5UFwbG8"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
-      )}
+     
     </section>
   );
 };
