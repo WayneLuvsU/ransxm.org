@@ -11,16 +11,10 @@ gsap.registerPlugin(ScrollTrigger);
 export const Hero = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showTrailer, setShowTrailer] = useState(false);
-
   const heroTitleRef = useRef<HTMLDivElement>(null);
 
-  const handleWatchTrailer = () => {
-    setShowTrailer(true);
-  };
-
-  const handleCloseTrailer = () => {
-    setShowTrailer(false);
-  };
+  const handleWatchTrailer = () => setShowTrailer(true);
+  const handleCloseTrailer = () => setShowTrailer(false);
 
   useEffect(() => {
     setIsLoading(false);
@@ -30,19 +24,52 @@ export const Hero = () => {
     gsap.set("#video-frame", {
       clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
       borderRadius: "0 0 40% 10%",
+      transformPerspective: 1400,
+      transformOrigin: "50% 100%",
+      transformStyle: "preserve-3d",
+      rotationX: 0,
+      rotationY: 0,
+      rotationZ: 0,
+      skewX: 0,
+      scale: 1,
+      y: 0,
     });
 
-    gsap.from("#video-frame", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      borderRadius: "0 0 0 0",
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: "#video-frame",
-        start: "center center",
-        end: "bottom center",
-        scrub: true,
+    gsap.fromTo(
+      "#video-frame",
+      {
+        clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+        borderRadius: "0 0 0 0",
+        transformPerspective: 1400,
+        transformOrigin: "50% 100%",
+        transformStyle: "preserve-3d",
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
+        skewX: 0,
+        scale: 1,
+        y: 0,
       },
-    });
+      {
+        clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
+        borderRadius: "0 0 40% 10%",
+        transformPerspective: 1400,
+        transformOrigin: "50% 100%",
+        transformStyle: "preserve-3d",
+        rotationX: -8,
+        rotationY: -1.5,
+        skewX: -1.5,
+        scale: 1.015,
+        y: -8,
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: "#video-frame",
+          start: "center center",
+          end: "bottom center",
+          scrub: true,
+        },
+      }
+    );
 
     const title = heroTitleRef.current;
 
@@ -67,9 +94,7 @@ export const Hero = () => {
       skewX: 0,
     });
 
-    const intro = gsap.timeline({
-      delay: 0.35,
-    });
+    const intro = gsap.timeline({ delay: 0.35 });
 
     intro.to(letters, {
       opacity: 1,
@@ -113,7 +138,7 @@ export const Hero = () => {
           duration: 0.04,
           ease: "none",
         },
-        "<",
+        "<"
       )
       .to(".ransxm-glitch-top", {
         x: 10,
@@ -133,7 +158,7 @@ export const Hero = () => {
           duration: 0.045,
           ease: "none",
         },
-        "<",
+        "<"
       )
       .to(".ransxm-glitch-left", {
         opacity: 0.8,
@@ -149,7 +174,7 @@ export const Hero = () => {
           duration: 0.035,
           ease: "none",
         },
-        "<",
+        "<"
       )
       .to(glitchLayers, {
         x: 0,
@@ -184,6 +209,10 @@ export const Hero = () => {
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
+        style={{
+          transformStyle: "preserve-3d",
+          backfaceVisibility: "hidden",
+        }}
       >
         <video
           src="https://file.garden/aN0Uo2YmaWI-OmAY/ezgif-686e4691d20e3345.mp4"
@@ -216,13 +245,14 @@ export const Hero = () => {
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-  <div
-    ref={heroTitleRef}
-    className="relative ml-4 sm:ml-8 md:ml-12 lg:ml-16"
-    style={{
-      perspective: "1000px",
-    }}
-  >
+            <div
+              ref={heroTitleRef}
+              className="relative ml-6 sm:ml-12 md:ml-20 lg:ml-24"
+              style={{
+                perspective: "1000px",
+                transformStyle: "preserve-3d",
+              }}
+            >
               <h1
                 aria-hidden="true"
                 className="ransxm-glitch-layer ransxm-glitch-top hero-heading special-font pointer-events-none absolute left-0 top-0"
@@ -320,6 +350,7 @@ export const Hero = () => {
               className="group relative z-10 flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full border border-white px-7 py-3 text-white transition hover:opacity-75"
             >
               <TiLocationArrow />
+
               <p className="relative inline-flex overflow-hidden font-general text-xs uppercase">
                 Watch Trailer
               </p>
