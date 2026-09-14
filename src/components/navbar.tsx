@@ -2,12 +2,12 @@ import gsap from "gsap";
 import { useEffect, useRef, useState } from "react";
 import { TiLocationArrow } from "react-icons/ti";
 import { useWindowScroll } from "react-use";
-
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { NAV_ITEMS } from "@/constants";
 import { cn } from "@/lib/utils";
 
 import { Button } from "./button";
-
+gsap.registerPlugin(ScrollToPlugin);
 export const Navbar = () => {
   const navContainerRef = useRef<HTMLDivElement>(null);
   const audioElementRef = useRef<HTMLAudioElement>(null);
@@ -26,11 +26,24 @@ export const Navbar = () => {
   };
 
   const handleNavClick = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const element = document.getElementById(id);
+
+  if (!element) return;
+
+  const targetY =
+    element.getBoundingClientRect().top +
+    window.scrollY -
+    80;
+
+  gsap.to(window, {
+    scrollTo: {
+      y: targetY,
+      autoKill: true,
+    },
+    duration: 1.8,
+    ease: "power3.inOut",
+  });
+};
 
   const handleProductsClick = () => {
     setShowComingSoon(true);
