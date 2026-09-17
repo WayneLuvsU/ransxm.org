@@ -640,21 +640,22 @@ export const MembersGrid = () => {
               info.activityState ? "block" : "none";
           }
 
-          if (activityIcon) {
-  if (info.activityIcon) {
-    activityIcon.src = info.activityIcon;
-    activityIcon.style.display = "block";
+            if (activityIcon) {
+            if (info.activityIcon) {
+              activityIcon.src = info.activityIcon;
+              activityIcon.style.display = "block";
 
-    activityIcon.onerror = () => {
-      activityIcon!.style.display = "none";
-    };
-  } else {
-    activityIcon.removeAttribute("src");
-    activityIcon.style.display = "none";
-  }
-}
+              activityIcon.onerror = () => {
+                activityIcon!.style.display = "none";
+              };
+            } else {
+              activityIcon.removeAttribute("src");
+              activityIcon.style.display = "none";
+            }
+          }
         }
-      if (spotify) {
+
+        if (spotify) {
         const spotifyData = info.spotify;
 
         if (spotifyData) {
