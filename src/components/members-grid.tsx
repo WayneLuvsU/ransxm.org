@@ -653,7 +653,7 @@ export const MembersGrid = () => {
     activityIcon.style.display = "none";
   }
 }
-
+        }
       if (spotify) {
         const spotifyData = info.spotify;
 
