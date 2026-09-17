@@ -17,94 +17,129 @@ export const MembersGrid = () => {
       {
         id: "1498182038342336542",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3"
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
       },
       {
         id: "737630884823433267",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/groundZERO%20-%20TMA%20(Tyler%20x%20ODP%20x%20Primera)%20%5B%20Official%20Music%20Video%20%5D%20%5BOhfOaPdi7yc%5D%20(1)%20(mp3cut.net).mp3"
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/groundZERO%20-%20TMA%20(Tyler%20x%20ODP%20x%20Primera)%20%5B%20Official%20Music%20Video%20%5D%20%5BOhfOaPdi7yc%5D%20(1)%20(mp3cut.net).mp3",
       },
       {
         id: "1411934822544314381",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/a387c19a64644060f368931d481b712a.png",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/a387c19a64644060f368931d481b712a.png",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
       },
       {
         id: "453061371513536523",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/8d8c95e3de8ed723cfb50c3ea4a6407d.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/DaBaby%20Ft%20(mp3cut.net).mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/8d8c95e3de8ed723cfb50c3ea4a6407d.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/DaBaby%20Ft%20(mp3cut.net).mp3",
       },
       {
         id: "1418922415802679330",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_6476.jpg",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/guatno-filipino-ot-remix-official-music-video-128-ytshorts.savetube.me.mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_6476.jpg",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/guatno-filipino-ot-remix-official-music-video-128-ytshorts.savetube.me.mp3",
       },
       {
         id: "1171474815874506864",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/7d329e822816984545eed29b3ece8601.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/xxxtentacion-rip-roach-audio-feat-ki-mask-the-slump-god-128-ytshorts%20(mp3cut.net).mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/7d329e822816984545eed29b3ece8601.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/xxxtentacion-rip-roach-audio-feat-ki-mask-the-slump-god-128-ytshorts%20(mp3cut.net).mp3",
       },
       {
         id: "1477383583386828850",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/Untitled_design.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/frank-ocean-ivy-128-ytshorts.savetube.me.mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/Untitled_design.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/frank-ocean-ivy-128-ytshorts.savetube.me.mp3",
       },
       {
         id: "1361012595561205951",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/d310d314fc99e1aedd20294e5cc6c5b1.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/I%20BE%20LIKE%20(DIFG)%20-%20gaspari%20x%20costa%20cashman%20(OLV).mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/d310d314fc99e1aedd20294e5cc6c5b1.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/I%20BE%20LIKE%20(DIFG)%20-%20gaspari%20x%20costa%20cashman%20(OLV).mp3",
       },
       {
         id: "1286586160361246789",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_0111.jpg",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/offtide!%20-%20by%20a%20thread%20(Official%20Video)%20(1)%20(mp3cut.net).mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_0111.jpg",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/offtide!%20-%20by%20a%20thread%20(Official%20Video)%20(1)%20(mp3cut.net).mp3",
       },
       {
         id: "1380573575282692166",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/328826fa582ff4e248949e467cd59710.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/hev-abi-ya-dig-freestyle-feat-gins-melodies-128-ytshorts.savetube.me.mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/328826fa582ff4e248949e467cd59710.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/hev-abi-ya-dig-freestyle-feat-gins-melodies-128-ytshorts.savetube.me.mp3",
       },
       {
         id: "984436577612759111",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/09fae4879b5c83ac5620f3e0b75156fb.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/09fae4879b5c83ac5620f3e0b75156fb.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
       },
       {
         id: "1252278719184113724",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/8a266a935a82db27b3c75a8d6dab9b1a.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/8a266a935a82db27b3c75a8d6dab9b1a.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3",
       },
       {
         id: "1501588984810176792",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/nazty-kidd-those-eyez-ft-hev-abi-official-lyric-video-128-ytshorts%20(mp3cut.net).mp3"
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/nazty-kidd-those-eyez-ft-hev-abi-official-lyric-video-128-ytshorts%20(mp3cut.net).mp3",
       },
       {
         id: "1322181942078341174",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/8f4c8e897a81920fbf4e56f0b5da4c1c.gif",
-        music: "https://file.garden/aN0Uo2YmaWI-OmAY/EsDeeKid%20%26%20Rico%20Ace%20-%20Phantom%20(Lyrics)%20%5BGlnYAkcHdGo%5D%20(mp3cut.net).mp3"
-      }
-
-      
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/8f4c8e897a81920fbf4e56f0b5da4c1c.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/EsDeeKid%20%26%20Rico%20Ace%20-%20Phantom%20(Lyrics)%20%5BGlnYAkcHdGo%5D%20(mp3cut.net).mp3",
+      },
     ];
 
     async function fetchDiscordInfoMembers(discordId: string) {
       try {
-        const res = await fetch(`https://api.lanyard.rest/v1/users/${discordId}`);
+        const res = await fetch(
+          `https://api.lanyard.rest/v1/users/${discordId}`
+        );
+
         const json = await res.json();
+
         if (json.success) {
           const u = json.data.discord_user;
+
           const avatarUrl = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=512`;
+
           return {
             displayName: u.display_name || u.username,
             username: u.username,
-            avatar: avatarUrl
+            avatar: avatarUrl,
           };
         }
       } catch (err) {
-        console.error('Lanyard fetch error', err);
+        console.error("Lanyard fetch error", err);
       }
-      return { displayName: 'Unknown', username: 'Unknown', avatar: '' };
+
+      return {
+        displayName: "Unknown",
+        username: "Unknown",
+        avatar: "",
+      };
     }
 
     (async () => {
@@ -113,13 +148,21 @@ export const MembersGrid = () => {
       for (const user of discordUsers) {
         const info = await fetchDiscordInfoMembers(user.id);
 
-        const drac = document.createElement('div');
-        drac.classList.add('drac');
+        const drac = document.createElement("div");
+        drac.classList.add("drac");
 
         drac.innerHTML = `
-          <div class="drac-banner" style="background-image:url('${user.banner}'); opacity:0.35;"></div>
+          <div 
+            class="drac-banner" 
+            style="background-image:url('${user.banner}'); opacity:0.35;"
+          ></div>
+
           <div class="drac-content">
-            <div class="avatar" style="background-image:url('${info.avatar}')"></div>
+            <div 
+              class="avatar" 
+              style="background-image:url('${info.avatar}')"
+            ></div>
+
             <div class="info">
               <h1>${info.displayName}</h1>
               <p>@${info.username}</p>
@@ -127,43 +170,116 @@ export const MembersGrid = () => {
           </div>
         `;
 
-        const audio = document.createElement('audio');
+        const audio = document.createElement("audio");
         audio.src = user.music;
         audio.preload = "auto";
         audio.volume = 0.5;
+
         drac.appendChild(audio);
 
-        drac.addEventListener('mouseenter', () => {
+        /*
+         * HOVER IN
+         */
+        drac.addEventListener("mouseenter", () => {
+          const allCards =
+            dracGridRef.current?.querySelectorAll(".drac");
+
+          if (!allCards) return;
+
+          // Keep hovered card fully visible
+          gsap.to(drac, {
+            opacity: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: true,
+          });
+
+          // Hide/fade every other card
+          allCards.forEach((card) => {
+            if (card !== drac) {
+              gsap.to(card, {
+                opacity: 0,
+                scale: 0.92,
+                filter: "blur(8px)",
+                duration: 0.35,
+                ease: "power2.out",
+                overwrite: true,
+              });
+            }
+          });
+
+          // Change fullscreen background
           if (bannerBgRef.current) {
             bannerBgRef.current.style.backgroundImage = `url('${user.banner}')`;
-            bannerBgRef.current.style.opacity = '1';
+            bannerBgRef.current.style.opacity = "1";
           }
-          const navbarAudio = (window as any).navbarAudioRef as HTMLAudioElement;
-          if (navbarAudio) navbarAudio.pause();
+
+          // Pause navbar audio
+          const navbarAudio = (window as any)
+            .navbarAudioRef as HTMLAudioElement;
+
+          if (navbarAudio) {
+            navbarAudio.pause();
+          }
+
+          // Play member audio
           audio.currentTime = 0;
-          audio.play().catch(() => {
-            
-          });
+
+          audio.play().catch(() => {});
         });
 
-        drac.addEventListener('mouseleave', () => {
+        /*
+         * HOVER OUT
+         */
+        drac.addEventListener("mouseleave", () => {
+          const allCards =
+            dracGridRef.current?.querySelectorAll(".drac");
+
+          if (!allCards) return;
+
+          // Bring every card back
+          gsap.to(allCards, {
+            opacity: 1,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.45,
+            ease: "power2.out",
+            overwrite: true,
+          });
+
+          // Hide fullscreen banner
           if (bannerBgRef.current) {
-            bannerBgRef.current.style.opacity = '0';
+            bannerBgRef.current.style.opacity = "0";
           }
+
+          // Stop member audio
           audio.pause();
           audio.currentTime = 0;
-          const navbarAudio = (window as any).navbarAudioRef as HTMLAudioElement;
-          const wasPlaying = (window as any).isNavbarAudioPlaying as boolean;
-          if (navbarAudio && wasPlaying) navbarAudio.play().catch(() => {});
+
+          // Resume navbar audio
+          const navbarAudio = (window as any)
+            .navbarAudioRef as HTMLAudioElement;
+
+          const wasPlaying = (window as any)
+            .isNavbarAudioPlaying as boolean;
+
+          if (navbarAudio && wasPlaying) {
+            navbarAudio.play().catch(() => {});
+          }
         });
 
         dracGridRef.current.appendChild(drac);
       }
 
-      // Add scroll animation to all drac cards
+      /*
+       * INITIAL SCROLL ANIMATION
+       */
       if (dracGridRef.current) {
-        const dracCards = dracGridRef.current.querySelectorAll('.drac');
-        
+        const dracCards =
+          dracGridRef.current.querySelectorAll(".drac");
+
         gsap.fromTo(
           dracCards,
           {
@@ -191,33 +307,36 @@ export const MembersGrid = () => {
 
   return (
     <div className="w-full">
-      <div 
+      {/* Fullscreen member banner */}
+      <div
         ref={bannerBgRef}
         className="drac-banner-bg"
         style={{
-          position: 'fixed',
+          position: "fixed",
           inset: 0,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
+          backgroundPosition: "center",
+          backgroundSize: "cover",
           opacity: 0,
-          filter: 'blur(2px) brightness(0.6)',
-          transition: 'opacity 0.6s ease, background 0.3s ease',
+          filter: "blur(2px) brightness(0.6)",
+          transition: "opacity 0.6s ease, background 0.3s ease",
           zIndex: 0,
-          pointerEvents: 'none'
+          pointerEvents: "none",
         }}
       />
-      <div 
+
+      {/* Members grid */}
+      <div
         ref={dracGridRef}
         className="drac-grid"
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 600px)',
-          gap: '30px',
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 600px)",
+          gap: "30px",
           zIndex: 2,
-          maxWidth: '100%',
-          position: 'relative',
-          justifyContent: 'center',
-          padding: '40px 20px'
+          maxWidth: "100%",
+          position: "relative",
+          justifyContent: "center",
+          padding: "40px 20px",
         }}
       />
     </div>
