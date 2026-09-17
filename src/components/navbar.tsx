@@ -49,7 +49,7 @@ export const Navbar = () => {
       setIsAudioPlaying(true);
 
       void audioElementRef.current?.play().catch(() => {
-        // Browser may block autoplay until user interaction.
+       
       });
     };
 
@@ -108,7 +108,7 @@ export const Navbar = () => {
       <div className="absolute top-1/2 w-full -translate-y-1/2">
         <nav className="flex size-full items-center justify-between p-4">
 
-          {/* Logo */}
+         
           <div className="flex items-center gap-7">
             <button
               onClick={() => handleNavClick("hero")}
@@ -122,10 +122,9 @@ export const Navbar = () => {
             </button>
           </div>
 
-          {/* Navigation + Audio */}
           <div className="flex h-full items-center">
 
-            {/* Navigation Links */}
+      
             <div className="hidden md:block">
               {NAV_ITEMS.map(({ label, href }) => (
                 <button
@@ -138,7 +137,7 @@ export const Navbar = () => {
               ))}
             </div>
 
-            {/* Audio */}
+      
             <div className="flex items-center gap-4">
               <button
                 onClick={toggleAudioIndicator}
@@ -147,9 +146,9 @@ export const Navbar = () => {
               >
                 <audio
                   ref={audioElementRef}
-                  src="https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20WALANG%20HIYA%20(Audio)%20%5BfSZyd_2LIPg%5D%20(1).mp3"
+                  src=""
                   className="hidden"
-                  loop
+        
                 />
 
                 {Array(4)
