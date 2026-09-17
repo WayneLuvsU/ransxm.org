@@ -16,7 +16,8 @@ export const MembersGrid = () => {
     const discordUsers = [
       {
         id: "1498182038342336542",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png",
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png",
         music:
           "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
       },
@@ -152,14 +153,14 @@ export const MembersGrid = () => {
         drac.classList.add("drac");
 
         drac.innerHTML = `
-          <div 
-            class="drac-banner" 
+          <div
+            class="drac-banner"
             style="background-image:url('${user.banner}'); opacity:0.35;"
           ></div>
 
           <div class="drac-content">
-            <div 
-              class="avatar" 
+            <div
+              class="avatar"
               style="background-image:url('${info.avatar}')"
             ></div>
 
@@ -177,46 +178,57 @@ export const MembersGrid = () => {
 
         drac.appendChild(audio);
 
-        /*
-         * HOVER IN
-         */
         drac.addEventListener("mouseenter", () => {
           const allCards =
             dracGridRef.current?.querySelectorAll(".drac");
 
-          if (!allCards) return;
+          if (!allCards || !dracGridRef.current) return;
 
-          // Keep hovered card fully visible
+          const rect = drac.getBoundingClientRect();
+
+          const viewportCenterX = window.innerWidth / 2;
+          const viewportCenterY = window.innerHeight / 2;
+
+          const cardCenterX = rect.left + rect.width / 2;
+          const cardCenterY = rect.top + rect.height / 2;
+
+          const moveX = viewportCenterX - cardCenterX;
+          const moveY = viewportCenterY - cardCenterY;
+
+          gsap.set(drac, {
+            zIndex: 50,
+          });
+
           gsap.to(drac, {
+            x: moveX,
+            y: moveY,
+            scale: 1.05,
             opacity: 1,
-            scale: 1,
             filter: "blur(0px)",
-            duration: 0.35,
-            ease: "power2.out",
+            duration: 0.65,
+            ease: "power3.out",
             overwrite: true,
           });
 
-          // Hide/fade every other card
           allCards.forEach((card) => {
             if (card !== drac) {
               gsap.to(card, {
                 opacity: 0,
-                scale: 0.92,
-                filter: "blur(8px)",
-                duration: 0.35,
-                ease: "power2.out",
+                scale: 0.85,
+                filter: "blur(10px)",
+                duration: 0.45,
+                ease: "power3.out",
                 overwrite: true,
               });
             }
           });
 
-          // Change fullscreen background
           if (bannerBgRef.current) {
-            bannerBgRef.current.style.backgroundImage = `url('${user.banner}')`;
+            bannerBgRef.current.style.backgroundImage =
+              `url('${user.banner}')`;
             bannerBgRef.current.style.opacity = "1";
           }
 
-          // Pause navbar audio
           const navbarAudio = (window as any)
             .navbarAudioRef as HTMLAudioElement;
 
@@ -224,41 +236,38 @@ export const MembersGrid = () => {
             navbarAudio.pause();
           }
 
-          // Play member audio
           audio.currentTime = 0;
-
           audio.play().catch(() => {});
         });
 
-        /*
-         * HOVER OUT
-         */
         drac.addEventListener("mouseleave", () => {
           const allCards =
             dracGridRef.current?.querySelectorAll(".drac");
 
           if (!allCards) return;
 
-          // Bring every card back
           gsap.to(allCards, {
+            x: 0,
+            y: 0,
             opacity: 1,
             scale: 1,
             filter: "blur(0px)",
-            duration: 0.45,
-            ease: "power2.out",
+            duration: 0.6,
+            ease: "power3.inOut",
             overwrite: true,
           });
 
-          // Hide fullscreen banner
+          gsap.set(drac, {
+            zIndex: "",
+          });
+
           if (bannerBgRef.current) {
             bannerBgRef.current.style.opacity = "0";
           }
 
-          // Stop member audio
           audio.pause();
           audio.currentTime = 0;
 
-          // Resume navbar audio
           const navbarAudio = (window as any)
             .navbarAudioRef as HTMLAudioElement;
 
@@ -273,9 +282,6 @@ export const MembersGrid = () => {
         dracGridRef.current.appendChild(drac);
       }
 
-      /*
-       * INITIAL SCROLL ANIMATION
-       */
       if (dracGridRef.current) {
         const dracCards =
           dracGridRef.current.querySelectorAll(".drac");
@@ -307,7 +313,6 @@ export const MembersGrid = () => {
 
   return (
     <div className="w-full">
-      {/* Fullscreen member banner */}
       <div
         ref={bannerBgRef}
         className="drac-banner-bg"
@@ -324,7 +329,6 @@ export const MembersGrid = () => {
         }}
       />
 
-      {/* Members grid */}
       <div
         ref={dracGridRef}
         className="drac-grid"
