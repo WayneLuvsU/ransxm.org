@@ -1,8 +1,5 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/all";
-
-gsap.registerPlugin(ScrollTrigger);
 
 type DiscordUser = {
   id: string;
@@ -366,15 +363,6 @@ export const MembersGrid = () => {
   const initializedRef = useRef(false);
   const activeCardRef = useRef<HTMLDivElement | null>(null);
   const activeUserRef = useRef<DiscordUser | null>(null);
-  const baseSizesRef = useRef(
-    new Map<
-      HTMLDivElement,
-      {
-        width: number;
-        height: number;
-      }
-    >()
-  );
 
   useEffect(() => {
     if (initializedRef.current) return;
@@ -394,7 +382,7 @@ export const MembersGrid = () => {
     if (!grid) return;
 
     const cards: HTMLDivElement[] = [];
-    const items: HTMLDivElement[] = [];
+    const slots: HTMLDivElement[] = [];
 
     const navbarAudio = () =>
       (
@@ -414,26 +402,26 @@ export const MembersGrid = () => {
       user: DiscordUser | null,
       visible: boolean
     ) => {
-      const banner = bannerBgRef.current;
-
-      if (!banner) return;
+      if (!bannerBgRef.current) return;
 
       if (!user || !visible) {
-        gsap.to(banner, {
+        gsap.to(bannerBgRef.current, {
           opacity: 0,
           duration: 0.35,
           ease: "power2.out",
+          overwrite: true,
         });
 
         return;
       }
 
-      banner.style.backgroundImage = `url("${user.banner}")`;
+      bannerBgRef.current.style.backgroundImage = `url("${user.banner}")`;
 
-      gsap.to(banner, {
+      gsap.to(bannerBgRef.current, {
         opacity: 1,
         duration: 0.45,
         ease: "power2.out",
+        overwrite: true,
       });
     };
 
@@ -464,11 +452,7 @@ export const MembersGrid = () => {
     };
 
     const pauseNavbarAudio = () => {
-      const audio = navbarAudio();
-
-      if (audio) {
-        audio.pause();
-      }
+      navbarAudio()?.pause();
     };
 
     const resumeNavbarAudio = () => {
@@ -632,23 +616,24 @@ export const MembersGrid = () => {
       }
 
       if (spotify) {
-        const spotifyData = info.spotify;
-
-        if (spotifyData) {
+        if (info.spotify) {
           spotify.style.display = "flex";
 
-          if (spotifyAlbum && spotifyData.album_art_url) {
-            spotifyAlbum.src = spotifyData.album_art_url;
+          if (
+            spotifyAlbum &&
+            info.spotify.album_art_url
+          ) {
+            spotifyAlbum.src = info.spotify.album_art_url;
           }
 
           if (spotifySong) {
             spotifySong.textContent =
-              spotifyData.song || "Spotify";
+              info.spotify.song || "Spotify";
           }
 
           if (spotifyArtist) {
             spotifyArtist.textContent =
-              spotifyData.artist || "";
+              info.spotify.artist || "";
           }
         } else {
           spotify.style.display = "none";
@@ -656,89 +641,82 @@ export const MembersGrid = () => {
       }
     };
 
-    const restoreOtherCards = (activeCard: HTMLDivElement | null) => {
+    const restoreAllCards = () => {
       cards.forEach((card) => {
-        if (card === activeCard) return;
-
         gsap.killTweensOf(card);
 
         gsap.to(card, {
           opacity: 1,
           scale: 1,
           filter: "blur(0px)",
-          duration: 0.4,
+          duration: 0.35,
           ease: "power3.out",
           overwrite: true,
         });
 
         card.style.pointerEvents = "auto";
+        card.classList.remove("drac-active");
         card.classList.remove("drac-dimmed");
       });
     };
 
-    const closeActiveCard = () => {
-      const card = activeCardRef.current;
+    const resetActiveCard = () => {
+      const activeCard = activeCardRef.current;
 
-      if (!card) {
+      if (!activeCard) {
+        restoreAllCards();
         updateBanner(null, false);
         resumeNavbarAudio();
         return;
       }
 
-      const baseSize = baseSizesRef.current.get(card);
+      const slot = activeCard.parentElement as HTMLDivElement | null;
+
+      gsap.killTweensOf(activeCard);
+
+      activeCard.classList.remove("drac-active");
+
+      if (slot) {
+        gsap.to(activeCard, {
+          x: 0,
+          y: 0,
+          width: "100%",
+          height: "100%",
+          duration: 0.5,
+          ease: "power4.inOut",
+          overwrite: true,
+          onComplete: () => {
+            gsap.set(activeCard, {
+              x: 0,
+              y: 0,
+              width: "100%",
+              height: "100%",
+            });
+
+            activeCard.style.zIndex = "";
+          },
+        });
+      } else {
+        gsap.to(activeCard, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "power4.inOut",
+          overwrite: true,
+          onComplete: () => {
+            activeCard.style.zIndex = "";
+          },
+        });
+      }
+
+      restoreAllCards();
 
       activeCardRef.current = null;
       activeUserRef.current = null;
 
-      stopAllMemberAudio();
       updateBanner(null, false);
+      stopAllMemberAudio();
       resumeNavbarAudio();
-
-      restoreOtherCards(null);
-
-      gsap.killTweensOf(card);
-
-      if (!baseSize) {
-        card.classList.remove("drac-active");
-        card.style.zIndex = "";
-        card.style.pointerEvents = "auto";
-
-        gsap.set(card, {
-          x: 0,
-          y: 0,
-          scale: 1,
-        });
-
-        return;
-      }
-
-      gsap.to(card, {
-        x: 0,
-        y: 0,
-        width: baseSize.width,
-        height: baseSize.height,
-        scale: 1,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.55,
-        ease: "power4.inOut",
-        overwrite: true,
-        onComplete: () => {
-          gsap.set(card, {
-            x: 0,
-            y: 0,
-            width: baseSize.width,
-            height: baseSize.height,
-            scale: 1,
-            opacity: 1,
-            filter: "blur(0px)",
-          });
-
-          card.classList.remove("drac-active");
-          card.style.zIndex = "";
-          card.style.pointerEvents = "auto";
-        },
-      });
     };
 
     const isPointerInsideCard = (
@@ -762,41 +740,26 @@ export const MembersGrid = () => {
       if (activeCardRef.current === card) return;
 
       if (activeCardRef.current) {
-        closeActiveCard();
+        resetActiveCard();
       }
 
+      const slot = card.parentElement as HTMLDivElement | null;
+
+      if (!slot) return;
+
       const rect = card.getBoundingClientRect();
-
-      const baseSize =
-        baseSizesRef.current.get(card) || {
-          width: card.offsetWidth,
-          height: card.offsetHeight,
-        };
-
-      baseSizesRef.current.set(card, baseSize);
-
-      activeCardRef.current = card;
-      activeUserRef.current = user;
 
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
 
-      const isMobile = viewportWidth <= 700;
-
       const targetWidth = Math.min(
         760,
-        Math.max(
-          isMobile ? 320 : 560,
-          viewportWidth - (isMobile ? 24 : 80)
-        )
+        Math.max(560, viewportWidth * 0.72)
       );
 
       const targetHeight = Math.min(
         430,
-        Math.max(
-          isMobile ? 260 : 330,
-          viewportHeight - (isMobile ? 110 : 160)
-        )
+        Math.max(330, viewportHeight * 0.52)
       );
 
       const targetLeft =
@@ -807,6 +770,9 @@ export const MembersGrid = () => {
 
       const moveX = targetLeft - rect.left;
       const moveY = targetTop - rect.top;
+
+      activeCardRef.current = card;
+      activeUserRef.current = user;
 
       cards.forEach((otherCard) => {
         if (otherCard === card) {
@@ -822,10 +788,10 @@ export const MembersGrid = () => {
         gsap.killTweensOf(otherCard);
 
         gsap.to(otherCard, {
-          opacity: 0.12,
+          opacity: 0.14,
           scale: 0.94,
           filter: "blur(5px)",
-          duration: 0.35,
+          duration: 0.3,
           ease: "power3.out",
           overwrite: true,
         });
@@ -843,9 +809,7 @@ export const MembersGrid = () => {
         y: moveY,
         width: targetWidth,
         height: targetHeight,
-        scale: 1,
-        opacity: 1,
-        duration: 0.65,
+        duration: 0.6,
         ease: "power4.out",
         overwrite: true,
       });
@@ -853,19 +817,16 @@ export const MembersGrid = () => {
 
     const createCard = async (
       user: DiscordUser
-    ): Promise<{
-      card: HTMLDivElement;
-      item: HTMLDivElement;
-    } | null> => {
+    ): Promise<HTMLDivElement | null> => {
       const info = await fetchDiscordInfoMembers(user.id);
 
       if (cancelled || !grid) {
         return null;
       }
 
-      const item = document.createElement("div");
-      item.className = "drac-item";
-      item.dataset.userId = user.id;
+      const slot = document.createElement("div");
+
+      slot.className = "drac-item";
 
       const card = document.createElement("div");
 
@@ -881,12 +842,14 @@ export const MembersGrid = () => {
         <div class="drac-shade"></div>
 
         <div class="drac-content">
+
           <div
             class="drac-avatar"
             style="background-image:url('${info.avatar}')"
           ></div>
 
           <div class="drac-info">
+
             <div class="drac-name-row">
               <div class="drac-display-name"></div>
 
@@ -904,6 +867,7 @@ export const MembersGrid = () => {
             </div>
 
             <div class="drac-activity">
+
               <div class="drac-activity-icon-wrap">
                 <img
                   class="drac-activity-icon"
@@ -917,9 +881,11 @@ export const MembersGrid = () => {
                 <span class="drac-activity-details"></span>
                 <span class="drac-activity-state"></span>
               </div>
+
             </div>
 
             <div class="drac-spotify">
+
               <img
                 class="drac-spotify-album"
                 alt=""
@@ -929,8 +895,11 @@ export const MembersGrid = () => {
                 <strong class="drac-spotify-song"></strong>
                 <span class="drac-spotify-artist"></span>
               </div>
+
             </div>
+
           </div>
+
         </div>
 
         <div class="drac-bottom-line"></div>
@@ -944,12 +913,14 @@ export const MembersGrid = () => {
       audio.volume = 0.5;
 
       card.appendChild(audio);
-      item.appendChild(card);
-      grid.appendChild(item);
+      slot.appendChild(card);
+      grid.appendChild(slot);
 
       updateCard(card, info);
 
       card.addEventListener("pointerenter", () => {
+        if (activeCardRef.current === card) return;
+
         activateCard(card, user);
       });
 
@@ -959,56 +930,19 @@ export const MembersGrid = () => {
         }
       });
 
-      return {
-        card,
-        item,
-      };
+      slots.push(slot);
+
+      return card;
     };
 
     const initialize = async () => {
       for (const user of discordUsers) {
-        const result = await createCard(user);
+        const card = await createCard(user);
 
-        if (!result) continue;
-
-        cards.push(result.card);
-        items.push(result.item);
+        if (card) {
+          cards.push(card);
+        }
       }
-
-      if (cancelled || cards.length === 0) return;
-
-      await new Promise<void>((resolve) => {
-        requestAnimationFrame(() => resolve());
-      });
-
-      cards.forEach((card) => {
-        baseSizesRef.current.set(card, {
-          width: card.offsetWidth,
-          height: card.offsetHeight,
-        });
-      });
-
-      gsap.set(items, {
-        opacity: 0,
-        y: 50,
-      });
-
-      const revealTween = gsap.to(items, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: "power3.out",
-      });
-
-      ScrollTrigger.create({
-        trigger: grid,
-        animation: revealTween,
-        start: "top center+=100",
-        end: "center center",
-        scrub: 0.5,
-        markers: false,
-      });
     };
 
     pointerMoveHandler = (event: PointerEvent) => {
@@ -1017,48 +951,29 @@ export const MembersGrid = () => {
       if (!activeCard) return;
 
       if (!isPointerInsideCard(activeCard, event)) {
-        closeActiveCard();
+        resetActiveCard();
       }
     };
 
     resizeHandler = () => {
-      cards.forEach((card) => {
-        if (!activeCardRef.current || activeCardRef.current !== card) {
-          baseSizesRef.current.set(card, {
-            width: card.offsetWidth,
-            height: card.offsetHeight,
-          });
-        }
-      });
-
       const activeCard = activeCardRef.current;
 
-      if (!activeCard) {
-        ScrollTrigger.refresh();
-        return;
-      }
-
-      const rect = activeCard.getBoundingClientRect();
+      if (!activeCard) return;
 
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-      const isMobile = viewportWidth <= 700;
 
       const targetWidth = Math.min(
         760,
-        Math.max(
-          isMobile ? 320 : 560,
-          viewportWidth - (isMobile ? 24 : 80)
-        )
+        Math.max(560, viewportWidth * 0.72)
       );
 
       const targetHeight = Math.min(
         430,
-        Math.max(
-          isMobile ? 260 : 330,
-          viewportHeight - (isMobile ? 110 : 160)
-        )
+        Math.max(330, viewportHeight * 0.52)
       );
+
+      const rect = activeCard.getBoundingClientRect();
 
       const targetLeft =
         viewportWidth / 2 - targetWidth / 2;
@@ -1069,26 +984,32 @@ export const MembersGrid = () => {
       gsap.killTweensOf(activeCard);
 
       gsap.to(activeCard, {
-        x: targetLeft - rect.left,
-        y: targetTop - rect.top,
+        x: `+=${targetLeft - rect.left}`,
+        y: `+=${targetTop - rect.top}`,
         width: targetWidth,
         height: targetHeight,
         duration: 0.3,
         ease: "power3.out",
         overwrite: true,
       });
-
-      ScrollTrigger.refresh();
     };
 
     keydownHandler = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && activeCardRef.current) {
-        closeActiveCard();
+      if (
+        event.key === "Escape" &&
+        activeCardRef.current
+      ) {
+        resetActiveCard();
       }
     };
 
-    window.addEventListener("pointermove", pointerMoveHandler);
+    window.addEventListener(
+      "pointermove",
+      pointerMoveHandler
+    );
+
     window.addEventListener("resize", resizeHandler);
+
     window.addEventListener("keydown", keydownHandler);
 
     initialize();
@@ -1126,38 +1047,37 @@ export const MembersGrid = () => {
       }
 
       if (resizeHandler) {
-        window.removeEventListener("resize", resizeHandler);
+        window.removeEventListener(
+          "resize",
+          resizeHandler
+        );
       }
 
       if (keydownHandler) {
-        window.removeEventListener("keydown", keydownHandler);
+        window.removeEventListener(
+          "keydown",
+          keydownHandler
+        );
       }
 
       stopAllMemberAudio();
 
       gsap.killTweensOf(cards);
-      gsap.killTweensOf(items);
-
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.vars.trigger === grid) {
-          trigger.kill();
-        }
-      });
+      gsap.killTweensOf(slots);
 
       cards.forEach((card) => {
         card.remove();
       });
 
-      items.forEach((item) => {
-        item.remove();
+      slots.forEach((slot) => {
+        slot.remove();
       });
 
       cards.length = 0;
-      items.length = 0;
+      slots.length = 0;
 
       activeCardRef.current = null;
       activeUserRef.current = null;
-      baseSizesRef.current.clear();
     };
   }, []);
 
