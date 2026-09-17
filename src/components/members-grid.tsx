@@ -363,6 +363,9 @@ export const MembersGrid = () => {
   const initializedRef = useRef(false);
   const activeCardRef = useRef<HTMLDivElement | null>(null);
   const activeUserRef = useRef<DiscordUser | null>(null);
+  const memberDataRef = useRef(
+    new Map<string, MemberInfo>()
+  );
 
   useEffect(() => {
     if (initializedRef.current) return;
@@ -382,46 +385,42 @@ export const MembersGrid = () => {
     if (!grid) return;
 
     const cards: HTMLDivElement[] = [];
-    const slots: HTMLDivElement[] = [];
 
     const navbarAudio = () =>
-      (
-        window as unknown as {
-          navbarAudioRef?: HTMLAudioElement;
-        }
-      ).navbarAudioRef;
+      (window as unknown as {
+        navbarAudioRef?: HTMLAudioElement;
+        isNavbarAudioPlaying?: boolean;
+      }).navbarAudioRef;
 
     const navbarWasPlaying = () =>
-      (
-        window as unknown as {
-          isNavbarAudioPlaying?: boolean;
-        }
-      ).isNavbarAudioPlaying;
+      (window as unknown as {
+        navbarAudioRef?: HTMLAudioElement;
+        isNavbarAudioPlaying?: boolean;
+      }).isNavbarAudioPlaying;
 
     const updateBanner = (
       user: DiscordUser | null,
       visible: boolean
     ) => {
-      if (!bannerBgRef.current) return;
+      const banner = bannerBgRef.current;
+
+      if (!banner) return;
 
       if (!user || !visible) {
-        gsap.to(bannerBgRef.current, {
+        gsap.to(banner, {
           opacity: 0,
           duration: 0.35,
           ease: "power2.out",
-          overwrite: true,
         });
-
         return;
       }
 
-      bannerBgRef.current.style.backgroundImage = `url("${user.banner}")`;
+      banner.style.backgroundImage = `url("${user.banner}")`;
 
-      gsap.to(bannerBgRef.current, {
+      gsap.to(banner, {
         opacity: 1,
         duration: 0.45,
         ease: "power2.out",
-        overwrite: true,
       });
     };
 
@@ -452,7 +451,11 @@ export const MembersGrid = () => {
     };
 
     const pauseNavbarAudio = () => {
-      navbarAudio()?.pause();
+      const audio = navbarAudio();
+
+      if (audio) {
+        audio.pause();
+      }
     };
 
     const resumeNavbarAudio = () => {
@@ -616,24 +619,23 @@ export const MembersGrid = () => {
       }
 
       if (spotify) {
-        if (info.spotify) {
+        const spotifyData = info.spotify;
+
+        if (spotifyData) {
           spotify.style.display = "flex";
 
-          if (
-            spotifyAlbum &&
-            info.spotify.album_art_url
-          ) {
-            spotifyAlbum.src = info.spotify.album_art_url;
+          if (spotifyAlbum && spotifyData.album_art_url) {
+            spotifyAlbum.src = spotifyData.album_art_url;
           }
 
           if (spotifySong) {
             spotifySong.textContent =
-              info.spotify.song || "Spotify";
+              spotifyData.song || "Spotify";
           }
 
           if (spotifyArtist) {
             spotifyArtist.textContent =
-              info.spotify.artist || "";
+              spotifyData.artist || "";
           }
         } else {
           spotify.style.display = "none";
@@ -641,22 +643,26 @@ export const MembersGrid = () => {
       }
     };
 
-    const restoreAllCards = () => {
+    const restoreOtherCards = (
+      exceptCard?: HTMLDivElement
+    ) => {
       cards.forEach((card) => {
+        if (card === exceptCard) return;
+
         gsap.killTweensOf(card);
+
+        card.classList.remove("drac-active");
+        card.classList.remove("drac-dimmed");
+        card.style.pointerEvents = "auto";
 
         gsap.to(card, {
           opacity: 1,
           scale: 1,
           filter: "blur(0px)",
-          duration: 0.35,
+          duration: 0.4,
           ease: "power3.out",
           overwrite: true,
         });
-
-        card.style.pointerEvents = "auto";
-        card.classList.remove("drac-active");
-        card.classList.remove("drac-dimmed");
       });
     };
 
@@ -664,55 +670,47 @@ export const MembersGrid = () => {
       const activeCard = activeCardRef.current;
 
       if (!activeCard) {
-        restoreAllCards();
         updateBanner(null, false);
         resumeNavbarAudio();
         return;
       }
 
-      const slot = activeCard.parentElement as HTMLDivElement | null;
+      activeCardRef.current = null;
+      activeUserRef.current = null;
 
       gsap.killTweensOf(activeCard);
 
       activeCard.classList.remove("drac-active");
+      activeCard.style.pointerEvents = "auto";
 
-      if (slot) {
-        gsap.to(activeCard, {
-          x: 0,
-          y: 0,
-          width: "100%",
-          height: "100%",
-          duration: 0.5,
-          ease: "power4.inOut",
-          overwrite: true,
-          onComplete: () => {
-            gsap.set(activeCard, {
-              x: 0,
-              y: 0,
-              width: "100%",
-              height: "100%",
-            });
+      gsap.to(activeCard, {
+        x: 0,
+        y: 0,
+        width: "100%",
+        height: "100%",
+        scale: 1,
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 0.55,
+        ease: "power4.inOut",
+        overwrite: true,
+        onComplete: () => {
+          gsap.set(activeCard, {
+            x: 0,
+            y: 0,
+            width: "100%",
+            height: "100%",
+            scale: 1,
+            opacity: 1,
+            filter: "blur(0px)",
+          });
 
-            activeCard.style.zIndex = "";
-          },
-        });
-      } else {
-        gsap.to(activeCard, {
-          x: 0,
-          y: 0,
-          duration: 0.5,
-          ease: "power4.inOut",
-          overwrite: true,
-          onComplete: () => {
-            activeCard.style.zIndex = "";
-          },
-        });
-      }
+          activeCard.style.zIndex = "";
+          activeCard.style.pointerEvents = "auto";
+        },
+      });
 
-      restoreAllCards();
-
-      activeCardRef.current = null;
-      activeUserRef.current = null;
+      restoreOtherCards(activeCard);
 
       updateBanner(null, false);
       stopAllMemberAudio();
@@ -733,6 +731,24 @@ export const MembersGrid = () => {
       );
     };
 
+    const isPointerInsideOriginalSlot = (
+      card: HTMLDivElement,
+      event: PointerEvent
+    ) => {
+      const item = card.parentElement as HTMLDivElement | null;
+
+      if (!item) return false;
+
+      const rect = item.getBoundingClientRect();
+
+      return (
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom
+      );
+    };
+
     const activateCard = (
       card: HTMLDivElement,
       user: DiscordUser
@@ -743,9 +759,7 @@ export const MembersGrid = () => {
         resetActiveCard();
       }
 
-      const slot = card.parentElement as HTMLDivElement | null;
-
-      if (!slot) return;
+      gsap.killTweensOf(card);
 
       const rect = card.getBoundingClientRect();
 
@@ -754,12 +768,12 @@ export const MembersGrid = () => {
 
       const targetWidth = Math.min(
         760,
-        Math.max(560, viewportWidth * 0.72)
+        Math.max(320, viewportWidth - 40)
       );
 
       const targetHeight = Math.min(
         430,
-        Math.max(330, viewportHeight * 0.52)
+        Math.max(240, viewportHeight - 120)
       );
 
       const targetLeft =
@@ -777,6 +791,7 @@ export const MembersGrid = () => {
       cards.forEach((otherCard) => {
         if (otherCard === card) {
           otherCard.classList.add("drac-active");
+          otherCard.classList.remove("drac-dimmed");
           otherCard.style.zIndex = "100";
           otherCard.style.pointerEvents = "auto";
           return;
@@ -791,7 +806,7 @@ export const MembersGrid = () => {
           opacity: 0.14,
           scale: 0.94,
           filter: "blur(5px)",
-          duration: 0.3,
+          duration: 0.35,
           ease: "power3.out",
           overwrite: true,
         });
@@ -802,14 +817,15 @@ export const MembersGrid = () => {
       playCardAudio(card);
       updateBanner(user, true);
 
-      gsap.killTweensOf(card);
-
       gsap.to(card, {
         x: moveX,
         y: moveY,
         width: targetWidth,
         height: targetHeight,
-        duration: 0.6,
+        scale: 1,
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 0.65,
         ease: "power4.out",
         overwrite: true,
       });
@@ -824,12 +840,12 @@ export const MembersGrid = () => {
         return null;
       }
 
-      const slot = document.createElement("div");
+      memberDataRef.current.set(user.id, info);
 
-      slot.className = "drac-item";
+      const item = document.createElement("div");
+      item.className = "drac-item";
 
       const card = document.createElement("div");
-
       card.className = "drac";
       card.dataset.userId = user.id;
 
@@ -842,14 +858,12 @@ export const MembersGrid = () => {
         <div class="drac-shade"></div>
 
         <div class="drac-content">
-
           <div
             class="drac-avatar"
             style="background-image:url('${info.avatar}')"
           ></div>
 
           <div class="drac-info">
-
             <div class="drac-name-row">
               <div class="drac-display-name"></div>
 
@@ -867,7 +881,6 @@ export const MembersGrid = () => {
             </div>
 
             <div class="drac-activity">
-
               <div class="drac-activity-icon-wrap">
                 <img
                   class="drac-activity-icon"
@@ -881,11 +894,9 @@ export const MembersGrid = () => {
                 <span class="drac-activity-details"></span>
                 <span class="drac-activity-state"></span>
               </div>
-
             </div>
 
             <div class="drac-spotify">
-
               <img
                 class="drac-spotify-album"
                 alt=""
@@ -895,11 +906,8 @@ export const MembersGrid = () => {
                 <strong class="drac-spotify-song"></strong>
                 <span class="drac-spotify-artist"></span>
               </div>
-
             </div>
-
           </div>
-
         </div>
 
         <div class="drac-bottom-line"></div>
@@ -913,8 +921,6 @@ export const MembersGrid = () => {
       audio.volume = 0.5;
 
       card.appendChild(audio);
-      slot.appendChild(card);
-      grid.appendChild(slot);
 
       updateCard(card, info);
 
@@ -930,7 +936,8 @@ export const MembersGrid = () => {
         }
       });
 
-      slots.push(slot);
+      item.appendChild(card);
+      grid.appendChild(item);
 
       return card;
     };
@@ -943,6 +950,8 @@ export const MembersGrid = () => {
           cards.push(card);
         }
       }
+
+      if (cancelled || cards.length === 0) return;
     };
 
     pointerMoveHandler = (event: PointerEvent) => {
@@ -950,7 +959,15 @@ export const MembersGrid = () => {
 
       if (!activeCard) return;
 
-      if (!isPointerInsideCard(activeCard, event)) {
+      const insideCard = isPointerInsideCard(
+        activeCard,
+        event
+      );
+
+      const insideOriginalSlot =
+        isPointerInsideOriginalSlot(activeCard, event);
+
+      if (!insideCard && !insideOriginalSlot) {
         resetActiveCard();
       }
     };
@@ -965,12 +982,12 @@ export const MembersGrid = () => {
 
       const targetWidth = Math.min(
         760,
-        Math.max(560, viewportWidth * 0.72)
+        Math.max(320, viewportWidth - 40)
       );
 
       const targetHeight = Math.min(
         430,
-        Math.max(330, viewportHeight * 0.52)
+        Math.max(240, viewportHeight - 120)
       );
 
       const rect = activeCard.getBoundingClientRect();
@@ -981,14 +998,17 @@ export const MembersGrid = () => {
       const targetTop =
         viewportHeight / 2 - targetHeight / 2;
 
+      const moveX = targetLeft - rect.left;
+      const moveY = targetTop - rect.top;
+
       gsap.killTweensOf(activeCard);
 
       gsap.to(activeCard, {
-        x: `+=${targetLeft - rect.left}`,
-        y: `+=${targetTop - rect.top}`,
+        x: `+=${moveX}`,
+        y: `+=${moveY}`,
         width: targetWidth,
         height: targetHeight,
-        duration: 0.3,
+        duration: 0.35,
         ease: "power3.out",
         overwrite: true,
       });
@@ -1008,9 +1028,15 @@ export const MembersGrid = () => {
       pointerMoveHandler
     );
 
-    window.addEventListener("resize", resizeHandler);
+    window.addEventListener(
+      "resize",
+      resizeHandler
+    );
 
-    window.addEventListener("keydown", keydownHandler);
+    window.addEventListener(
+      "keydown",
+      keydownHandler
+    );
 
     initialize();
 
@@ -1024,9 +1050,13 @@ export const MembersGrid = () => {
 
         if (!card) continue;
 
-        const info = await fetchDiscordInfoMembers(user.id);
+        const info = await fetchDiscordInfoMembers(
+          user.id
+        );
 
         if (cancelled) return;
+
+        memberDataRef.current.set(user.id, info);
 
         updateCard(card, info);
       }
@@ -1063,18 +1093,12 @@ export const MembersGrid = () => {
       stopAllMemberAudio();
 
       gsap.killTweensOf(cards);
-      gsap.killTweensOf(slots);
 
       cards.forEach((card) => {
-        card.remove();
-      });
-
-      slots.forEach((slot) => {
-        slot.remove();
+        card.parentElement?.remove();
       });
 
       cards.length = 0;
-      slots.length = 0;
 
       activeCardRef.current = null;
       activeUserRef.current = null;
