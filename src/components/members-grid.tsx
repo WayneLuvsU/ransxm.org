@@ -195,9 +195,31 @@ function getActivityIcon(
 ): string {
   if (!activity) return "";
 
-  const largeImage = activity.assets?.large_image;
+  const largeImage = activity.assets?.large_image || "";
+  const activityName = (activity.name || "").toLowerCase();
 
-  if (!largeImage) return "";
+  if (
+    activityName === "spotify" ||
+    activityName.includes("spotify") ||
+    activity.type === 2
+  ) {
+    return "https://cdn.simpleicons.org/spotify/1DB954";
+  }
+
+  if (
+    activityName === "roblox" ||
+    activityName.includes("roblox")
+  ) {
+    if (activity.application_id && largeImage) {
+      return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${largeImage}.png?size=128`;
+    }
+
+    return "https://cdn.simpleicons.org/roblox/ffffff";
+  }
+
+  if (!largeImage) {
+    return "";
+  }
 
   if (
     largeImage.startsWith("http://") ||
@@ -207,7 +229,21 @@ function getActivityIcon(
   }
 
   if (largeImage.startsWith("mp:external/")) {
-    return largeImage.replace("mp:external/", "");
+    const externalUrl = largeImage.replace(
+      "mp:external/",
+      ""
+    );
+
+    if (
+      externalUrl.startsWith("http://") ||
+      externalUrl.startsWith("https://")
+    ) {
+      return externalUrl;
+    }
+  }
+
+  if (largeImage.startsWith("spotify:")) {
+    return "https://cdn.simpleicons.org/spotify/1DB954";
   }
 
   if (activity.application_id) {
@@ -605,18 +641,18 @@ export const MembersGrid = () => {
           }
 
           if (activityIcon) {
-            if (info.activityIcon) {
-              activityIcon.src = info.activityIcon;
-              activityIcon.style.display = "block";
-            } else {
-              activityIcon.removeAttribute("src");
-              activityIcon.style.display = "none";
-            }
-          }
-        } else {
-          activity.style.display = "none";
-        }
-      }
+  if (info.activityIcon) {
+    activityIcon.src = info.activityIcon;
+    activityIcon.style.display = "block";
+
+    activityIcon.onerror = () => {
+      activityIcon!.style.display = "none";
+    };
+  } else {
+    activityIcon.removeAttribute("src");
+    activityIcon.style.display = "none";
+  }
+}
 
       if (spotify) {
         const spotifyData = info.spotify;
