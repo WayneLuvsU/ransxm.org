@@ -83,11 +83,11 @@ const discordUsers: DiscordUser[] = [
       "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
   },
   {
-    id: "1015473740391399474",
+    id: "984436577612759111",
     banner:
-      "https://file.garden/aN0Uo2YmaWI-OmAY/0ad735f722522d9a424b2a018ff63319.gif",
+      "https://file.garden/aN0Uo2YmaWI-OmAY/09fae4879b5c83ac5620f3e0b75156fb.gif",
     music:
-      "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3",
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
   },
   {
     id: "453061371513536523",
@@ -141,9 +141,9 @@ const discordUsers: DiscordUser[] = [
   {
     id: "984436577612759111",
     banner:
-      "https://file.garden/aN0Uo2YmaWI-OmAY/09fae4879b5c83ac5620f3e0b75156fb.gif",
+      "https://file.garden/aN0Uo2YmaWI-OmAY/8f4c8e897a81920fbf4e56f0b5da4c1c.gif",
     music:
-      "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
+      "https://file.garden/aN0Uo2YmaWI-OmAY/EsDeeKid%20%26%20Rico%20Ace%20-%20Phantom%20(Lyrics)%20%5BGlnYAkcHdGo%5D%20(mp3cut.net).mp3",
   },
   {
     id: "1252278719184113724",
