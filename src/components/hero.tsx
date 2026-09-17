@@ -234,14 +234,13 @@ export const Hero = () => {
         }}
       >
         <video
-          src="https://file.garden/aN0Uo2YmaWI-OmAY/ezgif-686e4691d20e3345.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
-        />
+  src="https://file.garden/aN0Uo2YmaWI-OmAY/dami_ng_12.mp4"
+  autoPlay
+  loop
+  playsInline
+  preload="auto"
+  className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
+/>
 
         <div
           className="pointer-events-none absolute inset-0 z-20 opacity-[0.18]"
