@@ -16,8 +16,7 @@ export const MembersGrid = () => {
     const discordUsers = [
       {
         id: "1498182038342336542",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png",
         music:
           "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
       },
@@ -25,7 +24,7 @@ export const MembersGrid = () => {
         id: "737630884823433267",
         banner: "https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif",
         music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/groundZERO%20-%20TMA%20(Tyler%20x%20ODP%20x%20Primera)%20%5B%20Official%20Music%20Video%20%5D%20%5BOhfOaPdi7yc%5D%20(1)%20(mp3cut.net).mp3",
+          "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
       },
       {
         id: "1411934822544314381",
@@ -33,6 +32,13 @@ export const MembersGrid = () => {
           "https://file.garden/aN0Uo2YmaWI-OmAY/a387c19a64644060f368931d481b712a.png",
         music:
           "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
+      },
+      {
+        id: "1015473740391399474",
+        banner:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/0ad735f722522d9a424b2a018ff63319.gif",
+        music:
+          "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3",
       },
       {
         id: "453061371513536523",
@@ -43,8 +49,7 @@ export const MembersGrid = () => {
       },
       {
         id: "1418922415802679330",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_6476.jpg",
+        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_6476.jpg",
         music:
           "https://file.garden/aN0Uo2YmaWI-OmAY/guatno-filipino-ot-remix-official-music-video-128-ytshorts.savetube.me.mp3",
       },
@@ -104,66 +109,46 @@ export const MembersGrid = () => {
         music:
           "https://file.garden/aN0Uo2YmaWI-OmAY/nazty-kidd-those-eyez-ft-hev-abi-official-lyric-video-128-ytshorts%20(mp3cut.net).mp3",
       },
-      {
-        id: "1322181942078341174",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/8f4c8e897a81920fbf4e56f0b5da4c1c.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/EsDeeKid%20%26%20Rico%20Ace%20-%20Phantom%20(Lyrics)%20%5BGlnYAkcHdGo%5D%20(mp3cut.net).mp3",
-      },
     ];
 
-    const activityIcons: { [key: string]: string } = {
-      Roblox: "https://www.roblox.com/favicon.ico",
-      "Visual Studio Code": "https://code.visualstudio.com/favicon.ico",
-      Discord: "https://discord.com/favicon.ico",
-      Chrome:
-        "https://www.google.com/chrome/static/images/favicons/favicon.ico",
-      Firefox: "https://www.mozilla.org/media/img/favicons/favicon.ico",
-      Steam: "https://steamcommunity-a.akamaihd.net/favicon.ico",
-      VALORANT:
-        "https://img.icons8.com/?size=96&id=aUZxT3Erwill&format=png",
+    const activityIcons: Record<string, string> = {
+      Roblox: "https://cdn.simpleicons.org/roblox/ffffff",
+      "Visual Studio Code": "https://cdn.simpleicons.org/visualstudiocode/ffffff",
+      Discord: "https://cdn.simpleicons.org/discord/ffffff",
+      Chrome: "https://cdn.simpleicons.org/googlechrome/ffffff",
+      Firefox: "https://cdn.simpleicons.org/firefox/ffffff",
+      Steam: "https://cdn.simpleicons.org/steam/ffffff",
+      VALORANT: "https://cdn.simpleicons.org/valorant/ffffff",
       "League of Legends":
-        "https://images.seeklogo.com/logo-png/38/1/league-of-legends-logo-png_seeklogo-385125.png",
-      Minecraft: "https://static.cdnlogo.com/logos/m/26/minecraft.svg",
-      Fortnite: "https://www.epicgames.com/favicon.ico",
-      "Call of Duty":
-        "https://store.steampowered.com/public/images/apps/310650/capsule_231x87.jpg",
-      Spotify: "https://www.spotify.com/favicon.ico",
-      YouTube: "https://www.youtube.com/favicon.ico",
-      Netflix: "https://www.netflix.com/favicon.ico",
-      Twitch: "https://www.twitch.tv/favicon.ico",
-      CrossFire:
-        "https://file.garden/aN0Uo2YmaWI-OmAY/crossfire-z8games-smilegate-logo-download-cf-a610310d8f7ca8528c9da8061f46431b.png",
-      "Among Us":
-        "https://upload.wikimedia.org/wikipedia/en/f/f2/Among_Us_mascots.png",
-      "Genshin Impact":
-        "https://webstatic.hoyoverse.com/upload/favicon/favicon.ico",
-      "Adobe Photoshop": "https://www.adobe.com/favicon.ico",
-      "Nba 2k23": "https://www.2k.com/favicon.ico",
-      "Animal Crossing":
-        "https://upload.wikimedia.org/wikipedia/en/1/1d/Animal_Crossing_New_Horizons.png",
-      "Apex Legends": "https://www.ea.com/favicon.ico",
-      "Cyberpunk 2077": "https://www.cyberpunk.net/favicon.ico",
-      "Dota 2": "https://www.dota2.com/favicon.ico",
-      Overwatch:
-        "https://upload.wikimedia.org/wikipedia/en/5/51/Overwatch_cover_art.jpg",
-      "Rocket League":
-        "https://upload.wikimedia.org/wikipedia/en/e/e3/Rocket_League_Cover_Art.jpg",
-      PUBG: "https://www.pubg.com/favicon.ico",
-      Hearthstone:
-        "https://upload.wikimedia.org/wikipedia/en/0/0f/Hearthstone_logo.png",
-      "World of Warcraft": "https://worldofwarcraft.com/favicon.ico",
-      "Final Fantasy XIV": "https://na.finalfantasyxiv.com/favicon.ico",
-      Fivem:
-        "https://img.icons8.com/?size=96&id=gdOksUo2UvLH&format=png",
+        "https://cdn.simpleicons.org/leagueoflegends/ffffff",
+      Minecraft: "https://cdn.simpleicons.org/minecraft/ffffff",
+      Fortnite: "https://cdn.simpleicons.org/fortnite/ffffff",
+      "Call of Duty": "https://cdn.simpleicons.org/callofduty/ffffff",
+      Spotify: "https://cdn.simpleicons.org/spotify/ffffff",
+      YouTube: "https://cdn.simpleicons.org/youtube/ffffff",
+      Netflix: "https://cdn.simpleicons.org/netflix/ffffff",
+      Twitch: "https://cdn.simpleicons.org/twitch/ffffff",
+      "Among Us": "https://cdn.simpleicons.org/amongus/ffffff",
+      "Genshin Impact": "https://cdn.simpleicons.org/genshinimpact/ffffff",
+      "Adobe Photoshop": "https://cdn.simpleicons.org/adobephotoshop/ffffff",
+      "Apex Legends": "https://cdn.simpleicons.org/apexlegends/ffffff",
+      "Cyberpunk 2077": "https://cdn.simpleicons.org/cyberpunk2077/ffffff",
+      Dota: "https://cdn.simpleicons.org/dota/ffffff",
+      "Rocket League": "https://cdn.simpleicons.org/rocketleague/ffffff",
+      PUBG: "https://cdn.simpleicons.org/pubg/ffffff",
+      "Grand Theft Auto V": "https://cdn.simpleicons.org/rockstargames/ffffff",
       "Grand Theft Auto V Legacy":
-        "https://img.icons8.com/?size=128&id=79082&format=png",
-      "Read Dead Redemption 2":
-        "https://www.rockstargames.com/favicon.ico",
-      Bloodstrike:
-        "https://cdn2.steamgriddb.com/icon_thumb/7e89f702c876c07b698b5b315807e0c5.png",
+        "https://cdn.simpleicons.org/rockstargames/ffffff",
+      Bloodstrike: "https://cdn.simpleicons.org/target/ffffff",
     };
+
+    const escapeHtml = (value: string) =>
+      value
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
     const renderDiscordEmoji = (emoji: any) => {
       if (!emoji) return "";
@@ -171,16 +156,136 @@ export const MembersGrid = () => {
       if (emoji.id) {
         const ext = emoji.animated ? "gif" : "png";
 
-        return `
-          <img
-            src="https://cdn.discordapp.com/emojis/${emoji.id}.${ext}"
-            alt="${emoji.name || ""}"
-            style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:5px;"
-          />
+        return `<img src="https://cdn.discordapp.com/emojis/${emoji.id}.${ext}?size=32" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:6px;" />`;
+      }
+
+      return escapeHtml(emoji.name || "");
+    };
+
+    const getStatusInfo = (status: string) => {
+      if (status === "online") {
+        return {
+          label: "Online",
+          color: "#23a55a",
+        };
+      }
+
+      if (status === "idle") {
+        return {
+          label: "Idle",
+          color: "#f0b232",
+        };
+      }
+
+      if (status === "dnd") {
+        return {
+          label: "Do Not Disturb",
+          color: "#f23f42",
+        };
+      }
+
+      return {
+        label: "Offline",
+        color: "#747f8d",
+      };
+    };
+
+    const updateDiscordCard = (drac: HTMLElement, discordData: any) => {
+      const status = discordData?.discord_status || "offline";
+      const statusInfo = getStatusInfo(status);
+
+      const customActivity = discordData?.activities?.find(
+        (activity: any) => activity.type === 4
+      );
+
+      const activities =
+        discordData?.activities?.filter(
+          (activity: any) =>
+            activity.type !== 4 && activity.name !== "Spotify"
+        ) || [];
+
+      const statusElement = drac.querySelector(
+        ".drac-status"
+      ) as HTMLElement | null;
+
+      const customStatusElement = drac.querySelector(
+        ".drac-custom-status"
+      ) as HTMLElement | null;
+
+      const activityElement = drac.querySelector(
+        ".drac-activity"
+      ) as HTMLElement | null;
+
+      if (statusElement) {
+        statusElement.innerHTML = `
+          <span class="drac-status-dot" style="background:${statusInfo.color};box-shadow:0 0 8px ${statusInfo.color};"></span>
+          <span>${statusInfo.label}</span>
         `;
       }
 
-      return emoji.name || "";
+      if (customStatusElement) {
+        if (customActivity) {
+          customStatusElement.style.display = "flex";
+          customStatusElement.innerHTML = `
+            <span class="drac-custom-emoji">
+              ${renderDiscordEmoji(customActivity.emoji)}
+            </span>
+            <span>${escapeHtml(customActivity.state || "")}</span>
+          `;
+        } else {
+          customStatusElement.style.display = "none";
+          customStatusElement.innerHTML = "";
+        }
+      }
+
+      if (activityElement) {
+        if (activities.length > 0) {
+          const activity = activities[0];
+
+          const icon =
+            activityIcons[activity.name] ||
+            activity.assets?.large_image ||
+            "";
+
+          let iconHtml = "";
+
+          if (icon.startsWith("http")) {
+            iconHtml = `<img src="${icon}" class="drac-activity-icon" />`;
+          }
+
+          const activityDetails =
+            activity.details ||
+            activity.state ||
+            activity.name ||
+            "";
+
+          const activityState =
+            activity.details && activity.state
+              ? activity.state
+              : "";
+
+          activityElement.style.display = "flex";
+
+          activityElement.innerHTML = `
+            <div class="drac-activity-icon-wrap">
+              ${iconHtml}
+            </div>
+            <div class="drac-activity-text">
+              <span class="drac-activity-label">ACTIVITY</span>
+              <strong>${escapeHtml(activity.name || "Activity")}</strong>
+              <span>${escapeHtml(activityDetails)}</span>
+              ${
+                activityState
+                  ? `<span>${escapeHtml(activityState)}</span>`
+                  : ""
+              }
+            </div>
+          `;
+        } else {
+          activityElement.style.display = "none";
+          activityElement.innerHTML = "";
+        }
+      }
     };
 
     const fetchDiscordInfoMembers = async (discordId: string) => {
@@ -192,13 +297,15 @@ export const MembersGrid = () => {
         const json = await res.json();
 
         if (json.success) {
-          const u = json.data.discord_user;
+          const data = json.data;
+          const u = data.discord_user;
 
           const avatarUrl = u.avatar
             ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=512`
-            : `https://cdn.discordapp.com/embed/avatars/0.png`;
+            : `https://cdn.discordapp.com/embed/avatars/${Number(u.discriminator || 0) % 5}.png`;
 
           return {
+            data,
             displayName: u.global_name || u.display_name || u.username,
             username: u.username,
             avatar: avatarUrl,
@@ -209,205 +316,271 @@ export const MembersGrid = () => {
       }
 
       return {
+        data: null,
         displayName: "Unknown",
         username: "Unknown",
-        avatar: "https://cdn.discordapp.com/embed/avatars/0.png",
+        avatar: "",
       };
     };
 
-    (async () => {
+    const activeState = {
+      card: null as HTMLElement | null,
+      originalRect: null as DOMRect | null,
+      originalHeight: 0,
+      audio: null as HTMLAudioElement | null,
+    };
+
+    const resetCards = () => {
+      if (!dracGridRef.current) return;
+
+      const cards =
+        dracGridRef.current.querySelectorAll<HTMLElement>(".drac");
+
+      cards.forEach((card) => {
+        gsap.killTweensOf(card);
+
+        card.classList.remove("drac-active");
+
+        gsap.to(card, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 0.5,
+          ease: "power3.out",
+          overwrite: true,
+        });
+
+        card.style.zIndex = "2";
+        card.style.height = `${card.dataset.originalHeight || "220"}px`;
+      });
+
+      if (bannerBgRef.current) {
+        bannerBgRef.current.style.opacity = "0";
+      }
+
+      if (activeState.audio) {
+        activeState.audio.pause();
+        activeState.audio.currentTime = 0;
+      }
+
+      const navbarAudio = (window as any)
+        .navbarAudioRef as HTMLAudioElement;
+
+      const wasPlaying = (window as any)
+        .isNavbarAudioPlaying as boolean;
+
+      if (navbarAudio && wasPlaying) {
+        navbarAudio.play().catch(() => {});
+      }
+
+      activeState.card = null;
+      activeState.originalRect = null;
+      activeState.audio = null;
+    };
+
+    const activateCard = (
+      drac: HTMLElement,
+      user: (typeof discordUsers)[number],
+      audio: HTMLAudioElement
+    ) => {
+      if (
+        activeState.card &&
+        activeState.card !== drac
+      ) {
+        return;
+      }
+
+      if (activeState.card === drac) return;
+
+      activeState.card = drac;
+      activeState.originalRect = drac.getBoundingClientRect();
+      activeState.originalHeight = drac.offsetHeight;
+      activeState.audio = audio;
+
+      drac.dataset.originalHeight = String(
+        activeState.originalHeight
+      );
+
+      const rect = activeState.originalRect;
+
+      const targetWidth = Math.min(
+        Math.max(rect.width, 600),
+        window.innerWidth - 80
+      );
+
+      const targetHeight = Math.min(
+        Math.max(activeState.originalHeight + 160, 380),
+        window.innerHeight - 100
+      );
+
+      const targetLeft =
+        (window.innerWidth - targetWidth) / 2;
+
+      const targetTop =
+        (window.innerHeight - targetHeight) / 2;
+
+      const targetX =
+        targetLeft - rect.left;
+
+      const targetY =
+        targetTop - rect.top;
+
+      const cards =
+        dracGridRef.current?.querySelectorAll<HTMLElement>(
+          ".drac"
+        );
+
+      cards?.forEach((card) => {
+        if (card !== drac) {
+          gsap.killTweensOf(card);
+
+          gsap.to(card, {
+            opacity: 0,
+            scale: 0.92,
+            filter: "blur(8px)",
+            duration: 0.4,
+            ease: "power3.out",
+            overwrite: true,
+          });
+
+          card.style.pointerEvents = "none";
+        }
+      });
+
+      drac.style.zIndex = "50";
+      drac.style.pointerEvents = "auto";
+      drac.classList.add("drac-active");
+
+      gsap.killTweensOf(drac);
+
+      gsap.to(drac, {
+        x: targetX,
+        y: targetY,
+        width: targetWidth,
+        height: targetHeight,
+        scale: 1,
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 0.65,
+        ease: "power3.out",
+        overwrite: true,
+      });
+
+      if (bannerBgRef.current) {
+        bannerBgRef.current.style.backgroundImage =
+          `url('${user.banner}')`;
+        bannerBgRef.current.style.opacity = "1";
+      }
+
+      const navbarAudio = (window as any)
+        .navbarAudioRef as HTMLAudioElement;
+
+      if (navbarAudio) {
+        navbarAudio.pause();
+      }
+
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    };
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const activeCard = activeState.card;
+
+      if (!activeCard) return;
+
+      const rect = activeCard.getBoundingClientRect();
+
+      const inside =
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom;
+
+      if (!inside) {
+        resetCards();
+      }
+    };
+
+    window.addEventListener(
+      "pointermove",
+      handlePointerMove
+    );
+
+    const initialize = async () => {
       if (!dracGridRef.current) return;
 
       for (const user of discordUsers) {
         const info = await fetchDiscordInfoMembers(user.id);
 
-        const drac = document.createElement("div");
-        drac.classList.add("drac");
+        if (!dracGridRef.current) return;
 
-        drac.style.position = "relative";
-        drac.style.overflow = "hidden";
-        drac.style.willChange = "transform, opacity, filter, height";
-        drac.style.transformOrigin = "center center";
+        const drac = document.createElement("div");
+
+        drac.className = "drac";
+        drac.dataset.originalHeight = "220";
 
         drac.innerHTML = `
           <div
             class="drac-banner"
-            style="background-image:url('${user.banner}'); opacity:0.35;"
+            style="
+              background-image:url('${user.banner}');
+              opacity:0.35;
+            "
           ></div>
 
           <div class="drac-content">
             <div
               class="avatar"
-              style="background-image:url('${info.avatar}');"
+              style="
+                background-image:url('${info.avatar}');
+              "
             ></div>
 
             <div class="info">
-              <h1>${info.displayName}</h1>
-              <p>@${info.username}</p>
-            </div>
+              <h1>${escapeHtml(info.displayName)}</h1>
 
-            <div
-              class="drac-status"
-              style="
-                display:flex;
-                align-items:center;
-                gap:7px;
-                margin-top:8px;
-                font-size:12px;
-                opacity:0.9;
-              "
-            >
-              <span
-                class="drac-status-dot"
-                style="
-                  width:9px;
-                  height:9px;
-                  min-width:9px;
-                  border-radius:50%;
-                  background:#747f8d;
-                  box-shadow:0 0 8px rgba(255,255,255,0.25);
-                "
-              ></span>
+              <p>@${escapeHtml(info.username)}</p>
 
-              <span class="drac-status-text">Offline</span>
-            </div>
-
-            <div
-              class="drac-custom-status"
-              style="
-                margin-top:6px;
-                font-size:12px;
-                opacity:0.75;
-                min-height:18px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                text-align:center;
-              "
-            ></div>
-
-            <div
-              class="drac-activity"
-              style="
-                margin-top:10px;
-                padding-top:10px;
-                border-top:1px solid rgba(255,255,255,0.15);
-                display:none;
-                flex-direction:column;
-                gap:5px;
-                width:100%;
-              "
-            >
-              <div
-                style="
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  gap:8px;
-                "
-              >
-                <div
-                  class="drac-activity-icon"
+              <div class="drac-status">
+                <span
+                  class="drac-status-dot"
                   style="
-                    width:30px;
-                    height:30px;
-                    border-radius:7px;
-                    background:rgba(255,255,255,0.08);
-                    border:1px solid rgba(255,255,255,0.15);
-                    display:flex;
-                    align-items:center;
-                    justify-content:center;
-                    overflow:hidden;
-                    flex-shrink:0;
+                    background:#747f8d;
+                    box-shadow:0 0 8px #747f8d;
                   "
-                ></div>
-
-                <div
-                  style="
-                    display:flex;
-                    flex-direction:column;
-                    min-width:0;
-                    text-align:left;
-                  "
-                >
-                  <span
-                    class="drac-activity-name"
-                    style="
-                      font-size:12px;
-                      font-weight:600;
-                      color:white;
-                      white-space:nowrap;
-                      overflow:hidden;
-                      text-overflow:ellipsis;
-                    "
-                  ></span>
-
-                  <span
-                    class="drac-activity-details"
-                    style="
-                      font-size:10px;
-                      opacity:0.65;
-                      white-space:nowrap;
-                      overflow:hidden;
-                      text-overflow:ellipsis;
-                    "
-                  ></span>
-                </div>
+                ></span>
+                <span>Offline</span>
               </div>
 
               <div
-                class="drac-activity-icons"
-                style="
-                  display:flex;
-                  justify-content:center;
-                  align-items:center;
-                  gap:6px;
-                  flex-wrap:wrap;
-                "
+                class="drac-custom-status"
+                style="display:none;"
+              ></div>
+
+              <div
+                class="drac-activity"
+                style="display:none;"
               ></div>
             </div>
           </div>
         `;
 
         const audio = document.createElement("audio");
+
         audio.src = user.music;
         audio.preload = "auto";
         audio.volume = 0.5;
+
         drac.appendChild(audio);
+        dracGridRef.current.appendChild(drac);
 
-        const statusDot = drac.querySelector(
-          ".drac-status-dot"
-        ) as HTMLElement;
+        updateDiscordCard(drac, info.data);
 
-        const statusText = drac.querySelector(
-          ".drac-status-text"
-        ) as HTMLElement;
-
-        const customStatus = drac.querySelector(
-          ".drac-custom-status"
-        ) as HTMLElement;
-
-        const activityBox = drac.querySelector(
-          ".drac-activity"
-        ) as HTMLElement;
-
-        const activityIcon = drac.querySelector(
-          ".drac-activity-icon"
-        ) as HTMLElement;
-
-        const activityName = drac.querySelector(
-          ".drac-activity-name"
-        ) as HTMLElement;
-
-        const activityDetails = drac.querySelector(
-          ".drac-activity-details"
-        ) as HTMLElement;
-
-        const activityIconsContainer = drac.querySelector(
-          ".drac-activity-icons"
-        ) as HTMLElement;
-
-        const ws = new WebSocket("wss://api.lanyard.rest/socket");
+        const ws = new WebSocket(
+          "wss://api.lanyard.rest/socket"
+        );
 
         ws.onopen = () => {
           ws.send(
@@ -426,346 +599,72 @@ export const MembersGrid = () => {
 
             if (!payload.d) return;
 
-            const discordData = payload.d;
-
-            if (discordData.discord_user?.avatar) {
-              const avatar = drac.querySelector(
-                ".avatar"
-              ) as HTMLElement;
-
-              if (avatar) {
-                avatar.style.backgroundImage = `url('https://cdn.discordapp.com/avatars/${user.id}/${discordData.discord_user.avatar}.png?size=512')`;
-              }
+            if (
+              payload.t === "INIT_STATE" ||
+              payload.t === "PRESENCE_UPDATE"
+            ) {
+              updateDiscordCard(drac, payload.d);
             }
-
-            const status = discordData.discord_status || "offline";
-
-            const statusMap: Record<
-              string,
-              { label: string; color: string }
-            > = {
-              online: {
-                label: "Online",
-                color: "#23a55a",
-              },
-              idle: {
-                label: "Idle",
-                color: "#f0b232",
-              },
-              dnd: {
-                label: "Do Not Disturb",
-                color: "#f23f42",
-              },
-              offline: {
-                label: "Offline",
-                color: "#747f8d",
-              },
-            };
-
-            const currentStatus =
-              statusMap[status] || statusMap.offline;
-
-            if (statusDot) {
-              statusDot.style.background = currentStatus.color;
-              statusDot.style.boxShadow = `0 0 10px ${currentStatus.color}`;
-            }
-
-            if (statusText) {
-              statusText.textContent = currentStatus.label;
-            }
-
-            const customActivity = discordData.activities?.find(
-              (activity: any) => activity.type === 4
-            );
-
-            if (customActivity && customStatus) {
-              const emoji = renderDiscordEmoji(
-                customActivity.emoji
-              );
-
-              const state = customActivity.state || "";
-
-              customStatus.innerHTML = `${emoji}${state}`;
-              customStatus.style.display = "flex";
-            } else if (customStatus) {
-              customStatus.innerHTML = "";
-              customStatus.style.display = "none";
-            }
-
-            const activities =
-              discordData.activities?.filter(
-                (activity: any) =>
-                  activity.type !== 4 &&
-                  activity.name !== "Spotify"
-              ) || [];
-
-            if (activities.length > 0) {
-              const primaryActivity = activities[0];
-
-              if (activityBox) {
-                activityBox.style.display = "flex";
-              }
-
-              if (activityName) {
-                activityName.textContent =
-                  primaryActivity.name || "Activity";
-              }
-
-              let detailsText = "";
-
-              if (primaryActivity.state) {
-                detailsText = primaryActivity.state;
-              }
-
-              if (primaryActivity.details) {
-                detailsText += detailsText
-                  ? ` - ${primaryActivity.details}`
-                  : primaryActivity.details;
-              }
-
-              if (activityDetails) {
-                activityDetails.textContent = detailsText;
-              }
-
-              if (activityIcon) {
-                activityIcon.innerHTML = "";
-
-                const iconUrl =
-                  activityIcons[primaryActivity.name];
-
-                if (iconUrl) {
-                  const img =
-                    document.createElement("img");
-
-                  img.src = iconUrl;
-                  img.alt = primaryActivity.name || "";
-                  img.style.width = "100%";
-                  img.style.height = "100%";
-                  img.style.objectFit = "contain";
-                  img.style.padding = "5px";
-
-                  activityIcon.appendChild(img);
-                }
-              }
-
-              if (activityIconsContainer) {
-                activityIconsContainer.innerHTML = "";
-
-                const seenActivityNames = new Set<string>();
-
-                activities.forEach((activity: any) => {
-                  if (
-                    !activity?.name ||
-                    seenActivityNames.has(activity.name)
-                  ) {
-                    return;
-                  }
-
-                  seenActivityNames.add(activity.name);
-
-                  const iconUrl =
-                    activityIcons[activity.name];
-
-                  if (!iconUrl) return;
-
-                  const iconWrapper =
-                    document.createElement("div");
-
-                  iconWrapper.style.width = "24px";
-                  iconWrapper.style.height = "24px";
-                  iconWrapper.style.borderRadius = "5px";
-                  iconWrapper.style.overflow = "hidden";
-                  iconWrapper.style.background =
-                    "rgba(255,255,255,0.08)";
-                  iconWrapper.style.border =
-                    "1px solid rgba(255,255,255,0.15)";
-                  iconWrapper.title = activity.name;
-
-                  const img =
-                    document.createElement("img");
-
-                  img.src = iconUrl;
-                  img.alt = activity.name;
-                  img.style.width = "100%";
-                  img.style.height = "100%";
-                  img.style.objectFit = "contain";
-                  img.style.padding = "3px";
-
-                  iconWrapper.appendChild(img);
-                  activityIconsContainer.appendChild(
-                    iconWrapper
-                  );
-                });
-              }
-            } else {
-              if (activityBox) {
-                activityBox.style.display = "none";
-              }
-            }
-          } catch (err) {
-            console.error("Lanyard message error", err);
+          } catch {
+            return;
           }
         };
 
-        ws.onerror = () => {
-          ws.close();
-        };
-
-        drac.addEventListener("mouseenter", () => {
-          const allCards =
-            dracGridRef.current?.querySelectorAll(".drac");
-
-          if (!allCards || !dracGridRef.current) return;
-
-          const rect = drac.getBoundingClientRect();
-
-          const viewportCenterX = window.innerWidth / 2;
-          const viewportCenterY = window.innerHeight / 2;
-
-          const cardCenterX = rect.left + rect.width / 2;
-          const cardCenterY = rect.top + rect.height / 2;
-
-          const moveX = viewportCenterX - cardCenterX;
-          const moveY = viewportCenterY - cardCenterY;
-
-          const originalHeight = rect.height;
-
-          drac.dataset.originalHeight =
-            originalHeight.toString();
-
-          gsap.killTweensOf(allCards);
-          gsap.killTweensOf(drac);
-
-          gsap.set(drac, {
-            zIndex: 50,
-          });
-
-          allCards.forEach((card) => {
-            if (card !== drac) {
-              gsap.to(card, {
-                opacity: 0,
-                scale: 0.85,
-                filter: "blur(10px)",
-                duration: 0.45,
-                ease: "power3.out",
-                overwrite: true,
-              });
-            }
-          });
-
-          gsap.to(drac, {
-            x: moveX,
-            y: moveY,
-            scale: 1.08,
-            opacity: 1,
-            filter: "blur(0px)",
-            height: originalHeight + 110,
-            duration: 0.65,
-            ease: "power3.out",
-            overwrite: true,
-          });
-
-          if (bannerBgRef.current) {
-            bannerBgRef.current.style.backgroundImage =
-              `url('${user.banner}')`;
-
-            bannerBgRef.current.style.opacity = "1";
-          }
-
-          const navbarAudio = (window as any)
-            .navbarAudioRef as HTMLAudioElement;
-
-          if (navbarAudio) {
-            navbarAudio.pause();
-          }
-
-          audio.currentTime = 0;
-
-          audio.play().catch(() => {});
+        drac.addEventListener("pointerenter", () => {
+          activateCard(drac, user, audio);
         });
-
-        drac.addEventListener("mouseleave", () => {
-          const allCards =
-            dracGridRef.current?.querySelectorAll(".drac");
-
-          if (!allCards) return;
-
-          gsap.to(allCards, {
-            x: 0,
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 0.6,
-            ease: "power3.inOut",
-            overwrite: true,
-          });
-
-          const originalHeight = Number(
-            drac.dataset.originalHeight || 0
-          );
-
-          if (originalHeight) {
-            gsap.to(drac, {
-              height: originalHeight,
-              duration: 0.6,
-              ease: "power3.inOut",
-              overwrite: true,
-            });
-          }
-
-          gsap.set(drac, {
-            zIndex: "",
-          });
-
-          if (bannerBgRef.current) {
-            bannerBgRef.current.style.opacity = "0";
-          }
-
-          audio.pause();
-          audio.currentTime = 0;
-
-          const navbarAudio = (window as any)
-            .navbarAudioRef as HTMLAudioElement;
-
-          const wasPlaying = (window as any)
-            .isNavbarAudioPlaying as boolean;
-
-          if (navbarAudio && wasPlaying) {
-            navbarAudio.play().catch(() => {});
-          }
-        });
-
-        dracGridRef.current.appendChild(drac);
       }
+
+      if (!dracGridRef.current) return;
+
+      const dracCards =
+        dracGridRef.current.querySelectorAll<HTMLElement>(
+          ".drac"
+        );
+
+      gsap.fromTo(
+        dracCards,
+        {
+          opacity: 0,
+          y: 50,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: dracGridRef.current,
+            start: "top center+=100",
+            end: "center center",
+            scrub: 0.5,
+            markers: false,
+          },
+        }
+      );
+    };
+
+    void initialize();
+
+    return () => {
+      window.removeEventListener(
+        "pointermove",
+        handlePointerMove
+      );
+
+      resetCards();
 
       if (dracGridRef.current) {
-        const dracCards =
-          dracGridRef.current.querySelectorAll(".drac");
-
-        gsap.fromTo(
-          dracCards,
-          {
-            opacity: 0,
-            y: 50,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: dracGridRef.current,
-              start: "top center+=100",
-              end: "center center",
-              scrub: 0.5,
-              markers: false,
-            },
-          }
-        );
+        dracGridRef.current.innerHTML = "";
       }
-    })();
+
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.trigger === dracGridRef.current) {
+          trigger.kill();
+        }
+      });
+    };
   }, []);
 
   return (
@@ -773,33 +672,11 @@ export const MembersGrid = () => {
       <div
         ref={bannerBgRef}
         className="drac-banner-bg"
-        style={{
-          position: "fixed",
-          inset: 0,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          opacity: 0,
-          filter: "blur(2px) brightness(0.6)",
-          transition:
-            "opacity 0.6s ease, background 0.3s ease",
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
       />
 
       <div
         ref={dracGridRef}
         className="drac-grid"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 600px)",
-          gap: "30px",
-          zIndex: 2,
-          maxWidth: "100%",
-          position: "relative",
-          justifyContent: "center",
-          padding: "40px 20px",
-        }}
       />
     </div>
   );
