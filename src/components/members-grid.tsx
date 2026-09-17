@@ -678,6 +678,7 @@ export const MembersGrid = () => {
           spotify.style.display = "none";
         }
       }
+      }
     };
 
     const restoreOtherCards = (
