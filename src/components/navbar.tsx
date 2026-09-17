@@ -14,7 +14,6 @@ export const Navbar = () => {
 
   const { y: currentScrollY } = useWindowScroll();
 
-
   const handleNavClick = (id: string) => {
     const element = document.getElementById(id);
 
@@ -35,6 +34,10 @@ export const Navbar = () => {
     });
   };
 
+  useEffect(() => {
+    const handlePageLoad = () => {
+      setIsNavVisible(true);
+    };
 
     if (document.readyState === "complete") {
       handlePageLoad();
@@ -77,8 +80,6 @@ export const Navbar = () => {
     >
       <div className="absolute top-1/2 w-full -translate-y-1/2">
         <nav className="flex size-full items-center justify-between p-4">
-
-         
           <div className="flex items-center gap-7">
             <button
               onClick={() => handleNavClick("hero")}
@@ -93,8 +94,6 @@ export const Navbar = () => {
           </div>
 
           <div className="flex h-full items-center">
-
-      
             <div className="hidden md:block">
               {NAV_ITEMS.map(({ label, href }) => (
                 <button
@@ -106,8 +105,6 @@ export const Navbar = () => {
                 </button>
               ))}
             </div>
-
-
           </div>
         </nav>
       </div>
