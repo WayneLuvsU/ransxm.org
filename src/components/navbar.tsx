@@ -4,7 +4,6 @@ import { useWindowScroll } from "react-use";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import { NAV_ITEMS } from "@/constants";
-import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -36,14 +35,6 @@ export const Navbar = () => {
     });
   };
 
-  useEffect(() => {
-    const handlePageLoad = () => {
-      setIsAudioPlaying(true);
-
-      void audioElementRef.current?.play().catch(() => {
-       
-      });
-    };
 
     if (document.readyState === "complete") {
       handlePageLoad();
