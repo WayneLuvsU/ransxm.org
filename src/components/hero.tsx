@@ -12,10 +12,45 @@ export const Hero = () => {
   const [tagline, setTagline] = useState("");
   const [tagArrowVisible, setTagArrowVisible] = useState(true);
   const heroTitleRef = useRef<HTMLDivElement>(null);
-
+  const videoRef = useRef<HTMLVideoElement>(null);  
   useEffect(() => {
     setIsLoading(false);
   }, []);
+
+  useEffect(() => {
+  const video = videoRef.current;
+  if (!video) return;
+
+  video.volume = 1;
+
+  const tryPlay = () => {
+    video.play().catch(() => {});
+  };
+
+  tryPlay();
+
+  const handleInteraction = () => {
+    tryPlay();
+  };
+
+  window.addEventListener("pointerdown", handleInteraction, {
+    once: true,
+  });
+
+  window.addEventListener("keydown", handleInteraction, {
+    once: true,
+  });
+
+  window.addEventListener("touchstart", handleInteraction, {
+    once: true,
+  });
+
+  return () => {
+    window.removeEventListener("pointerdown", handleInteraction);
+    window.removeEventListener("keydown", handleInteraction);
+    window.removeEventListener("touchstart", handleInteraction);
+  };
+}, []);
 
   useEffect(() => {
     const phrases = ["flyest of 'em all", "pinakamainit sa scene"];
