@@ -10,19 +10,11 @@ gsap.registerPlugin(ScrollToPlugin);
 
 export const Navbar = () => {
   const navContainerRef = useRef<HTMLDivElement>(null);
-  const audioElementRef = useRef<HTMLAudioElement>(null);
-
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(false);
 
   const { y: currentScrollY } = useWindowScroll();
 
-  const toggleAudioIndicator = () => {
-    setIsAudioPlaying((prevAudioPlaying) => !prevAudioPlaying);
-    setIsIndicatorActive((prevIndicatorActive) => !prevIndicatorActive);
-  };
 
   const handleNavClick = (id: string) => {
     const element = document.getElementById(id);
@@ -63,19 +55,6 @@ export const Navbar = () => {
       };
     }
   }, []);
-
-  useEffect(() => {
-    if (isAudioPlaying) {
-      void audioElementRef.current?.play().catch(() => {});
-    } else {
-      audioElementRef.current?.pause();
-    }
-  }, [isAudioPlaying]);
-
-  useEffect(() => {
-    (window as any).navbarAudioRef = audioElementRef.current;
-    (window as any).isNavbarAudioPlaying = isAudioPlaying;
-  }, [isAudioPlaying]);
 
   useEffect(() => {
     if (currentScrollY === 0) {
@@ -144,12 +123,6 @@ export const Navbar = () => {
                 className="ml-10 flex items-center space-x-1 p-2 transition hover:opacity-75"
                 title="Play Audio"
               >
-                <audio
-                  ref={audioElementRef}
-                  src=""
-                  className="hidden"
-        
-                />
 
                 {Array(4)
                   .fill("")
