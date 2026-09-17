@@ -113,7 +113,77 @@ export const MembersGrid = () => {
       },
     ];
 
-    async function fetchDiscordInfoMembers(discordId: string) {
+    const activityIcons: { [key: string]: string } = {
+      Roblox: "https://www.roblox.com/favicon.ico",
+      "Visual Studio Code": "https://code.visualstudio.com/favicon.ico",
+      Discord: "https://discord.com/favicon.ico",
+      Chrome:
+        "https://www.google.com/chrome/static/images/favicons/favicon.ico",
+      Firefox: "https://www.mozilla.org/media/img/favicons/favicon.ico",
+      Steam: "https://steamcommunity-a.akamaihd.net/favicon.ico",
+      VALORANT:
+        "https://img.icons8.com/?size=96&id=aUZxT3Erwill&format=png",
+      "League of Legends":
+        "https://images.seeklogo.com/logo-png/38/1/league-of-legends-logo-png_seeklogo-385125.png",
+      Minecraft: "https://static.cdnlogo.com/logos/m/26/minecraft.svg",
+      Fortnite: "https://www.epicgames.com/favicon.ico",
+      "Call of Duty":
+        "https://store.steampowered.com/public/images/apps/310650/capsule_231x87.jpg",
+      Spotify: "https://www.spotify.com/favicon.ico",
+      YouTube: "https://www.youtube.com/favicon.ico",
+      Netflix: "https://www.netflix.com/favicon.ico",
+      Twitch: "https://www.twitch.tv/favicon.ico",
+      CrossFire:
+        "https://file.garden/aN0Uo2YmaWI-OmAY/crossfire-z8games-smilegate-logo-download-cf-a610310d8f7ca8528c9da8061f46431b.png",
+      "Among Us":
+        "https://upload.wikimedia.org/wikipedia/en/f/f2/Among_Us_mascots.png",
+      "Genshin Impact":
+        "https://webstatic.hoyoverse.com/upload/favicon/favicon.ico",
+      "Adobe Photoshop": "https://www.adobe.com/favicon.ico",
+      "Nba 2k23": "https://www.2k.com/favicon.ico",
+      "Animal Crossing":
+        "https://upload.wikimedia.org/wikipedia/en/1/1d/Animal_Crossing_New_Horizons.png",
+      "Apex Legends": "https://www.ea.com/favicon.ico",
+      "Cyberpunk 2077": "https://www.cyberpunk.net/favicon.ico",
+      "Dota 2": "https://www.dota2.com/favicon.ico",
+      Overwatch:
+        "https://upload.wikimedia.org/wikipedia/en/5/51/Overwatch_cover_art.jpg",
+      "Rocket League":
+        "https://upload.wikimedia.org/wikipedia/en/e/e3/Rocket_League_Cover_Art.jpg",
+      PUBG: "https://www.pubg.com/favicon.ico",
+      Hearthstone:
+        "https://upload.wikimedia.org/wikipedia/en/0/0f/Hearthstone_logo.png",
+      "World of Warcraft": "https://worldofwarcraft.com/favicon.ico",
+      "Final Fantasy XIV": "https://na.finalfantasyxiv.com/favicon.ico",
+      Fivem:
+        "https://img.icons8.com/?size=96&id=gdOksUo2UvLH&format=png",
+      "Grand Theft Auto V Legacy":
+        "https://img.icons8.com/?size=128&id=79082&format=png",
+      "Read Dead Redemption 2":
+        "https://www.rockstargames.com/favicon.ico",
+      Bloodstrike:
+        "https://cdn2.steamgriddb.com/icon_thumb/7e89f702c876c07b698b5b315807e0c5.png",
+    };
+
+    const renderDiscordEmoji = (emoji: any) => {
+      if (!emoji) return "";
+
+      if (emoji.id) {
+        const ext = emoji.animated ? "gif" : "png";
+
+        return `
+          <img
+            src="https://cdn.discordapp.com/emojis/${emoji.id}.${ext}"
+            alt="${emoji.name || ""}"
+            style="width:20px;height:20px;object-fit:contain;vertical-align:middle;margin-right:5px;"
+          />
+        `;
+      }
+
+      return emoji.name || "";
+    };
+
+    const fetchDiscordInfoMembers = async (discordId: string) => {
       try {
         const res = await fetch(
           `https://api.lanyard.rest/v1/users/${discordId}`
@@ -124,10 +194,12 @@ export const MembersGrid = () => {
         if (json.success) {
           const u = json.data.discord_user;
 
-          const avatarUrl = `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=512`;
+          const avatarUrl = u.avatar
+            ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=512`
+            : `https://cdn.discordapp.com/embed/avatars/0.png`;
 
           return {
-            displayName: u.display_name || u.username,
+            displayName: u.global_name || u.display_name || u.username,
             username: u.username,
             avatar: avatarUrl,
           };
@@ -139,9 +211,9 @@ export const MembersGrid = () => {
       return {
         displayName: "Unknown",
         username: "Unknown",
-        avatar: "",
+        avatar: "https://cdn.discordapp.com/embed/avatars/0.png",
       };
-    }
+    };
 
     (async () => {
       if (!dracGridRef.current) return;
@@ -152,6 +224,11 @@ export const MembersGrid = () => {
         const drac = document.createElement("div");
         drac.classList.add("drac");
 
+        drac.style.position = "relative";
+        drac.style.overflow = "hidden";
+        drac.style.willChange = "transform, opacity, filter, height";
+        drac.style.transformOrigin = "center center";
+
         drac.innerHTML = `
           <div
             class="drac-banner"
@@ -161,12 +238,133 @@ export const MembersGrid = () => {
           <div class="drac-content">
             <div
               class="avatar"
-              style="background-image:url('${info.avatar}')"
+              style="background-image:url('${info.avatar}');"
             ></div>
 
             <div class="info">
               <h1>${info.displayName}</h1>
               <p>@${info.username}</p>
+            </div>
+
+            <div
+              class="drac-status"
+              style="
+                display:flex;
+                align-items:center;
+                gap:7px;
+                margin-top:8px;
+                font-size:12px;
+                opacity:0.9;
+              "
+            >
+              <span
+                class="drac-status-dot"
+                style="
+                  width:9px;
+                  height:9px;
+                  min-width:9px;
+                  border-radius:50%;
+                  background:#747f8d;
+                  box-shadow:0 0 8px rgba(255,255,255,0.25);
+                "
+              ></span>
+
+              <span class="drac-status-text">Offline</span>
+            </div>
+
+            <div
+              class="drac-custom-status"
+              style="
+                margin-top:6px;
+                font-size:12px;
+                opacity:0.75;
+                min-height:18px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                text-align:center;
+              "
+            ></div>
+
+            <div
+              class="drac-activity"
+              style="
+                margin-top:10px;
+                padding-top:10px;
+                border-top:1px solid rgba(255,255,255,0.15);
+                display:none;
+                flex-direction:column;
+                gap:5px;
+                width:100%;
+              "
+            >
+              <div
+                style="
+                  display:flex;
+                  align-items:center;
+                  justify-content:center;
+                  gap:8px;
+                "
+              >
+                <div
+                  class="drac-activity-icon"
+                  style="
+                    width:30px;
+                    height:30px;
+                    border-radius:7px;
+                    background:rgba(255,255,255,0.08);
+                    border:1px solid rgba(255,255,255,0.15);
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    overflow:hidden;
+                    flex-shrink:0;
+                  "
+                ></div>
+
+                <div
+                  style="
+                    display:flex;
+                    flex-direction:column;
+                    min-width:0;
+                    text-align:left;
+                  "
+                >
+                  <span
+                    class="drac-activity-name"
+                    style="
+                      font-size:12px;
+                      font-weight:600;
+                      color:white;
+                      white-space:nowrap;
+                      overflow:hidden;
+                      text-overflow:ellipsis;
+                    "
+                  ></span>
+
+                  <span
+                    class="drac-activity-details"
+                    style="
+                      font-size:10px;
+                      opacity:0.65;
+                      white-space:nowrap;
+                      overflow:hidden;
+                      text-overflow:ellipsis;
+                    "
+                  ></span>
+                </div>
+              </div>
+
+              <div
+                class="drac-activity-icons"
+                style="
+                  display:flex;
+                  justify-content:center;
+                  align-items:center;
+                  gap:6px;
+                  flex-wrap:wrap;
+                "
+              ></div>
             </div>
           </div>
         `;
@@ -175,8 +373,243 @@ export const MembersGrid = () => {
         audio.src = user.music;
         audio.preload = "auto";
         audio.volume = 0.5;
-
         drac.appendChild(audio);
+
+        const statusDot = drac.querySelector(
+          ".drac-status-dot"
+        ) as HTMLElement;
+
+        const statusText = drac.querySelector(
+          ".drac-status-text"
+        ) as HTMLElement;
+
+        const customStatus = drac.querySelector(
+          ".drac-custom-status"
+        ) as HTMLElement;
+
+        const activityBox = drac.querySelector(
+          ".drac-activity"
+        ) as HTMLElement;
+
+        const activityIcon = drac.querySelector(
+          ".drac-activity-icon"
+        ) as HTMLElement;
+
+        const activityName = drac.querySelector(
+          ".drac-activity-name"
+        ) as HTMLElement;
+
+        const activityDetails = drac.querySelector(
+          ".drac-activity-details"
+        ) as HTMLElement;
+
+        const activityIconsContainer = drac.querySelector(
+          ".drac-activity-icons"
+        ) as HTMLElement;
+
+        const ws = new WebSocket("wss://api.lanyard.rest/socket");
+
+        ws.onopen = () => {
+          ws.send(
+            JSON.stringify({
+              op: 2,
+              d: {
+                subscribe_to_id: user.id,
+              },
+            })
+          );
+        };
+
+        ws.onmessage = (event) => {
+          try {
+            const payload = JSON.parse(event.data);
+
+            if (!payload.d) return;
+
+            const discordData = payload.d;
+
+            if (discordData.discord_user?.avatar) {
+              const avatar = drac.querySelector(
+                ".avatar"
+              ) as HTMLElement;
+
+              if (avatar) {
+                avatar.style.backgroundImage = `url('https://cdn.discordapp.com/avatars/${user.id}/${discordData.discord_user.avatar}.png?size=512')`;
+              }
+            }
+
+            const status = discordData.discord_status || "offline";
+
+            const statusMap: Record<
+              string,
+              { label: string; color: string }
+            > = {
+              online: {
+                label: "Online",
+                color: "#23a55a",
+              },
+              idle: {
+                label: "Idle",
+                color: "#f0b232",
+              },
+              dnd: {
+                label: "Do Not Disturb",
+                color: "#f23f42",
+              },
+              offline: {
+                label: "Offline",
+                color: "#747f8d",
+              },
+            };
+
+            const currentStatus =
+              statusMap[status] || statusMap.offline;
+
+            if (statusDot) {
+              statusDot.style.background = currentStatus.color;
+              statusDot.style.boxShadow = `0 0 10px ${currentStatus.color}`;
+            }
+
+            if (statusText) {
+              statusText.textContent = currentStatus.label;
+            }
+
+            const customActivity = discordData.activities?.find(
+              (activity: any) => activity.type === 4
+            );
+
+            if (customActivity && customStatus) {
+              const emoji = renderDiscordEmoji(
+                customActivity.emoji
+              );
+
+              const state = customActivity.state || "";
+
+              customStatus.innerHTML = `${emoji}${state}`;
+              customStatus.style.display = "flex";
+            } else if (customStatus) {
+              customStatus.innerHTML = "";
+              customStatus.style.display = "none";
+            }
+
+            const activities =
+              discordData.activities?.filter(
+                (activity: any) =>
+                  activity.type !== 4 &&
+                  activity.name !== "Spotify"
+              ) || [];
+
+            if (activities.length > 0) {
+              const primaryActivity = activities[0];
+
+              if (activityBox) {
+                activityBox.style.display = "flex";
+              }
+
+              if (activityName) {
+                activityName.textContent =
+                  primaryActivity.name || "Activity";
+              }
+
+              let detailsText = "";
+
+              if (primaryActivity.state) {
+                detailsText = primaryActivity.state;
+              }
+
+              if (primaryActivity.details) {
+                detailsText += detailsText
+                  ? ` - ${primaryActivity.details}`
+                  : primaryActivity.details;
+              }
+
+              if (activityDetails) {
+                activityDetails.textContent = detailsText;
+              }
+
+              if (activityIcon) {
+                activityIcon.innerHTML = "";
+
+                const iconUrl =
+                  activityIcons[primaryActivity.name];
+
+                if (iconUrl) {
+                  const img =
+                    document.createElement("img");
+
+                  img.src = iconUrl;
+                  img.alt = primaryActivity.name || "";
+                  img.style.width = "100%";
+                  img.style.height = "100%";
+                  img.style.objectFit = "contain";
+                  img.style.padding = "5px";
+
+                  activityIcon.appendChild(img);
+                }
+              }
+
+              if (activityIconsContainer) {
+                activityIconsContainer.innerHTML = "";
+
+                const seenActivityNames = new Set<string>();
+
+                activities.forEach((activity: any) => {
+                  if (
+                    !activity?.name ||
+                    seenActivityNames.has(activity.name)
+                  ) {
+                    return;
+                  }
+
+                  seenActivityNames.add(activity.name);
+
+                  const iconUrl =
+                    activityIcons[activity.name];
+
+                  if (!iconUrl) return;
+
+                  const iconWrapper =
+                    document.createElement("div");
+
+                  iconWrapper.style.width = "24px";
+                  iconWrapper.style.height = "24px";
+                  iconWrapper.style.borderRadius = "5px";
+                  iconWrapper.style.overflow = "hidden";
+                  iconWrapper.style.background =
+                    "rgba(255,255,255,0.08)";
+                  iconWrapper.style.border =
+                    "1px solid rgba(255,255,255,0.15)";
+                  iconWrapper.title = activity.name;
+
+                  const img =
+                    document.createElement("img");
+
+                  img.src = iconUrl;
+                  img.alt = activity.name;
+                  img.style.width = "100%";
+                  img.style.height = "100%";
+                  img.style.objectFit = "contain";
+                  img.style.padding = "3px";
+
+                  iconWrapper.appendChild(img);
+                  activityIconsContainer.appendChild(
+                    iconWrapper
+                  );
+                });
+              }
+            } else {
+              if (activityBox) {
+                activityBox.style.display = "none";
+              }
+            }
+          } catch (err) {
+            console.error("Lanyard message error", err);
+          }
+        };
+
+        ws.onerror = () => {
+          ws.close();
+        };
 
         drac.addEventListener("mouseenter", () => {
           const allCards =
@@ -195,19 +628,16 @@ export const MembersGrid = () => {
           const moveX = viewportCenterX - cardCenterX;
           const moveY = viewportCenterY - cardCenterY;
 
+          const originalHeight = rect.height;
+
+          drac.dataset.originalHeight =
+            originalHeight.toString();
+
+          gsap.killTweensOf(allCards);
+          gsap.killTweensOf(drac);
+
           gsap.set(drac, {
             zIndex: 50,
-          });
-
-          gsap.to(drac, {
-            x: moveX,
-            y: moveY,
-            scale: 1.05,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 0.65,
-            ease: "power3.out",
-            overwrite: true,
           });
 
           allCards.forEach((card) => {
@@ -223,9 +653,22 @@ export const MembersGrid = () => {
             }
           });
 
+          gsap.to(drac, {
+            x: moveX,
+            y: moveY,
+            scale: 1.08,
+            opacity: 1,
+            filter: "blur(0px)",
+            height: originalHeight + 110,
+            duration: 0.65,
+            ease: "power3.out",
+            overwrite: true,
+          });
+
           if (bannerBgRef.current) {
             bannerBgRef.current.style.backgroundImage =
               `url('${user.banner}')`;
+
             bannerBgRef.current.style.opacity = "1";
           }
 
@@ -237,6 +680,7 @@ export const MembersGrid = () => {
           }
 
           audio.currentTime = 0;
+
           audio.play().catch(() => {});
         });
 
@@ -256,6 +700,19 @@ export const MembersGrid = () => {
             ease: "power3.inOut",
             overwrite: true,
           });
+
+          const originalHeight = Number(
+            drac.dataset.originalHeight || 0
+          );
+
+          if (originalHeight) {
+            gsap.to(drac, {
+              height: originalHeight,
+              duration: 0.6,
+              ease: "power3.inOut",
+              overwrite: true,
+            });
+          }
 
           gsap.set(drac, {
             zIndex: "",
@@ -323,7 +780,8 @@ export const MembersGrid = () => {
           backgroundSize: "cover",
           opacity: 0,
           filter: "blur(2px) brightness(0.6)",
-          transition: "opacity 0.6s ease, background 0.3s ease",
+          transition:
+            "opacity 0.6s ease, background 0.3s ease",
           zIndex: 0,
           pointerEvents: "none",
         }}
