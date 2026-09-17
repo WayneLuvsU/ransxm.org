@@ -11,46 +11,65 @@ export const Hero = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [tagline, setTagline] = useState("");
   const [tagArrowVisible, setTagArrowVisible] = useState(true);
+
   const heroTitleRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);  
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
-  const video = videoRef.current;
-  if (!video) return;
+    const video = videoRef.current;
 
-  video.volume = 1;
+    if (!video) return;
 
-  const tryPlay = () => {
-    video.play().catch(() => {});
-  };
+    video.muted = true;
+    video.volume = 1;
 
-  tryPlay();
+    const playVideo = async () => {
+      try {
+        await video.play();
+      } catch (error) {
+        console.log("Video autoplay waiting for interaction:", error);
+      }
+    };
 
-  const handleInteraction = () => {
-    tryPlay();
-  };
+    const enableAudio = async () => {
+      try {
+        video.muted = false;
+        video.volume = 1;
+        await video.play();
+      } catch (error) {
+        console.log("Video audio could not start:", error);
 
-  window.addEventListener("pointerdown", handleInteraction, {
-    once: true,
-  });
+        video.muted = true;
 
-  window.addEventListener("keydown", handleInteraction, {
-    once: true,
-  });
+        try {
+          await video.play();
+        } catch {
+          console.log("Video playback was blocked.");
+        }
+      }
+    };
 
-  window.addEventListener("touchstart", handleInteraction, {
-    once: true,
-  });
+    if (video.readyState >= 2) {
+      playVideo();
+    } else {
+      video.addEventListener("loadeddata", playVideo, { once: true });
+    }
 
-  return () => {
-    window.removeEventListener("pointerdown", handleInteraction);
-    window.removeEventListener("keydown", handleInteraction);
-    window.removeEventListener("touchstart", handleInteraction);
-  };
-}, []);
+    window.addEventListener("pointerdown", enableAudio, { once: true });
+    window.addEventListener("keydown", enableAudio, { once: true });
+    window.addEventListener("touchstart", enableAudio, { once: true });
+
+    return () => {
+      video.removeEventListener("loadeddata", playVideo);
+      window.removeEventListener("pointerdown", enableAudio);
+      window.removeEventListener("keydown", enableAudio);
+      window.removeEventListener("touchstart", enableAudio);
+    };
+  }, []);
 
   useEffect(() => {
     const phrases = ["flyest of 'em all", "pinakamainit sa scene"];
@@ -124,6 +143,7 @@ export const Hero = () => {
     });
 
     const title = heroTitleRef.current;
+
     if (!title) return;
 
     const letters = title.querySelectorAll(".ransxm-letter");
@@ -269,13 +289,14 @@ export const Hero = () => {
         }}
       >
         <video
-  src="https://file.garden/aN0Uo2YmaWI-OmAY/dami_ng_12.mp4"
-  autoPlay
-  loop
-  playsInline
-  preload="auto"
-  className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
-/>
+          ref={videoRef}
+          src="https://file.garden/aN0Uo2YmaWI-OmAY/dami_ng_12.mp4"
+          autoPlay
+          loop
+          playsInline
+          preload="auto"
+          className="pointer-events-none absolute left-0 top-0 size-full object-cover object-center"
+        />
 
         <div
           className="pointer-events-none absolute inset-0 z-20 opacity-[0.18]"
