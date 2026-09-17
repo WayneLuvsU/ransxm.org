@@ -4,626 +4,1006 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
+type DiscordUser = {
+  id: string;
+  banner: string;
+  music: string;
+};
+
+type LanyardActivity = {
+  id?: string;
+  name?: string;
+  type?: number;
+  details?: string | null;
+  state?: string | null;
+  application_id?: string | null;
+  assets?: {
+    large_image?: string | null;
+    large_text?: string | null;
+    small_image?: string | null;
+    small_text?: string | null;
+  } | null;
+};
+
+type LanyardData = {
+  discord_user: {
+    id: string;
+    username: string;
+    global_name?: string | null;
+    display_name?: string | null;
+    avatar?: string | null;
+  };
+  discord_status: "online" | "idle" | "dnd" | "offline";
+  activities: LanyardActivity[];
+  spotify?: {
+    track_id?: string;
+    song?: string;
+    artist?: string;
+    album?: string;
+    album_art_url?: string;
+    timestamps?: {
+      start?: number;
+      end?: number;
+    };
+  } | null;
+};
+
+type MemberInfo = {
+  displayName: string;
+  username: string;
+  avatar: string;
+  status: string;
+  customStatus: string;
+  customEmoji: string;
+  customEmojiUrl: string;
+  activityName: string;
+  activityDetails: string;
+  activityState: string;
+  activityIcon: string;
+  activityType: string;
+  spotify: LanyardData["spotify"];
+};
+
+gsap.registerPlugin(ScrollTrigger);
+
+const discordUsers: DiscordUser[] = [
+  {
+    id: "1498182038342336542",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
+  },
+  {
+    id: "737630884823433267",
+    banner: "https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
+  },
+  {
+    id: "1411934822544314381",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/a387c19a64644060f368931d481b712a.png",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
+  },
+  {
+    id: "1015473740391399474",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/0ad735f722522d9a424b2a018ff63319.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3",
+  },
+  {
+    id: "453061371513536523",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/8d8c95e3de8ed723cfb50c3ea4a6407d.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/DaBaby%20Ft%20(mp3cut.net).mp3",
+  },
+  {
+    id: "1418922415802679330",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_6476.jpg",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/guatno-filipino-ot-remix-official-music-video-128-ytshorts.savetube.me.mp3",
+  },
+  {
+    id: "1171474815874506864",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/7d329e822816984545eed29b3ece8601.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/xxxtentacion-rip-roach-audio-feat-ki-mask-the-slump-god-128-ytshorts%20(mp3cut.net).mp3",
+  },
+  {
+    id: "1477383583386828850",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Untitled_design.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/frank-ocean-ivy-128-ytshorts.savetube.me.mp3",
+  },
+  {
+    id: "1361012595561205951",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/d310d314fc99e1aedd20294e5cc6c5b1.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/I%20BE%20LIKE%20(DIFG)%20-%20gaspari%20x%20costa%20cashman%20(OLV).mp3",
+  },
+  {
+    id: "1286586160361246789",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_0111.jpg",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/offtide!%20-%20by%20a%20thread%20(Official%20Video)%20(1)%20(mp3cut.net).mp3",
+  },
+  {
+    id: "1380573575282692166",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/328826fa582ff4e248949e467cd59710.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/hev-abi-ya-dig-freestyle-feat-gins-melodies-128-ytshorts.savetube.me.mp3",
+  },
+  {
+    id: "984436577612759111",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/09fae4879b5c83ac5620f3e0b75156fb.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
+  },
+  {
+    id: "1252278719184113724",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/8a266a935a82db27b3c75a8d6dab9b1a.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3",
+  },
+  {
+    id: "1501588984810176792",
+    banner:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif",
+    music:
+      "https://file.garden/aN0Uo2YmaWI-OmAY/nazty-kidd-those-eyez-ft-hev-abi-official-lyric-video-128-ytshorts%20(mp3cut.net).mp3",
+  },
+];
+
+const emptyInfo = (): MemberInfo => ({
+  displayName: "Unknown",
+  username: "Unknown",
+  avatar: "",
+  status: "offline",
+  customStatus: "",
+  customEmoji: "",
+  customEmojiUrl: "",
+  activityName: "",
+  activityDetails: "",
+  activityState: "",
+  activityIcon: "",
+  activityType: "",
+  spotify: null,
+});
+
+function getAvatarUrl(
+  userId: string,
+  avatar: string | null | undefined
+): string {
+  if (!avatar) {
+    return `https://cdn.discordapp.com/embed/avatars/0.png`;
+  }
+
+  const extension = avatar.startsWith("a_") ? "gif" : "png";
+
+  return `https://cdn.discordapp.com/avatars/${userId}/${avatar}.${extension}?size=512`;
+}
+
+function getActivityIcon(
+  activity: LanyardActivity | undefined
+): string {
+  if (!activity) return "";
+
+  const largeImage = activity.assets?.large_image;
+
+  if (!largeImage) return "";
+
+  if (
+    largeImage.startsWith("http://") ||
+    largeImage.startsWith("https://")
+  ) {
+    return largeImage;
+  }
+
+  if (largeImage.startsWith("mp:external/")) {
+    return largeImage.replace("mp:external/", "");
+  }
+
+  if (activity.application_id) {
+    return `https://cdn.discordapp.com/app-assets/${activity.application_id}/${largeImage}.png?size=128`;
+  }
+
+  return "";
+}
+
+function getActivityType(type?: number): string {
+  switch (type) {
+    case 0:
+      return "Playing";
+    case 1:
+      return "Streaming";
+    case 2:
+      return "Listening to";
+    case 3:
+      return "Watching";
+    case 4:
+      return "Custom Status";
+    case 5:
+      return "Competing in";
+    default:
+      return "Activity";
+  }
+}
+
+function getCustomStatus(
+  activities: LanyardActivity[]
+): {
+  text: string;
+  emoji: string;
+  emojiUrl: string;
+} {
+  const custom = activities.find(
+    (activity) => activity.type === 4
+  );
+
+  if (!custom) {
+    return {
+      text: "",
+      emoji: "",
+      emojiUrl: "",
+    };
+  }
+
+  const emojiData = (custom as LanyardActivity & {
+    emoji?: {
+      name?: string | null;
+      id?: string | null;
+      animated?: boolean;
+    } | null;
+  }).emoji;
+
+  let emoji = emojiData?.name || "";
+  let emojiUrl = "";
+
+  if (emojiData?.id) {
+    const extension = emojiData.animated ? "gif" : "png";
+
+    emojiUrl = `https://cdn.discordapp.com/emojis/${emojiData.id}.${extension}?size=64`;
+
+    emoji = "";
+  }
+
+  return {
+    text: custom.state || "",
+    emoji,
+    emojiUrl,
+  };
+}
+
+function chooseMainActivity(
+  activities: LanyardActivity[]
+): LanyardActivity | undefined {
+  return activities.find((activity) => activity.type !== 4);
+}
+
+function buildMemberInfo(data: LanyardData): MemberInfo {
+  const user = data.discord_user;
+  const activities = data.activities || [];
+  const mainActivity = chooseMainActivity(activities);
+  const customStatus = getCustomStatus(activities);
+
+  const spotifyActivity = data.spotify;
+
+  return {
+    displayName:
+      user.global_name ||
+      user.display_name ||
+      user.username ||
+      "Unknown",
+
+    username: user.username || "Unknown",
+
+    avatar: getAvatarUrl(user.id, user.avatar),
+
+    status: data.discord_status || "offline",
+
+    customStatus: customStatus.text,
+
+    customEmoji: customStatus.emoji,
+
+    customEmojiUrl: customStatus.emojiUrl,
+
+    activityName: mainActivity?.name || "",
+
+    activityDetails: mainActivity?.details || "",
+
+    activityState: mainActivity?.state || "",
+
+    activityIcon: getActivityIcon(mainActivity),
+
+    activityType: mainActivity
+      ? getActivityType(mainActivity.type)
+      : "",
+
+    spotify: spotifyActivity || null,
+  };
+}
+
+async function fetchDiscordInfoMembers(
+  discordId: string
+): Promise<MemberInfo> {
+  try {
+    const response = await fetch(
+      `https://api.lanyard.rest/v1/users/${discordId}`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      return emptyInfo();
+    }
+
+    const json = await response.json();
+
+    if (json.success && json.data) {
+      return buildMemberInfo(json.data as LanyardData);
+    }
+  } catch (error) {
+    console.error("Lanyard fetch error:", error);
+  }
+
+  return emptyInfo();
+}
+
+function formatStatus(status: string): string {
+  switch (status) {
+    case "online":
+      return "Online";
+    case "idle":
+      return "Idle";
+    case "dnd":
+      return "Do Not Disturb";
+    default:
+      return "Offline";
+  }
+}
+
 export const MembersGrid = () => {
   const dracGridRef = useRef<HTMLDivElement>(null);
   const bannerBgRef = useRef<HTMLDivElement>(null);
   const initializedRef = useRef(false);
+  const activeCardRef = useRef<HTMLDivElement | null>(null);
+  const activeUserRef = useRef<DiscordUser | null>(null);
+  const originalRectsRef = useRef(
+    new Map<
+      HTMLDivElement,
+      {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+      }
+    >()
+  );
+  const memberDataRef = useRef(
+    new Map<string, MemberInfo>()
+  );
 
   useEffect(() => {
     if (initializedRef.current) return;
+
     initializedRef.current = true;
 
-    const discordUsers = [
-      {
-        id: "1498182038342336542",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/ransommukhangxtazy.png",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/Hev%20Abi%20-%20MEDICAL%20(1)%20(mp3cut.net).mp3",
-      },
-      {
-        id: "737630884823433267",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/xo.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
-      },
-      {
-        id: "1411934822544314381",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/a387c19a64644060f368931d481b712a.png",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/ssstik.io_@supahflyyyy_1766001840975.mp3",
-      },
-      {
-        id: "1015473740391399474",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/0ad735f722522d9a424b2a018ff63319.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/snaptik_7464739156128828678_v2%20(1).mp3",
-      },
-      {
-        id: "453061371513536523",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/8d8c95e3de8ed723cfb50c3ea4a6407d.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/DaBaby%20Ft%20(mp3cut.net).mp3",
-      },
-      {
-        id: "1418922415802679330",
-        banner: "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_6476.jpg",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/guatno-filipino-ot-remix-official-music-video-128-ytshorts.savetube.me.mp3",
-      },
-      {
-        id: "1171474815874506864",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/7d329e822816984545eed29b3ece8601.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/xxxtentacion-rip-roach-audio-feat-ki-mask-the-slump-god-128-ytshorts%20(mp3cut.net).mp3",
-      },
-      {
-        id: "1477383583386828850",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/Untitled_design.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/frank-ocean-ivy-128-ytshorts.savetube.me.mp3",
-      },
-      {
-        id: "1361012595561205951",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/d310d314fc99e1aedd20294e5cc6c5b1.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/I%20BE%20LIKE%20(DIFG)%20-%20gaspari%20x%20costa%20cashman%20(OLV).mp3",
-      },
-      {
-        id: "1286586160361246789",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/IMG_0111.jpg",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/offtide!%20-%20by%20a%20thread%20(Official%20Video)%20(1)%20(mp3cut.net).mp3",
-      },
-      {
-        id: "1380573575282692166",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/328826fa582ff4e248949e467cd59710.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/hev-abi-ya-dig-freestyle-feat-gins-melodies-128-ytshorts.savetube.me.mp3",
-      },
-      {
-        id: "984436577612759111",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/09fae4879b5c83ac5620f3e0b75156fb.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/Teenage%20Fever%20%5BUc57OKGTDXk%5D%20(mp3cut.net).mp3",
-      },
-      {
-        id: "1252278719184113724",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/8a266a935a82db27b3c75a8d6dab9b1a.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/Downtown%20Q%20-%20Panadero%202%20No%20Heart%20Remix%20feat%20(mp3cut.net)%20(1).mp3",
-      },
-      {
-        id: "1501588984810176792",
-        banner:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/902fb683da6e99129aa43990f81607cd.gif",
-        music:
-          "https://file.garden/aN0Uo2YmaWI-OmAY/nazty-kidd-those-eyez-ft-hev-abi-official-lyric-video-128-ytshorts%20(mp3cut.net).mp3",
-      },
-    ];
+    let cancelled = false;
+    let refreshTimer: number | undefined;
+    let pointerMoveHandler: ((event: PointerEvent) => void) | null =
+      null;
+    let resizeHandler: (() => void) | null = null;
+    let keydownHandler: ((event: KeyboardEvent) => void) | null =
+      null;
 
-    const activityIcons: Record<string, string> = {
-      Roblox: "https://cdn.simpleicons.org/roblox/ffffff",
-      "Visual Studio Code": "https://cdn.simpleicons.org/visualstudiocode/ffffff",
-      Discord: "https://cdn.simpleicons.org/discord/ffffff",
-      Chrome: "https://cdn.simpleicons.org/googlechrome/ffffff",
-      Firefox: "https://cdn.simpleicons.org/firefox/ffffff",
-      Steam: "https://cdn.simpleicons.org/steam/ffffff",
-      VALORANT: "https://cdn.simpleicons.org/valorant/ffffff",
-      "League of Legends":
-        "https://cdn.simpleicons.org/leagueoflegends/ffffff",
-      Minecraft: "https://cdn.simpleicons.org/minecraft/ffffff",
-      Fortnite: "https://cdn.simpleicons.org/fortnite/ffffff",
-      "Call of Duty": "https://cdn.simpleicons.org/callofduty/ffffff",
-      Spotify: "https://cdn.simpleicons.org/spotify/ffffff",
-      YouTube: "https://cdn.simpleicons.org/youtube/ffffff",
-      Netflix: "https://cdn.simpleicons.org/netflix/ffffff",
-      Twitch: "https://cdn.simpleicons.org/twitch/ffffff",
-      "Among Us": "https://cdn.simpleicons.org/amongus/ffffff",
-      "Genshin Impact": "https://cdn.simpleicons.org/genshinimpact/ffffff",
-      "Adobe Photoshop": "https://cdn.simpleicons.org/adobephotoshop/ffffff",
-      "Apex Legends": "https://cdn.simpleicons.org/apexlegends/ffffff",
-      "Cyberpunk 2077": "https://cdn.simpleicons.org/cyberpunk2077/ffffff",
-      Dota: "https://cdn.simpleicons.org/dota/ffffff",
-      "Rocket League": "https://cdn.simpleicons.org/rocketleague/ffffff",
-      PUBG: "https://cdn.simpleicons.org/pubg/ffffff",
-      "Grand Theft Auto V": "https://cdn.simpleicons.org/rockstargames/ffffff",
-      "Grand Theft Auto V Legacy":
-        "https://cdn.simpleicons.org/rockstargames/ffffff",
-      Bloodstrike: "https://cdn.simpleicons.org/target/ffffff",
+    const grid = dracGridRef.current;
+
+    if (!grid) return;
+
+    const cards: HTMLDivElement[] = [];
+
+    const navbarAudio = () =>
+      (window as unknown as {
+        navbarAudioRef?: HTMLAudioElement;
+        isNavbarAudioPlaying?: boolean;
+      }).navbarAudioRef;
+
+    const navbarWasPlaying = () =>
+      (window as unknown as {
+        navbarAudioRef?: HTMLAudioElement;
+        isNavbarAudioPlaying?: boolean;
+      }).isNavbarAudioPlaying;
+
+    const updateBanner = (
+      user: DiscordUser | null,
+      visible: boolean
+    ) => {
+      if (!bannerBgRef.current) return;
+
+      if (!user || !visible) {
+        gsap.to(bannerBgRef.current, {
+          opacity: 0,
+          duration: 0.35,
+          ease: "power2.out",
+        });
+
+        return;
+      }
+
+      bannerBgRef.current.style.backgroundImage = `url("${user.banner}")`;
+
+      gsap.to(bannerBgRef.current, {
+        opacity: 1,
+        duration: 0.45,
+        ease: "power2.out",
+      });
     };
 
-    const escapeHtml = (value: string) =>
-      value
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    const stopCardAudio = (card: HTMLDivElement) => {
+      const audio = card.querySelector(
+        ".drac-audio"
+      ) as HTMLAudioElement | null;
 
-    const renderDiscordEmoji = (emoji: any) => {
-      if (!emoji) return "";
+      if (!audio) return;
 
-      if (emoji.id) {
-        const ext = emoji.animated ? "gif" : "png";
-
-        return `<img src="https://cdn.discordapp.com/emojis/${emoji.id}.${ext}?size=32" style="width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:6px;" />`;
-      }
-
-      return escapeHtml(emoji.name || "");
+      audio.pause();
+      audio.currentTime = 0;
     };
 
-    const getStatusInfo = (status: string) => {
-      if (status === "online") {
-        return {
-          label: "Online",
-          color: "#23a55a",
-        };
-      }
-
-      if (status === "idle") {
-        return {
-          label: "Idle",
-          color: "#f0b232",
-        };
-      }
-
-      if (status === "dnd") {
-        return {
-          label: "Do Not Disturb",
-          color: "#f23f42",
-        };
-      }
-
-      return {
-        label: "Offline",
-        color: "#747f8d",
-      };
+    const stopAllMemberAudio = () => {
+      cards.forEach((card) => stopCardAudio(card));
     };
 
-    const updateDiscordCard = (drac: HTMLElement, discordData: any) => {
-      const status = discordData?.discord_status || "offline";
-      const statusInfo = getStatusInfo(status);
+    const playCardAudio = (card: HTMLDivElement) => {
+      const audio = card.querySelector(
+        ".drac-audio"
+      ) as HTMLAudioElement | null;
 
-      const customActivity = discordData?.activities?.find(
-        (activity: any) => activity.type === 4
-      );
+      if (!audio) return;
 
-      const activities =
-        discordData?.activities?.filter(
-          (activity: any) =>
-            activity.type !== 4 && activity.name !== "Spotify"
-        ) || [];
+      audio.currentTime = 0;
 
-      const statusElement = drac.querySelector(
-        ".drac-status"
+      audio.play().catch(() => {});
+    };
+
+    const pauseNavbarAudio = () => {
+      const audio = navbarAudio();
+
+      if (audio) {
+        audio.pause();
+      }
+    };
+
+    const resumeNavbarAudio = () => {
+      const audio = navbarAudio();
+
+      if (audio && navbarWasPlaying()) {
+        audio.play().catch(() => {});
+      }
+    };
+
+    const updateCard = (
+      card: HTMLDivElement,
+      info: MemberInfo
+    ) => {
+      const avatar = card.querySelector(
+        ".drac-avatar"
+      ) as HTMLDivElement | null;
+
+      const displayName = card.querySelector(
+        ".drac-display-name"
       ) as HTMLElement | null;
 
-      const customStatusElement = drac.querySelector(
+      const username = card.querySelector(
+        ".drac-username"
+      ) as HTMLElement | null;
+
+      const statusText = card.querySelector(
+        ".drac-status-text"
+      ) as HTMLElement | null;
+
+      const statusDot = card.querySelector(
+        ".drac-status-dot"
+      ) as HTMLElement | null;
+
+      const customStatus = card.querySelector(
         ".drac-custom-status"
       ) as HTMLElement | null;
 
-      const activityElement = drac.querySelector(
+      const customStatusText = card.querySelector(
+        ".drac-custom-status-text"
+      ) as HTMLElement | null;
+
+      const customStatusEmoji = card.querySelector(
+        ".drac-custom-status-emoji"
+      ) as HTMLElement | null;
+
+      const activity = card.querySelector(
         ".drac-activity"
       ) as HTMLElement | null;
 
-      if (statusElement) {
-        statusElement.innerHTML = `
-          <span class="drac-status-dot" style="background:${statusInfo.color};box-shadow:0 0 8px ${statusInfo.color};"></span>
-          <span>${statusInfo.label}</span>
-        `;
+      const activityName = card.querySelector(
+        ".drac-activity-name"
+      ) as HTMLElement | null;
+
+      const activityDetails = card.querySelector(
+        ".drac-activity-details"
+      ) as HTMLElement | null;
+
+      const activityState = card.querySelector(
+        ".drac-activity-state"
+      ) as HTMLElement | null;
+
+      const activityIcon = card.querySelector(
+        ".drac-activity-icon"
+      ) as HTMLImageElement | null;
+
+      const activityType = card.querySelector(
+        ".drac-activity-type"
+      ) as HTMLElement | null;
+
+      const spotify = card.querySelector(
+        ".drac-spotify"
+      ) as HTMLElement | null;
+
+      const spotifyAlbum = card.querySelector(
+        ".drac-spotify-album"
+      ) as HTMLImageElement | null;
+
+      const spotifySong = card.querySelector(
+        ".drac-spotify-song"
+      ) as HTMLElement | null;
+
+      const spotifyArtist = card.querySelector(
+        ".drac-spotify-artist"
+      ) as HTMLElement | null;
+
+      if (avatar) {
+        avatar.style.backgroundImage = info.avatar
+          ? `url("${info.avatar}")`
+          : "";
       }
 
-      if (customStatusElement) {
-        if (customActivity) {
-          customStatusElement.style.display = "flex";
-          customStatusElement.innerHTML = `
-            <span class="drac-custom-emoji">
-              ${renderDiscordEmoji(customActivity.emoji)}
-            </span>
-            <span>${escapeHtml(customActivity.state || "")}</span>
-          `;
-        } else {
-          customStatusElement.style.display = "none";
-          customStatusElement.innerHTML = "";
+      if (displayName) {
+        displayName.textContent = info.displayName;
+      }
+
+      if (username) {
+        username.textContent = `@${info.username}`;
+      }
+
+      if (statusText) {
+        statusText.textContent = formatStatus(info.status);
+      }
+
+      if (statusDot) {
+        statusDot.dataset.status = info.status;
+      }
+
+      if (customStatus && customStatusText) {
+        customStatusText.textContent = info.customStatus;
+
+        if (customStatusEmoji) {
+          if (info.customEmojiUrl) {
+            customStatusEmoji.innerHTML = `<img src="${info.customEmojiUrl}" alt="" />`;
+          } else {
+            customStatusEmoji.textContent = info.customEmoji;
+          }
         }
+
+        customStatus.style.display = info.customStatus
+          ? "flex"
+          : "none";
       }
 
-      if (activityElement) {
-        if (activities.length > 0) {
-          const activity = activities[0];
+      if (activity) {
+        if (info.activityName) {
+          activity.style.display = "flex";
 
-          const icon =
-            activityIcons[activity.name] ||
-            activity.assets?.large_image ||
-            "";
-
-          let iconHtml = "";
-
-          if (icon.startsWith("http")) {
-            iconHtml = `<img src="${icon}" class="drac-activity-icon" />`;
+          if (activityName) {
+            activityName.textContent = info.activityName;
           }
 
-          const activityDetails =
-            activity.details ||
-            activity.state ||
-            activity.name ||
-            "";
+          if (activityType) {
+            activityType.textContent = info.activityType;
+          }
 
-          const activityState =
-            activity.details && activity.state
-              ? activity.state
-              : "";
+          if (activityDetails) {
+            activityDetails.textContent = info.activityDetails;
+            activityDetails.style.display =
+              info.activityDetails ? "block" : "none";
+          }
 
-          activityElement.style.display = "flex";
+          if (activityState) {
+            activityState.textContent = info.activityState;
+            activityState.style.display =
+              info.activityState ? "block" : "none";
+          }
 
-          activityElement.innerHTML = `
-            <div class="drac-activity-icon-wrap">
-              ${iconHtml}
-            </div>
-            <div class="drac-activity-text">
-              <span class="drac-activity-label">ACTIVITY</span>
-              <strong>${escapeHtml(activity.name || "Activity")}</strong>
-              <span>${escapeHtml(activityDetails)}</span>
-              ${
-                activityState
-                  ? `<span>${escapeHtml(activityState)}</span>`
-                  : ""
-              }
-            </div>
-          `;
+          if (activityIcon) {
+            if (info.activityIcon) {
+              activityIcon.src = info.activityIcon;
+              activityIcon.style.display = "block";
+            } else {
+              activityIcon.removeAttribute("src");
+              activityIcon.style.display = "none";
+            }
+          }
         } else {
-          activityElement.style.display = "none";
-          activityElement.innerHTML = "";
+          activity.style.display = "none";
+        }
+      }
+
+      if (spotify) {
+        const spotifyData = info.spotify;
+
+        if (spotifyData) {
+          spotify.style.display = "flex";
+
+          if (spotifyAlbum && spotifyData.album_art_url) {
+            spotifyAlbum.src = spotifyData.album_art_url;
+          }
+
+          if (spotifySong) {
+            spotifySong.textContent =
+              spotifyData.song || "Spotify";
+          }
+
+          if (spotifyArtist) {
+            spotifyArtist.textContent =
+              spotifyData.artist || "";
+          }
+        } else {
+          spotify.style.display = "none";
         }
       }
     };
 
-    const fetchDiscordInfoMembers = async (discordId: string) => {
-      try {
-        const res = await fetch(
-          `https://api.lanyard.rest/v1/users/${discordId}`
-        );
-
-        const json = await res.json();
-
-        if (json.success) {
-          const data = json.data;
-          const u = data.discord_user;
-
-          const avatarUrl = u.avatar
-            ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=512`
-            : `https://cdn.discordapp.com/embed/avatars/${Number(u.discriminator || 0) % 5}.png`;
-
-          return {
-            data,
-            displayName: u.global_name || u.display_name || u.username,
-            username: u.username,
-            avatar: avatarUrl,
-          };
-        }
-      } catch (err) {
-        console.error("Lanyard fetch error", err);
-      }
-
-      return {
-        data: null,
-        displayName: "Unknown",
-        username: "Unknown",
-        avatar: "",
-      };
-    };
-
-    const activeState = {
-      card: null as HTMLElement | null,
-      originalRect: null as DOMRect | null,
-      originalHeight: 0,
-      audio: null as HTMLAudioElement | null,
-    };
-
-    const resetCards = () => {
-      if (!dracGridRef.current) return;
-
-      const cards =
-        dracGridRef.current.querySelectorAll<HTMLElement>(".drac");
-
+    const resetCardVisuals = () => {
       cards.forEach((card) => {
         gsap.killTweensOf(card);
 
-        card.classList.remove("drac-active");
-
         gsap.to(card, {
-          x: 0,
-          y: 0,
-          scale: 1,
           opacity: 1,
+          scale: 1,
           filter: "blur(0px)",
-          duration: 0.5,
+          duration: 0.4,
           ease: "power3.out",
           overwrite: true,
         });
 
-        card.style.zIndex = "2";
-        card.style.height = `${card.dataset.originalHeight || "220"}px`;
+        card.style.pointerEvents = "auto";
+        card.classList.remove("drac-active");
+        card.classList.remove("drac-dimmed");
       });
-
-      if (bannerBgRef.current) {
-        bannerBgRef.current.style.opacity = "0";
-      }
-
-      if (activeState.audio) {
-        activeState.audio.pause();
-        activeState.audio.currentTime = 0;
-      }
-
-      const navbarAudio = (window as any)
-        .navbarAudioRef as HTMLAudioElement;
-
-      const wasPlaying = (window as any)
-        .isNavbarAudioPlaying as boolean;
-
-      if (navbarAudio && wasPlaying) {
-        navbarAudio.play().catch(() => {});
-      }
-
-      activeState.card = null;
-      activeState.originalRect = null;
-      activeState.audio = null;
     };
 
-    const activateCard = (
-      drac: HTMLElement,
-      user: (typeof discordUsers)[number],
-      audio: HTMLAudioElement
-    ) => {
-      if (
-        activeState.card &&
-        activeState.card !== drac
-      ) {
+    const resetActiveCard = () => {
+      const activeCard = activeCardRef.current;
+
+      if (!activeCard) {
+        updateBanner(null, false);
+        resumeNavbarAudio();
         return;
       }
 
-      if (activeState.card === drac) return;
+      const original = originalRectsRef.current.get(activeCard);
 
-      activeState.card = drac;
-      activeState.originalRect = drac.getBoundingClientRect();
-      activeState.originalHeight = drac.offsetHeight;
-      activeState.audio = audio;
+      gsap.killTweensOf(activeCard);
 
-      drac.dataset.originalHeight = String(
-        activeState.originalHeight
-      );
+      if (original) {
+        const currentRect = activeCard.getBoundingClientRect();
 
-      const rect = activeState.originalRect;
+        const currentCenterX =
+          currentRect.left + currentRect.width / 2;
 
-      const targetWidth = Math.min(
-        Math.max(rect.width, 600),
-        window.innerWidth - 80
-      );
+        const currentCenterY =
+          currentRect.top + currentRect.height / 2;
 
-      const targetHeight = Math.min(
-        Math.max(activeState.originalHeight + 160, 380),
-        window.innerHeight - 100
-      );
+        const originalCenterX =
+          original.x + original.width / 2;
 
-      const targetLeft =
-        (window.innerWidth - targetWidth) / 2;
+        const originalCenterY =
+          original.y + original.height / 2;
 
-      const targetTop =
-        (window.innerHeight - targetHeight) / 2;
+        const deltaX = originalCenterX - currentCenterX;
+        const deltaY = originalCenterY - currentCenterY;
 
-      const targetX =
-        targetLeft - rect.left;
+        gsap.to(activeCard, {
+          x: `+=${deltaX}`,
+          y: `+=${deltaY}`,
+          width: original.width,
+          height: original.height,
+          scale: 1,
+          duration: 0.55,
+          ease: "power4.inOut",
+          overwrite: true,
+          onComplete: () => {
+            gsap.set(activeCard, {
+              x: 0,
+              y: 0,
+              width: original.width,
+              height: original.height,
+              scale: 1,
+            });
 
-      const targetY =
-        targetTop - rect.top;
-
-      const cards =
-        dracGridRef.current?.querySelectorAll<HTMLElement>(
-          ".drac"
-        );
-
-      cards?.forEach((card) => {
-        if (card !== drac) {
-          gsap.killTweensOf(card);
-
-          gsap.to(card, {
-            opacity: 0,
-            scale: 0.92,
-            filter: "blur(8px)",
-            duration: 0.4,
-            ease: "power3.out",
-            overwrite: true,
-          });
-
-          card.style.pointerEvents = "none";
-        }
-      });
-
-      drac.style.zIndex = "50";
-      drac.style.pointerEvents = "auto";
-      drac.classList.add("drac-active");
-
-      gsap.killTweensOf(drac);
-
-      gsap.to(drac, {
-        x: targetX,
-        y: targetY,
-        width: targetWidth,
-        height: targetHeight,
-        scale: 1,
-        opacity: 1,
-        filter: "blur(0px)",
-        duration: 0.65,
-        ease: "power3.out",
-        overwrite: true,
-      });
-
-      if (bannerBgRef.current) {
-        bannerBgRef.current.style.backgroundImage =
-          `url('${user.banner}')`;
-        bannerBgRef.current.style.opacity = "1";
-      }
-
-      const navbarAudio = (window as any)
-        .navbarAudioRef as HTMLAudioElement;
-
-      if (navbarAudio) {
-        navbarAudio.pause();
-      }
-
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    };
-
-    const handlePointerMove = (event: PointerEvent) => {
-      const activeCard = activeState.card;
-
-      if (!activeCard) return;
-
-      const rect = activeCard.getBoundingClientRect();
-
-      const inside =
-        event.clientX >= rect.left &&
-        event.clientX <= rect.right &&
-        event.clientY >= rect.top &&
-        event.clientY <= rect.bottom;
-
-      if (!inside) {
-        resetCards();
-      }
-    };
-
-    window.addEventListener(
-      "pointermove",
-      handlePointerMove
-    );
-
-    const initialize = async () => {
-      if (!dracGridRef.current) return;
-
-      for (const user of discordUsers) {
-        const info = await fetchDiscordInfoMembers(user.id);
-
-        if (!dracGridRef.current) return;
-
-        const drac = document.createElement("div");
-
-        drac.className = "drac";
-        drac.dataset.originalHeight = "220";
-
-        drac.innerHTML = `
-          <div
-            class="drac-banner"
-            style="
-              background-image:url('${user.banner}');
-              opacity:0.35;
-            "
-          ></div>
-
-          <div class="drac-content">
-            <div
-              class="avatar"
-              style="
-                background-image:url('${info.avatar}');
-              "
-            ></div>
-
-            <div class="info">
-              <h1>${escapeHtml(info.displayName)}</h1>
-
-              <p>@${escapeHtml(info.username)}</p>
-
-              <div class="drac-status">
-                <span
-                  class="drac-status-dot"
-                  style="
-                    background:#747f8d;
-                    box-shadow:0 0 8px #747f8d;
-                  "
-                ></span>
-                <span>Offline</span>
-              </div>
-
-              <div
-                class="drac-custom-status"
-                style="display:none;"
-              ></div>
-
-              <div
-                class="drac-activity"
-                style="display:none;"
-              ></div>
-            </div>
-          </div>
-        `;
-
-        const audio = document.createElement("audio");
-
-        audio.src = user.music;
-        audio.preload = "auto";
-        audio.volume = 0.5;
-
-        drac.appendChild(audio);
-        dracGridRef.current.appendChild(drac);
-
-        updateDiscordCard(drac, info.data);
-
-        const ws = new WebSocket(
-          "wss://api.lanyard.rest/socket"
-        );
-
-        ws.onopen = () => {
-          ws.send(
-            JSON.stringify({
-              op: 2,
-              d: {
-                subscribe_to_id: user.id,
-              },
-            })
-          );
-        };
-
-        ws.onmessage = (event) => {
-          try {
-            const payload = JSON.parse(event.data);
-
-            if (!payload.d) return;
-
-            if (
-              payload.t === "INIT_STATE" ||
-              payload.t === "PRESENCE_UPDATE"
-            ) {
-              updateDiscordCard(drac, payload.d);
-            }
-          } catch {
-            return;
-          }
-        };
-
-        drac.addEventListener("pointerenter", () => {
-          activateCard(drac, user, audio);
+            activeCard.style.zIndex = "";
+            activeCard.classList.remove("drac-active");
+          },
+        });
+      } else {
+        gsap.to(activeCard, {
+          x: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          ease: "power4.inOut",
+          overwrite: true,
         });
       }
 
-      if (!dracGridRef.current) return;
+      resetCardVisuals();
 
-      const dracCards =
-        dracGridRef.current.querySelectorAll<HTMLElement>(
-          ".drac"
-        );
+      activeCardRef.current = null;
+      activeUserRef.current = null;
+
+      updateBanner(null, false);
+      stopAllMemberAudio();
+      resumeNavbarAudio();
+    };
+
+    const isPointerInsideCard = (
+      card: HTMLDivElement,
+      event: PointerEvent
+    ) => {
+      const rect = card.getBoundingClientRect();
+
+      return (
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom
+      );
+    };
+
+    const activateCard = (
+      card: HTMLDivElement,
+      user: DiscordUser
+    ) => {
+      if (activeCardRef.current === card) {
+        return;
+      }
+
+      if (activeCardRef.current) {
+        resetActiveCard();
+      }
+
+      const rect = card.getBoundingClientRect();
+
+      originalRectsRef.current.set(card, {
+        x: rect.left,
+        y: rect.top,
+        width: rect.width,
+        height: rect.height,
+      });
+
+      activeCardRef.current = card;
+      activeUserRef.current = user;
+
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      const targetWidth = Math.min(
+        760,
+        Math.max(560, viewportWidth * 0.72)
+      );
+
+      const targetHeight = Math.min(
+        430,
+        Math.max(330, viewportHeight * 0.52)
+      );
+
+      const originalCenterX = rect.left + rect.width / 2;
+      const originalCenterY = rect.top + rect.height / 2;
+
+      const targetCenterX = viewportWidth / 2;
+      const targetCenterY = viewportHeight / 2;
+
+      const moveX = targetCenterX - originalCenterX;
+      const moveY = targetCenterY - originalCenterY;
+
+      cards.forEach((otherCard) => {
+        if (otherCard === card) {
+          otherCard.classList.add("drac-active");
+          otherCard.style.zIndex = "100";
+          otherCard.style.pointerEvents = "auto";
+          return;
+        }
+
+        otherCard.classList.add("drac-dimmed");
+        otherCard.style.pointerEvents = "none";
+
+        gsap.to(otherCard, {
+          opacity: 0.14,
+          scale: 0.94,
+          filter: "blur(5px)",
+          duration: 0.35,
+          ease: "power3.out",
+          overwrite: true,
+        });
+      });
+
+      pauseNavbarAudio();
+      stopAllMemberAudio();
+      playCardAudio(card);
+      updateBanner(user, true);
+
+      gsap.killTweensOf(card);
+
+      gsap.to(card, {
+        x: moveX,
+        y: moveY,
+        width: targetWidth,
+        height: targetHeight,
+        scale: 1,
+        duration: 0.65,
+        ease: "power4.out",
+        overwrite: true,
+      });
+    };
+
+    const createCard = async (
+      user: DiscordUser
+    ): Promise<HTMLDivElement | null> => {
+      const info = await fetchDiscordInfoMembers(user.id);
+
+      if (cancelled || !grid) {
+        return null;
+      }
+
+      memberDataRef.current.set(user.id, info);
+
+      const card = document.createElement("div");
+
+      card.className = "drac";
+
+      card.dataset.userId = user.id;
+
+      card.innerHTML = `
+        <div
+          class="drac-banner"
+          style="background-image:url('${user.banner}')"
+        ></div>
+
+        <div class="drac-shade"></div>
+
+        <div class="drac-content">
+
+          <div
+            class="drac-avatar"
+            style="background-image:url('${info.avatar}')"
+          ></div>
+
+          <div class="drac-info">
+
+            <div class="drac-name-row">
+              <div class="drac-display-name"></div>
+              <div class="drac-status">
+                <span class="drac-status-dot"></span>
+                <span class="drac-status-text"></span>
+              </div>
+            </div>
+
+            <div class="drac-username"></div>
+
+            <div class="drac-custom-status">
+              <span class="drac-custom-status-emoji"></span>
+              <span class="drac-custom-status-text"></span>
+            </div>
+
+            <div class="drac-activity">
+              <div class="drac-activity-icon-wrap">
+                <img
+                  class="drac-activity-icon"
+                  alt=""
+                />
+              </div>
+
+              <div class="drac-activity-text">
+                <span class="drac-activity-type"></span>
+                <strong class="drac-activity-name"></strong>
+                <span class="drac-activity-details"></span>
+                <span class="drac-activity-state"></span>
+              </div>
+            </div>
+
+            <div class="drac-spotify">
+              <img
+                class="drac-spotify-album"
+                alt=""
+              />
+
+              <div class="drac-spotify-info">
+                <strong class="drac-spotify-song"></strong>
+                <span class="drac-spotify-artist"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="drac-bottom-line"></div>
+      `;
+
+      const audio = document.createElement("audio");
+
+      audio.className = "drac-audio";
+      audio.src = user.music;
+      audio.preload = "auto";
+      audio.volume = 0.5;
+
+      card.appendChild(audio);
+
+      updateCard(card, info);
+
+      card.addEventListener("pointerenter", () => {
+        if (activeCardRef.current === card) return;
+
+        activateCard(card, user);
+      });
+
+      card.addEventListener("pointerleave", () => {
+        if (activeCardRef.current !== card) {
+          stopCardAudio(card);
+        }
+      });
+
+      grid.appendChild(card);
+
+      return card;
+    };
+
+    const initialize = async () => {
+      for (const user of discordUsers) {
+        const card = await createCard(user);
+
+        if (card) {
+          cards.push(card);
+        }
+      }
+
+      if (cancelled || cards.length === 0) return;
+
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => resolve());
+      });
+
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+
+        originalRectsRef.current.set(card, {
+          x: rect.left,
+          y: rect.top,
+          width: rect.width,
+          height: rect.height,
+        });
+      });
 
       gsap.fromTo(
-        dracCards,
+        cards,
         {
           opacity: 0,
           y: 50,
@@ -632,10 +1012,10 @@ export const MembersGrid = () => {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          stagger: 0.15,
-          ease: "power2.out",
+          stagger: 0.12,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: dracGridRef.current,
+            trigger: grid,
             start: "top center+=100",
             end: "center center",
             scrub: 0.5,
@@ -645,33 +1025,147 @@ export const MembersGrid = () => {
       );
     };
 
-    void initialize();
+    pointerMoveHandler = (event: PointerEvent) => {
+      const activeCard = activeCardRef.current;
 
-    return () => {
-      window.removeEventListener(
-        "pointermove",
-        handlePointerMove
-      );
+      if (!activeCard) return;
 
-      resetCards();
+      if (!isPointerInsideCard(activeCard, event)) {
+        resetActiveCard();
+      }
+    };
 
-      if (dracGridRef.current) {
-        dracGridRef.current.innerHTML = "";
+    resizeHandler = () => {
+      if (!activeCardRef.current) {
+        cards.forEach((card) => {
+          const rect = card.getBoundingClientRect();
+
+          originalRectsRef.current.set(card, {
+            x: rect.left,
+            y: rect.top,
+            width: rect.width,
+            height: rect.height,
+          });
+        });
+
+        return;
       }
 
+      const activeCard = activeCardRef.current;
+      const user = activeUserRef.current;
+
+      if (!activeCard || !user) return;
+
+      gsap.killTweensOf(activeCard);
+
+      const rect = activeCard.getBoundingClientRect();
+
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      const targetWidth = Math.min(
+        760,
+        Math.max(560, viewportWidth * 0.72)
+      );
+
+      const targetHeight = Math.min(
+        430,
+        Math.max(330, viewportHeight * 0.52)
+      );
+
+      const currentCenterX = rect.left + rect.width / 2;
+      const currentCenterY = rect.top + rect.height / 2;
+
+      gsap.to(activeCard, {
+        x: "+=" + (viewportWidth / 2 - currentCenterX),
+        y: "+=" + (viewportHeight / 2 - currentCenterY),
+        width: targetWidth,
+        height: targetHeight,
+        duration: 0.35,
+        ease: "power3.out",
+        overwrite: true,
+      });
+    };
+
+    keydownHandler = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && activeCardRef.current) {
+        resetActiveCard();
+      }
+    };
+
+    window.addEventListener("pointermove", pointerMoveHandler);
+    window.addEventListener("resize", resizeHandler);
+    window.addEventListener("keydown", keydownHandler);
+
+    initialize();
+
+    refreshTimer = window.setInterval(async () => {
+      if (cancelled) return;
+
+      for (const user of discordUsers) {
+        const card = cards.find(
+          (item) => item.dataset.userId === user.id
+        );
+
+        if (!card) continue;
+
+        const info = await fetchDiscordInfoMembers(user.id);
+
+        if (cancelled) return;
+
+        memberDataRef.current.set(user.id, info);
+        updateCard(card, info);
+      }
+    }, 15000);
+
+    return () => {
+      cancelled = true;
+
+      if (refreshTimer) {
+        window.clearInterval(refreshTimer);
+      }
+
+      if (pointerMoveHandler) {
+        window.removeEventListener(
+          "pointermove",
+          pointerMoveHandler
+        );
+      }
+
+      if (resizeHandler) {
+        window.removeEventListener("resize", resizeHandler);
+      }
+
+      if (keydownHandler) {
+        window.removeEventListener("keydown", keydownHandler);
+      }
+
+      stopAllMemberAudio();
+
+      gsap.killTweensOf(cards);
+
       ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === dracGridRef.current) {
+        if (trigger.vars.trigger === grid) {
           trigger.kill();
         }
       });
+
+      cards.forEach((card) => {
+        card.remove();
+      });
+
+      cards.length = 0;
+      activeCardRef.current = null;
+      activeUserRef.current = null;
     };
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="drac-members-wrapper">
       <div
         ref={bannerBgRef}
         className="drac-banner-bg"
+        aria-hidden="true"
       />
 
       <div
