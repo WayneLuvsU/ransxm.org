@@ -936,6 +936,8 @@ addEventListener('resize', () => {
     { id: "1380573575282692166", banner: "https://file.garden/aN0Uo2YmaWI-OmAY/7d329e822816984545eed29b3ece8601.gif" },
     { id: "1252278719184113724", banner: "https://file.garden/aN0Uo2YmaWI-OmAY/0ad735f722522d9a424b2a018ff63319.gif" },
     { id: "1409472056109826181", banner: "https://file.garden/aN0Uo2YmaWI-OmAY/2498b7aeb833d49748f0af151cf199a5.gif" },
+    { id: "998493903286181928", banner: "https://file.garden/aN0Uo2YmaWI-OmAY/2a7e42c8a096727f801abbbdd0dc370b.gif" },
+    { id: "1439556646966923317", banner: "https://file.garden/aN0Uo2YmaWI-OmAY/d748caa0ffc9c604a10beedc75d4775f.gif" },
   ];
 
   const RADIUS_X = 720;
