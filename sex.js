@@ -480,6 +480,15 @@ function fillInfo(col, json) {
   const displayName = u.display_name || u.global_name || u.username || '—';
   const username = u.username ? `@${u.username}` : '';
 
+    const avatarImg = col.querySelector('.hof-avatar');
+  if (avatarImg && u.id) {
+    const hash = u.avatar;
+    const isAnimated = hash && hash.startsWith('a_');
+    avatarImg.src = hash
+      ? `https://cdn.discordapp.com/avatars/${u.id}/${hash}.${isAnimated ? 'gif' : 'png'}?size=256`
+      : `https://cdn.discordapp.com/embed/avatars/${(u.discriminator ?? '0') % 5}.png`;
+  }
+
   col.querySelector('[data-field="name"]').textContent = displayName;
   col.querySelector('[data-field="username"]').textContent = username;
 
